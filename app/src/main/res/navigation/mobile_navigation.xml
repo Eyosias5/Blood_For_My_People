@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" app:startDestination="@id/home_des">
+    <fragment android:id="@+id/home_des"
+              tools:layout="@layout/home_fragment"
+              android:name="com.teambloodformypeople.HomeFragment"
+              android:label="HomeFragment"/>
+
+
+    <fragment android:id="@+id/history_des"
+              tools:layout="@layout/donation_history_fragment"
+              android:name="com.teambloodformypeople.DonationHistoryFragment"
+              android:label="DonationHistoryFragment"/>
+</navigation>
