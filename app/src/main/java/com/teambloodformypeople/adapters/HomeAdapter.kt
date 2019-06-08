@@ -4,19 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
-import com.teambloodformypeople.models.Recipient
+import com.teambloodformypeople.data.Recipient
 import kotlinx.android.synthetic.main.home_item.view.*
 
 class HomeAdapter(val context: Context): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     private  val recipients = listOf(
-        Recipient(12,"Brass Hospital","Bole","0912373184",2),
-        Recipient(12,"Brass Hospital","Bole","0912373184",2),
-        Recipient(12,"Brass Hospital","Bole","0912373184",2),
-        Recipient(12,"Brass Hospital","Bole","0912373184",2),
         Recipient(12,"Brass Hospital","Bole","0912373184",2)
+
 
 
     )
@@ -37,8 +35,12 @@ class HomeAdapter(val context: Context): RecyclerView.Adapter<HomeAdapter.HomeVi
         holder.itemView.recipient_name_textview.text = recipient.name
         holder.itemView.donation_recpient_location_textview.text = recipient.location
 
+        holder.itemView.setOnClickListener {
+            Navigation.createNavigateOnClickListener(R.id.history_detail_des,null)
+        }
+
     }
-    class HomeViewHolder(itemView: View):RecyclerView.ViewHolder(itemView);
+    class HomeViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 
 
 }

@@ -6,20 +6,16 @@
               tools:layout="@layout/home_fragment"
               android:name="com.teambloodformypeople.HomeFragment"
               android:label="HomeFragment">
-        <action android:id="@+id/action_home_des_to_history_des" app:destination="@id/history_des"
-                app:enterAnim="@anim/fade_in" app:exitAnim="@anim/fade_out" app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/fade_in"/>
+        <action android:id="@+id/action_home_des_to_history_detail_des" app:destination="@+id/history_detail_des"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
 
     <fragment android:id="@+id/history_des"
               tools:layout="@layout/donation_history_fragment"
               android:name="com.teambloodformypeople.DonationHistoryFragment"
-              android:label="DonationHistoryFragment">
-        <action android:id="@+id/action_history_des_to_home_des" app:destination="@id/home_des"
-                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_in_left"
-                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_in_left"/>
-    </fragment>
+              android:label="DonationHistoryFragment"/>
     <fragment android:id="@+id/report_des"
               tools:layout="@layout/report_fragment"
               android:name="com.teambloodformypeople.ReportFragment"
@@ -28,4 +24,8 @@
               android:name="com.teambloodformypeople.ProfileFragment"
               tools:layout="@layout/profile_fragment"
               android:label="ProfileFragment"/>
+    <fragment android:id="@+id/history_detail_des"
+              tools:layout="@layout/donation_history_detail_fragment"
+              android:name="com.teambloodformypeople.DonationHistoryDetailFragment"
+              android:label="DonationHistoryDetailFragment"/>
 </navigation>

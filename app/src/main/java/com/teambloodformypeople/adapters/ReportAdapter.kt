@@ -6,18 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
-import com.teambloodformypeople.models.Recipient
-import kotlinx.android.synthetic.main.donation_history_item.view.*
+import com.teambloodformypeople.data.Recipient
 import kotlinx.android.synthetic.main.report_item.view.*
 
 class ReportAdapter (val context: Context): RecyclerView.Adapter<ReportAdapter.ReportViewHolder>(){
 
     private  val recipients = listOf(
-        Recipient(12,"Brass Hospital","Bole","0912373184",2),
-        Recipient(12,"Brass Hospital","Bole","0912373184",2),
-        Recipient(12,"Brass Hospital","Bole","0912373184",2),
-        Recipient(12,"Brass Hospital","Bole","0912373184",2),
         Recipient(12,"Brass Hospital","Bole","0912373184",2)
+
 
 
     )

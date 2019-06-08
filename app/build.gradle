@@ -58,7 +58,7 @@ dependencies {
     //kapt "androidx.lifecycle:lifecycle-compiler:$arch_lifecycle_version"
     androidTestImplementation "androidx.arch.core:core-testing:$androidx_arch_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_lifecycle_version"
-
+    implementation 'androidx.fragment:fragment-ktx:1.0.0'
 
 
 }

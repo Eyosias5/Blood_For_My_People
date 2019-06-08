@@ -4,18 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
-import com.teambloodformypeople.models.Donation
+import com.teambloodformypeople.data.Donation
 import kotlinx.android.synthetic.main.donation_history_item.view.*
 
 
 class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<DonationHistoryAdapter.DonationHistoryViewHolder>(){
 
     private val donations = listOf(
-        Donation(1,"June 12 20",200.0f,"0 +",23,11),
-        Donation(2,"June 2 2019", 200.0F,"B -",23,11),
-        Donation(3,"June 1 2019", 200.0F,"A ",23,11)
+        Donation(1,"June 12 20",200.0f,"0 +",23,11)
     )
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -29,11 +29,18 @@ class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<Donatio
         return donations.size
     }
 
-    override fun onBindViewHolder(holder: DonationHistoryAdapter.DonationHistoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder:DonationHistoryViewHolder, position: Int) {
         val donation = donations[position]
 
         holder.itemView.donation_date_textview.text = donation.date
         holder.itemView.donation_recpient_location_textview.text = donation.recipient.toString()
+
+
+
+        holder.itemView.setOnClickListener{
+            System.out.println("I got clicked now ")
+            Navigation.createNavigateOnClickListener(R.id.history_detail_des, null)
+        }
     }
 
 

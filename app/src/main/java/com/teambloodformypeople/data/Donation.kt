@@ -1,4 +1,4 @@
-package com.teambloodformypeople.models
+package com.teambloodformypeople.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
