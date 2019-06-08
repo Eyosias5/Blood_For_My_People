@@ -8,10 +8,10 @@ import java.io.Serializable
     tableName = "users"
 )
 data class User(
-    @PrimaryKey @ColumnInfo(name = "userId", index = true) var id: Int,
-    @ColumnInfo(name = "email") var email: String,
-    @ColumnInfo(name = "password") var password: String,
-    @ColumnInfo(name = "role") var role: String
+    @PrimaryKey @ColumnInfo(name = "userId", index = true) var id: Int?,
+    @ColumnInfo(name = "email") var email: String?,
+    @ColumnInfo(name = "password") var password: String?,
+    @ColumnInfo(name = "role") var role: String?
 ): Serializable{
     constructor(email:String, password: String, role: String): this(0,email,password,role)
 }

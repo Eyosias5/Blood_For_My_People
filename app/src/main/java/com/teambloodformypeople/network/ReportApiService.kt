@@ -18,7 +18,7 @@ interface ReportApiService {
     @GET("reports/{id}")
     fun findByReportIdAsync(@Path("id") id: Int): Deferred<Response<Report>>
     @POST("reports")
-    fun insertReportAsync(@Body newReport: Report): Deferred<Response<Report>>
+    fun insertReportAsync(@Body newReport: Report): Deferred<Response<Void>>
     @PUT("reports/{id}")
     fun updateReportAsync(@Path("id") id: Int, @Body newReport: Report): Deferred<Response<Void>>
     @DELETE("reports/{id}")

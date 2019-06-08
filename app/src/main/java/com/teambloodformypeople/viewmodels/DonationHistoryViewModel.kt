@@ -1,40 +1,49 @@
 package com.teambloodformypeople.viewmodels
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.teambloodformypeople.data.models.DonationHistory
-import com.teambloodformypeople.data.DB
-import com.teambloodformypeople.data.daos.DonationHistoryDao
+import com.teambloodformypeople.network.DonationHistoryApiService
 import com.teambloodformypeople.repositories.DonationHistoryRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Response
 
-class DonationHistoryViewModel (application: Application): AndroidViewModel(application) {
+class DonationHistoryViewModel : ViewModel(){
     private val donationHistoryRepository: DonationHistoryRepository
-    private var donationHistoryDao: DonationHistoryDao? = null
 
     init {
-        donationHistoryDao = DB.getDatabase(application).donationHistoryDao()
-        donationHistoryRepository = DonationHistoryRepository(donationHistoryDao!!)
+        val donationHistoryApiService =  DonationHistoryApiService.getInstance()
+        donationHistoryRepository = DonationHistoryRepository(donationHistoryApiService)
     }
+    private val _getResponse = MutableLiveData<Response<DonationHistory>>()
+    val getResponse:LiveData<Response<DonationHistory>>
+        get() = _getResponse
+    private val _getAllResponse = MutableLiveData<Response<List<DonationHistory>>>()
+    val getAllResponse:LiveData<Response<List<DonationHistory>>>
+        get() = _getAllResponse
+    private val _insertResponse = MutableLiveData<Response<Void>>()
+    val insertResponse:LiveData<Response<Void>>
+        get() = _insertResponse
+    private val _deleteResponse = MutableLiveData<Response<Void>>()
+    val deleteResponse:LiveData<Response<Void>>
+        get() = _deleteResponse
+    private val _updateResponse = MutableLiveData<Response<Void>>()
+    val updateResponse:LiveData<Response<Void>>
+        get() = _updateResponse
 
-    fun getAllDonationHistories(): LiveData<Response<List<DonationHistory>>> {
-        return donationHistoryRepository.findAllDonationHistories()
+    fun getAllDonationHistorys() =viewModelScope.launch{
+        _getAllResponse.postValue(donationHistoryRepository.findAllDonationHistories())
     }
-    fun getDonationHistoryById(donationHistoryId : Int): LiveData<Response<DonationHistory>> {
-        return donationHistoryRepository.findDonationHistoryById(donationHistoryId)
+    fun getDonationHistoryById(donationHistoryId: Int) =viewModelScope.launch{
+        _getResponse.postValue(donationHistoryRepository.findDonationHistoryAsync(donationHistoryId))
     }
-    fun insertDonationHistory(donationHistory: DonationHistory)  = viewModelScope.launch(Dispatchers.IO) {
-        donationHistoryRepository.insertDonationHistory(donationHistory)
+    fun insertDonationHistory(donationHistory: DonationHistory)  =viewModelScope.launch{
+        _insertResponse.postValue(donationHistoryRepository.insertDonationHistoryAsync(donationHistory))
     }
-    fun updateDonationHistory(donationHistory: DonationHistory)  = viewModelScope.launch(Dispatchers.IO) {
-        donationHistoryRepository.updateDonationHistory(donationHistory)
+    fun updateDonationHistory(donationHistory: DonationHistory)  =viewModelScope.launch{
+        _updateResponse.postValue(donationHistoryRepository.updateDonationHistoryAsync(donationHistory))
     }
-    fun deleteDonationHistory(donationHistory: DonationHistory)  = viewModelScope.launch(Dispatchers.IO) {
-        donationHistoryRepository.deleteDonationHistory(donationHistory)
+    fun deleteDonationHistory(donationHistoryId: Int)   =viewModelScope.launch{
+        _deleteResponse.postValue(donationHistoryRepository.deleteDonationHistoryAsync(donationHistoryId))
     }
 
 }

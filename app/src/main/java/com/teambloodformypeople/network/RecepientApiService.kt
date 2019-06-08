@@ -18,7 +18,7 @@ interface RecepientApiService {
     @GET("recepients/{id}")
     fun findByRecepeintIdAsync(@Path("id") id: Int): Deferred<Response<Recepient>>
     @POST("recepients")
-    fun insertRecepeintAsync(@Body newRecepient: Recepient): Deferred<Response<Recepient>>
+    fun insertRecepeintAsync(@Body newRecepient: Recepient): Deferred<Response<Void>>
     @PUT("recepients/{id}")
     fun updateRecepeintAsnc(@Path("id") id: Int, @Body newRecepient: Recepient): Deferred<Response<Void>>
     @DELETE("recepients/{id}")

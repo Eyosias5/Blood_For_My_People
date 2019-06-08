@@ -48,64 +48,65 @@ class TestingActivity : AppCompatActivity() {
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
         addButton.setOnClickListener {
-            GlobalScope.launch(Dispatchers.IO) {
-                if(connected()) {
-                    userViewModel.insertUser(readFields())
-                    Log.d("MainActivity", "ADDED")
-                }
+            val user = readFields()
+            if(connected()){
+                userViewModel.insertUser(user)
+                userViewModel.insertResponse.observe(this,Observer{response->
+                    response.body().run{
+
+                    }
+                })
             }
             clearFields()
         }
 
         updateButton.setOnClickListener {
+            val id: Int = searchEditText.text.toString().toInt()
             var user = readFields()
-            val id:Int = searchEditText.text.toString().toInt()
-            GlobalScope.launch(Dispatchers.IO) {
-                if(connected()) {
-                    user.id = id
-                    userViewModel.updateUser(user)
-                    Log.d("MainActivity", "UPDATED")
-                }
+            user.id = id
+            if(connected()){
+                userViewModel.updateUser(user)
+                userViewModel.updateResponse.observe(this,Observer{response->
+                    response.body().run{
+
+                    }
+                })
             }
             clearFields()
         }
 
         deleteButton.setOnClickListener {
             val id: Int = searchEditText.text.toString().toInt()
-            GlobalScope.launch(Dispatchers.IO) {
-                if(connected()) {
-                    userViewModel.deleteUser(id)
-                    Log.d("MainActivity", "DELETED")
-                }
+            if(connected()){
+                userViewModel.deleteUser(id)
+                userViewModel.deleteResponse.observe(this,Observer{response->
+                    response.body().run{
+
+                    }
+                })
             }
             clearFields()
         }
 
         searchButton.setOnClickListener {
             val id: Int = searchEditText.text.toString().toInt()
-            GlobalScope.launch(Dispatchers.IO) {
-                if(connected()) {
-                    val user: User? = userViewModel.getUserById(id)
-                    if(user==null){
-                        Toast.makeText(this@TestingActivity,"USER WAS NOT FOUND",Toast.LENGTH_SHORT).show()
+            if(connected()) {
+                userViewModel.getUserById(id)
+                userViewModel.getResponse.observe(this, Observer {response->
+                    response.body()?.run{
+                        updateFields(this)
                     }
-                    if (user != null) {
-                        withContext(Dispatchers.Main){
-                            updateFields(user)
-                            Log.d("MainActivity","FOUND")
-                        }
-                    }
-                }
+                })
             }
         }
     }
 
     private fun updateFields(user: User){
         user.run{
-            searchEditText.setText(user.id.toString())
-            emailEditText.setText(user.email)
-            passwordEditText.setText(user.password)
-            roleEditText.setText(user.role)
+            searchEditText.setText(this.id.toString())
+            emailEditText.setText(this.email)
+            passwordEditText.setText(this.password)
+            roleEditText.setText(this.role)
         }
     }
 

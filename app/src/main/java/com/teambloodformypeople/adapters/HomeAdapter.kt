@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
-import com.teambloodformypeople.data.Recipient
+import com.teambloodformypeople.data.models.Recepient
 import kotlinx.android.synthetic.main.home_item.view.*
 
 class HomeAdapter(val context: Context): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     private  val recipients = listOf(
-        Recipient(12,"Brass Hospital","Bole","0912373184",2)
+        Recepient(12,"Brass Hospital","Bole","0912373184",2)
 
 
 

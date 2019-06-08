@@ -21,13 +21,12 @@ interface UserApiService {
     @POST("Users")
     fun insertUserAsync(@Body newUser: User): Deferred<Response<Void>>
     @PUT("Users/{id}")
-    fun updateUserAsnc(@Path("id") id: Int, @Body newUser: User): Deferred<Response<Void>>
+    fun updateUserAsnc(@Path("id") id: Int?, @Body newUser: User): Deferred<Response<Void>>
     @DELETE("Users/{id}")
     fun deleteUserAsync(@Path("id") id: Int): Deferred<Response<Void>>
+
     companion object {
-
         private val baseUrl = Constants().baseUrl
-
         fun getInstance(): UserApiService {
 
             val interceptor = HttpLoggingInterceptor()

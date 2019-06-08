@@ -3,24 +3,32 @@ package com.teambloodformypeople.repositories
 import androidx.lifecycle.LiveData
 import com.teambloodformypeople.data.daos.DonorDao
 import com.teambloodformypeople.data.models.Donor
+import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.network.DonorApiService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class DonorRepository(donorDao: DonorDao) {
-    fun findAllDonors(): LiveData<Response<List<Donor>>> {
-        return DonorApiService.getInstance().findDonors() as LiveData<Response<List<Donor>>>
-    }
-    fun findDonorById(donorId: Int): LiveData<Response<Donor>> {
-        return DonorApiService.getInstance().findByDonorIdAsync(donorId) as LiveData<Response<Donor>>
-    }
-    fun insertDonor(donor: Donor) {
-        DonorApiService.getInstance().insertDonorAsync(donor)
-    }
-    fun updateDonor(donor: Donor) {
-        DonorApiService.getInstance().updateDonorAsnc(donor.id,donor)
-    }
-    fun deleteDonor(donor: Donor) {
-        DonorApiService.getInstance().deleteDonorAsync(donor.id)
-    }
+class DonorRepository(private val DonorApiService: DonorApiService) {
+    suspend fun findAllDonorsAsync(): Response<List<Donor>> =
+        withContext(Dispatchers.IO){
+            DonorApiService.findDonors().await()
+        }
+    suspend fun findDonorByIdAsync(donorId: Int): Response<Donor> =
+        withContext(Dispatchers.IO){
+            DonorApiService.findByDonorIdAsync(donorId).await()
+        }
 
+    suspend fun insertDonorAsync(donor: Donor): Response<Void> =
+        withContext(Dispatchers.IO){
+            DonorApiService.insertDonorAsync(donor).await()
+        }
+    suspend fun updateDonorAsync(donor: Donor): Response<Void> =
+        withContext(Dispatchers.IO){
+            DonorApiService.updateDonorAsnc(donor.id,donor).await()
+        }
+    suspend fun deleteDonorAsync(donorId: Int): Response<Void> =
+        withContext(Dispatchers.IO){
+            DonorApiService.deleteDonorAsync(donorId).await()
+        }
 }

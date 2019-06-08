@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
-import com.teambloodformypeople.data.Recipient
+import com.teambloodformypeople.data.models.Recepient
 import kotlinx.android.synthetic.main.report_item.view.*
 
 class ReportAdapter (val context: Context): RecyclerView.Adapter<ReportAdapter.ReportViewHolder>(){
 
     private  val recipients = listOf(
-        Recipient(12,"Brass Hospital","Bole","0912373184",2)
+        Recepient(12,"Brass Hospital","Bole","0912373184",2)
 
 
 
