@@ -6,15 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
-import com.teambloodformypeople.models.Donation
 
 
 class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<DonationHistoryAdapter.DonationHistoryViewHolder>(){
 
-    private val donations = listOf(
-        Donation(1,"June 12 20",200.0f,"0 +",23,11),
-        Donation(2,"June 2 2019", 200.0F,"B -",23,11),
-        Donation(3,"June 1 2019", 200.0F,"A ",23,11)
+    private val donations = listOf(null
+//        Donation(1, "June 12 20", 200.0f, "0 +", 23, 11),
+//        Donation(2, "June 2 2019", 200.0F, "B -", 23, 11),
+//        Donation(3, "June 1 2019", 200.0F, "A ", 23, 11)
     )
     override fun onCreateViewHolder(
         parent: ViewGroup,
