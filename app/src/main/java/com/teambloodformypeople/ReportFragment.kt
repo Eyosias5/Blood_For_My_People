@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.teambloodformypeople.adapters.ReportAdapter
 import kotlinx.android.synthetic.main.donation_history_fragment.*
+import kotlinx.android.synthetic.main.report_fragment.*
 
 class ReportFragment : Fragment(){
     lateinit var recyclerView: RecyclerView
@@ -20,9 +22,9 @@ class ReportFragment : Fragment(){
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView = recycler_view_history
+        recyclerView = recycler_view_report
         recyclerView.layoutManager = LinearLayoutManager(activity)
-       // recyclerView.adapter = context?.let{ ReportAdapter(it) }
+        recyclerView.adapter = context?.let{ ReportAdapter(it) }
 
     }
     companion object{

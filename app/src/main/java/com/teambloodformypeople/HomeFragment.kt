@@ -28,12 +28,12 @@ class HomeFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         recyclerView = recycler_view_home
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        //recyclerView.adapter = context?.let{ HomeAdapter(it) }
+        recyclerView.adapter = context?.let{ HomeAdapter(it) }
 
     }
     companion object{
-        fun newInstance(): DonationHistoryFragment{
-            return DonationHistoryFragment()
+        fun newInstance(): HomeFragment{
+            return HomeFragment()
         }
     }
 

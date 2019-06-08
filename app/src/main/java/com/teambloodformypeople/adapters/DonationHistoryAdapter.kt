@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
 import com.teambloodformypeople.models.Donation
+import kotlinx.android.synthetic.main.donation_history_item.view.*
 
 
 class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<DonationHistoryAdapter.DonationHistoryViewHolder>(){
@@ -29,7 +30,10 @@ class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<Donatio
     }
 
     override fun onBindViewHolder(holder: DonationHistoryAdapter.DonationHistoryViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val donation = donations[position]
+
+        holder.itemView.donation_date_textview.text = donation.date
+        holder.itemView.donation_recpient_location_textview.text = donation.recipient.toString()
     }
 
 
