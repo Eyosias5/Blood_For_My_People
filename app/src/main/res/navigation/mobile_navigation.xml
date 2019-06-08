@@ -5,11 +5,27 @@
     <fragment android:id="@+id/home_des"
               tools:layout="@layout/home_fragment"
               android:name="com.teambloodformypeople.HomeFragment"
-              android:label="HomeFragment"/>
+              android:label="HomeFragment">
+        <action android:id="@+id/action_home_des_to_history_detail_des" app:destination="@+id/history_detail_des"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
 
     <fragment android:id="@+id/history_des"
               tools:layout="@layout/donation_history_fragment"
               android:name="com.teambloodformypeople.DonationHistoryFragment"
               android:label="DonationHistoryFragment"/>
+    <fragment android:id="@+id/report_des"
+              tools:layout="@layout/report_fragment"
+              android:name="com.teambloodformypeople.ReportFragment"
+              android:label="ReportFragment"/>
+    <fragment android:id="@+id/profile_des"
+              android:name="com.teambloodformypeople.ProfileFragment"
+              tools:layout="@layout/profile_fragment"
+              android:label="ProfileFragment"/>
+    <fragment android:id="@+id/history_detail_des"
+              tools:layout="@layout/donation_history_detail_fragment"
+              android:name="com.teambloodformypeople.DonationHistoryDetailFragment"
+              android:label="DonationHistoryDetailFragment"/>
 </navigation>

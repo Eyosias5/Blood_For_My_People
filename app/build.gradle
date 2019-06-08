@@ -17,6 +17,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    dataBinding{
+        enabled = true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -65,7 +68,7 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:$arch_lifecycle_version"
     androidTestImplementation "androidx.arch.core:core-testing:$androidx_arch_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_lifecycle_version"
-
+    implementation 'androidx.fragment:fragment-ktx:1.0.0'
 
     def retrofit_version = "2.5.0"
     def moshi_version = "1.8.0"
