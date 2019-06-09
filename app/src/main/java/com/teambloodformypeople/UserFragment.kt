@@ -26,7 +26,7 @@ import androidx.navigation.Navigation
 class UserFragment : Fragment() {
 
 
-    class ProfileFragment : Fragment() {
+
         lateinit var _context: Context
         lateinit var sharedPreferences: SharedPreferences
         lateinit var nameTv: TextView
@@ -89,4 +89,3 @@ class UserFragment : Fragment() {
             }
         }
     }
-}
