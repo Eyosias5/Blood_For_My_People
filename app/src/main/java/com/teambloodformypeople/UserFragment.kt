@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.user_fragment.view.*
 import androidx.navigation.Navigation
 
 class UserFragment : Fragment() {
+
         lateinit var _context: Context
         lateinit var sharedPreferences: SharedPreferences
         lateinit var nameTv: TextView
