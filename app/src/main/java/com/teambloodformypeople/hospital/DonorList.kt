@@ -5,10 +5,12 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.teambloodformypeople.Constants
 import com.teambloodformypeople.R
 import com.teambloodformypeople.hospital.adapters.DonorListAdapter
 import com.teambloodformypeople.viewmodels.DonorViewModel
@@ -23,18 +25,21 @@ class DonorList : AppCompatActivity() {
         setContentView(R.layout.hospital_donor_list)
         model = ViewModelProviders.of(this).get(DonorViewModel::class.java)
         val linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,false)
-        recyclerView.layoutManager = linearLayoutManager
+        donorRecyclerView.layoutManager = linearLayoutManager
         if(connected()){
-            model.getAllDonors()
-            model.getAllResponse.observe(this, Observer { response->
-                response.body().run{
-                    recyclerView.adapter = DonorListAdapter(this!!)
-                }
-
-            })
-
+            var currentRecepientId = getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).getInt(Constants().currentRecepient,0)
+            if(currentRecepientId==0){
+                Toast.makeText(this@DonorList,"User is non-existent", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                model.getAllDonors()
+                model.getAllResponse.observe(this, Observer { response ->
+                    response.body().run {
+                        donorRecyclerView.adapter = DonorListAdapter(this!!)
+                    }
+                })
+            }
         }
-
     }
     private fun connected():Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

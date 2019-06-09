@@ -14,6 +14,14 @@ class ReportRepository(private val ReportApiService: ReportApiService) {
         withContext(Dispatchers.IO){
             ReportApiService.findReports().await()
         }
+    suspend fun findAllReportsByDonorIdAsync(donorId : Int): Response<List<Report>> =
+        withContext(Dispatchers.IO){
+            ReportApiService.findReportsByDonorId(donorId).await()
+        }
+    suspend fun findAllReportsByRecepientIdAsync(recepientId: Int): Response<List<Report>> =
+        withContext(Dispatchers.IO){
+            ReportApiService.findReportsByRecepientId(recepientId).await()
+        }
     suspend fun findReportByIdAsync(reportId: Int): Response<Report> =
         withContext(Dispatchers.IO){
             ReportApiService.findByReportIdAsync(reportId).await()

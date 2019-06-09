@@ -36,6 +36,9 @@ class RecepientViewModel : ViewModel(){
     fun getRecepientById(recepientId: Int) =viewModelScope.launch{
         _getResponse.postValue(recepientRepository.findRecepientByIdAsync(recepientId))
     }
+    fun getRecepientByUserId(userId: Int) =viewModelScope.launch{
+        _getResponse.postValue(recepientRepository.findRecepientByUserIdAsync(userId))
+    }
     fun insertRecepient(recepient: Recepient)  =viewModelScope.launch{
         _insertResponse.postValue(recepientRepository.insertRecepientAsync(recepient))
     }

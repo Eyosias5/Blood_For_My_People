@@ -9,10 +9,12 @@ import java.io.Serializable
     ]
 )
 data class Recepient (
-    @PrimaryKey @ColumnInfo(name = "recepientId", index = true) val id: Int,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "location") val location: String,
-    @ColumnInfo(name = "phoneNumber") val phoneNumber: String,
+    @PrimaryKey @ColumnInfo(name = "recepientId", index = true) var id: Int,
+    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "location") var location: String,
+    @ColumnInfo(name = "phoneNumber") var phoneNumber: String,
 
-    @ColumnInfo(name = "userId") val user: Int
-): Serializable
+    @ColumnInfo(name = "userId") var user: Int
+): Serializable{
+    constructor(name:String, location: String, phoneNumber: String): this(0,name, location, phoneNumber,0)
+}

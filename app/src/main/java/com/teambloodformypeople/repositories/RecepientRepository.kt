@@ -18,6 +18,10 @@ class RecepientRepository(private val RecepientApiService: RecepientApiService) 
         withContext(Dispatchers.IO){
             RecepientApiService.findByRecepeintIdAsync(recepientId).await()
         }
+    suspend fun findRecepientByUserIdAsync(userId: Int): Response<Recepient> =
+        withContext(Dispatchers.IO){
+            RecepientApiService.findByUserIdAsync(userId).await()
+        }
 
     suspend fun insertRecepientAsync(recepient: Recepient): Response<Void> =
         withContext(Dispatchers.IO){

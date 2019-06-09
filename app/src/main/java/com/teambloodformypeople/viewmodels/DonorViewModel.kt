@@ -36,6 +36,9 @@ class DonorViewModel : ViewModel(){
     fun getDonorById(donorId: Int) =viewModelScope.launch{
         _getResponse.postValue(donorRepository.findDonorByIdAsync(donorId))
     }
+    fun getDonorByUserId(userId: Int) =viewModelScope.launch{
+        _getResponse.postValue(donorRepository.findDonorByUserIdAsync(userId))
+    }
     fun insertDonor(donor: Donor)  =viewModelScope.launch{
         _insertResponse.postValue(donorRepository.insertDonorAsync(donor))
     }

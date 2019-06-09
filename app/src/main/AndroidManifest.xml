@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".hospital.DonorList">
         </activity>
-        <activity android:name=".hospital.AddHospital">
+        <activity android:name=".hospital.AddRecepient">
         </activity>
         <activity android:name=".hospital.Register">
         </activity>
