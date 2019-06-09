@@ -18,6 +18,8 @@ class ReportFragment : Fragment(){
                               savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
+        val bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view)
+        bottom_nav?.visibility = View.VISIBLE
         return inflater.inflate(R.layout.report_fragment,container,false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

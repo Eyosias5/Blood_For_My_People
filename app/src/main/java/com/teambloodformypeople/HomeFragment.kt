@@ -22,10 +22,14 @@ class HomeFragment : Fragment(){
                               savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
+        this.activity?.title = "Hello"
+        view?.let { Navigation.findNavController(it).getCurrentDestination()?.setLabel("Hello") }
         return inflater.inflate(R.layout.home_fragment,container,false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view)
+        bottom_nav?.visibility = View.VISIBLE
         recyclerView = recycler_view_home
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = context?.let{ HomeAdapter(it) }

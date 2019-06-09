@@ -4,16 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import com.teambloodformypeople.data.models.DonationHistory
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
+import kotlinx.android.synthetic.main.donation_history_item.view.*
+import kotlinx.android.synthetic.main.home_item.view.*
+import kotlinx.android.synthetic.main.home_item.view.donation_recpient_location_textview
 
 
 class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<DonationHistoryAdapter.DonationHistoryViewHolder>(){
 
-    private val donations = listOf(null
-//        Donation(1, "June 12 20", 200.0f, "0 +", 23, 11),
-//        Donation(2, "June 2 2019", 200.0F, "B -", 23, 11),
-//        Donation(3, "June 1 2019", 200.0F, "A ", 23, 11)
+    private val donations = listOf(
+            DonationHistory(2,"June 11 2019",120F,1,12)
     )
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,7 +31,14 @@ class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<Donatio
     }
 
     override fun onBindViewHolder(holder: DonationHistoryAdapter.DonationHistoryViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val donoation= donations[position]
+
+        holder.itemView.donation_date_textview.text=donoation.date
+        holder.itemView.donation_recpient_location_textview.text = donoation.amount.toString()
+
+        holder.itemView.setOnClickListener {
+            Navigation.createNavigateOnClickListener(R.id.history_detail_des,null)
+        }
     }
 
 
