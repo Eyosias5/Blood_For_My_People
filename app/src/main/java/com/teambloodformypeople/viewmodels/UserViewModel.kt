@@ -41,6 +41,9 @@ class UserViewModel : ViewModel(){
     fun getUserById(userId: Int) =viewModelScope.launch{
         _getResponse.postValue(userRepository.findUserByIdAsync(userId))
     }
+    fun getUserByEmailAndPassword(email:String, password: String) =viewModelScope.launch{
+        _getResponse.postValue(userRepository.findUserByEmailAndPasswordAsync(email, password))
+    }
     fun insertUser(user: User)  =viewModelScope.launch{
         _insertResponse.postValue(userRepository.insertUserAsync(user))
     }

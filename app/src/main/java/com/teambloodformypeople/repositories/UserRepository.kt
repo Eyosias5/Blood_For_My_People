@@ -15,7 +15,12 @@ class UserRepository(private val UserApiService: UserApiService) {
     suspend fun findUserByIdAsync(userId: Int): Response<User> =
         withContext(Dispatchers.IO){
             UserApiService.findByUserIdAsync(userId).await()
-    }
+        }
+
+    suspend fun findUserByEmailAndPasswordAsync(email: String, password: String): Response<User> =
+        withContext(Dispatchers.IO){
+            UserApiService.findByUserEmailAndPasswordAsync(email, password).await()
+        }
 
     suspend fun insertUserAsync(user: User): Response<Void> =
         withContext(Dispatchers.IO){
