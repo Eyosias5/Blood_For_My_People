@@ -26,7 +26,7 @@ class DonorList : AppCompatActivity() {
         model = ViewModelProviders.of(this).get(DonorViewModel::class.java)
         val linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,false)
         donorRecyclerView.layoutManager = linearLayoutManager
-        if(connected()){
+//        if(connected()){
             var currentRecepientId = getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).getInt(Constants().currentRecepient,0)
             if(currentRecepientId==0){
                 Toast.makeText(this@DonorList,"User is non-existent", Toast.LENGTH_SHORT).show()
@@ -39,7 +39,7 @@ class DonorList : AppCompatActivity() {
                     }
                 })
             }
-        }
+//        }
     }
     private fun connected():Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

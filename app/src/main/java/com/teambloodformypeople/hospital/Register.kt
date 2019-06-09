@@ -35,8 +35,8 @@ class Register : AppCompatActivity() {
         registerButton.setOnClickListener {
             var username = usernameEditText.text.toString()
             var password = passwordEditText.text.toString()
-            val user = User(username,password,"donor")
-            if(connected()) {
+            val user = User(username,password,"Donor")
+//            if(connected()) {
                 userViewModel.insertUser(user)
                 userViewModel.insertResponse.observe(this, Observer {response->
                     response.body()?.run{
@@ -45,7 +45,7 @@ class Register : AppCompatActivity() {
                         }
                     }
                 })
-            }
+//            }
         }
         loginButton.setOnClickListener {
             login()
