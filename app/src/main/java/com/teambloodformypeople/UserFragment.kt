@@ -15,8 +15,6 @@ import android.widget.Toast
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 
 import kotlinx.android.synthetic.main.user_fragment.view.*
@@ -28,7 +26,7 @@ class UserFragment : Fragment() {
         lateinit var sharedPreferences: SharedPreferences
         lateinit var nameTv: TextView
         lateinit var phoneTv: TextView
-        lateinit var emailTv: TextView
+        lateinit var dbTv: TextView
         private lateinit var donorViewModel: DonorViewModel
         var currentRecepientId: Int = 0
         override fun onCreateView(
@@ -50,7 +48,7 @@ class UserFragment : Fragment() {
             Toast.makeText(_context, currentRecepientId.toString(), Toast.LENGTH_SHORT).show()
             nameTv = view.name_tv
             phoneTv = view.phone_tv
-            emailTv = view.email_tv
+            dbTv = view.db_tv
             updateView(1)
 
             return view
@@ -62,14 +60,15 @@ class UserFragment : Fragment() {
             donorViewModel.getDonorByUserId(id)
             donorViewModel.getResponse.observe(this, Observer { response ->
                 response.body()?.run {
-                    updateView(this.fullName , this.phoneNumber)
+                    updateView(this.fullName , this.phoneNumber,this.dateOfBirth)
 
                 }
             })
         }
-    private fun updateView(name: String, phone: String){
+    private fun updateView(name: String, phone: String,db:String){
         nameTv.text =name
         phoneTv.text = phone
+        dbTv.text=db
     }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -44,10 +44,10 @@
                 android:layout_marginTop="336dp"
                 app:layout_constraintTop_toTopOf="parent"/>
         <TextView
-                android:text="eyosiassamson5@gmail.com"
+                android:text="1998-04-06"
                 android:layout_width="186dp"
                 android:layout_height="23dp"
-                android:id="@+id/email_tv"
+                android:id="@+id/db_tv"
                 android:textStyle="bold"
                 android:layout_marginTop="372dp" app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView15" android:layout_marginStart="40dp"
