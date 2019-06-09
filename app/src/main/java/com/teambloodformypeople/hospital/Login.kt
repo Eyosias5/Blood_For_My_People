@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.teambloodformypeople.Constants
+import com.teambloodformypeople.MainActivity
 import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.Donor
 import com.teambloodformypeople.viewmodels.DonorViewModel
@@ -19,6 +20,7 @@ import com.teambloodformypeople.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.hospital_login.*
 import kotlinx.coroutines.Dispatchers
 
+public var key: Int=0
 class Login : AppCompatActivity() {
     lateinit var loginButton: Button
     lateinit var registerButton: Button
@@ -28,6 +30,7 @@ class Login : AppCompatActivity() {
     private lateinit var userViewModel: UserViewModel
     private lateinit var donorViewModel: DonorViewModel
     private lateinit var recepientViewModel: RecepientViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.hospital_login)
@@ -42,7 +45,7 @@ class Login : AppCompatActivity() {
         loginButton.setOnClickListener {
             var username = usernameEditText.text.toString()
             var password = passwordEditText.text.toString()
-            if(connected()) {
+//            if(connected()) {
                 userViewModel.getUserByEmailAndPassword(username,password)
                 userViewModel.getResponse.observe(this, Observer {response->
                     response.body()?.run{
@@ -61,13 +64,18 @@ class Login : AppCompatActivity() {
                             }
                             this.role=="Donor" -> {
                                 donorViewModel.getDonorByUserId(this.id!!)
-                                donorViewModel.getResponse.observe(Login(),Observer{response->
-                                    response.body()?.run {
-                                        var sharedPrefs = getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
-                                        sharedPrefs.edit().putInt(Constants().currentDonor,this.id).apply()
-                                    }
-                                })
-                                val intent =  Intent(applicationContext,DonorList::class.java)
+//                                donorViewModel.getResponse.observe(Login(),Observer{response->
+//                                    response.body()?.run {
+//                                        var sharedPrefs = getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
+//
+//                                        sharedPrefs.edit().putInt(Constants().currentDonor,this.id).apply()
+//                                    }
+//                                })
+
+                                var sharedPrefs = getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
+                                sharedPrefs.edit().putInt(Constants().currentDonor, this.id!!).apply()
+
+                                val intent =  Intent(applicationContext,MainActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             }
@@ -83,7 +91,7 @@ class Login : AppCompatActivity() {
                         }
                     }
                 })
-            }
+           // }
         }
         registerButton.setOnClickListener {
             register()
