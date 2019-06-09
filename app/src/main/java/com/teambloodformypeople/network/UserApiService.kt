@@ -18,6 +18,8 @@ interface UserApiService {
     fun findUsers(): Deferred<Response<List<User>>>
     @GET("Users/{id}")
     fun findByUserIdAsync(@Path("id") id: Int): Deferred<Response<User>>
+    @GET("Users/{email}&{password}")
+    fun findByUserEmailAndPasswordAsync(@Path("email") email: String,@Path("password") password: String): Deferred<Response<User>>
     @POST("Users")
     fun insertUserAsync(@Body newUser: User): Deferred<Response<Void>>
     @PUT("Users/{id}")

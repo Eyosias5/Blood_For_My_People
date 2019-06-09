@@ -33,6 +33,12 @@ class ReportViewModel : ViewModel(){
     fun getAllReports() =viewModelScope.launch{
         _getAllResponse.postValue(reportRepository.findAllReportsAsync())
     }
+    fun getAllReportsByDonorId(donorId:Int) =viewModelScope.launch{
+        _getAllResponse.postValue(reportRepository.findAllReportsByDonorIdAsync(donorId))
+    }
+    fun getAllReportsByRecepientId(recepientId:Int) =viewModelScope.launch{
+        _getAllResponse.postValue(reportRepository.findAllReportsByRecepientIdAsync(recepientId))
+    }
     fun getReportById(reportId: Int) =viewModelScope.launch{
         _getResponse.postValue(reportRepository.findReportByIdAsync(reportId))
     }

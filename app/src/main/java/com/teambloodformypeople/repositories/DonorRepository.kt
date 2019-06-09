@@ -18,6 +18,10 @@ class DonorRepository(private val DonorApiService: DonorApiService) {
         withContext(Dispatchers.IO){
             DonorApiService.findByDonorIdAsync(donorId).await()
         }
+    suspend fun findDonorByUserIdAsync(userId: Int): Response<Donor> =
+        withContext(Dispatchers.IO){
+            DonorApiService.findByUserIdAsync(userId).await()
+        }
 
     suspend fun insertDonorAsync(donor: Donor): Response<Void> =
         withContext(Dispatchers.IO){

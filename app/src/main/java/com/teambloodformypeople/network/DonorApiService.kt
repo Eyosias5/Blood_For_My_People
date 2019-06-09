@@ -17,6 +17,8 @@ interface DonorApiService {
     fun findDonors(): Deferred<Response<List<Donor>>>
     @GET("donors/{id}")
     fun findByDonorIdAsync(@Path("id") id: Int): Deferred<Response<Donor>>
+    @GET("donors/{user}")
+    fun findByUserIdAsync(@Path("userId") id: Int): Deferred<Response<Donor>>
     @POST("donors")
     fun insertDonorAsync(@Body newDonor: Donor): Deferred<Response<Void>>
     @PUT("donors/{id}")

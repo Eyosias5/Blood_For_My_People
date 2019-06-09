@@ -15,6 +15,12 @@ interface ReportApiService {
     //Reports
     @GET("reports")
     fun findReports(): Deferred<Response<List<Report>>>
+
+    @GET("reports/{donorId}")
+    fun findReportsByDonorId(@Path("donorId") donorId: Int): Deferred<Response<List<Report>>>
+    @GET("reports/{recepientId}")
+    fun findReportsByRecepientId(@Path("recepientId") recepientId : Int): Deferred<Response<List<Report>>>
+
     @GET("reports/{id}")
     fun findByReportIdAsync(@Path("id") id: Int): Deferred<Response<Report>>
     @POST("reports")

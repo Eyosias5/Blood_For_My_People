@@ -15,6 +15,12 @@ interface DonationHistoryApiService {
     @GET("donationHistories")
     fun findDonationHistories(): Deferred<Response<List<DonationHistory>>>
 
+    @GET("donationHistories/{donorId}")
+    fun findDonationHistoriesByDonorId(@Path("donorId") donorId:Int): Deferred<Response<List<DonationHistory>>>
+
+    @GET("donationHistories/{recepientId}")
+    fun findDonationHistoriesByRecepientId(@Path("recepientId") recepientId: Int): Deferred<Response<List<DonationHistory>>>
+
     @GET("donationHistories/{id}")
     fun findByDonationHistoryIdAsync(@Path("id") id: Int): Deferred<Response<DonationHistory>>
 
