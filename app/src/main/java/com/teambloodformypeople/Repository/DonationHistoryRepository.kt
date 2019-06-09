@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import com.teambloodformypeople.data.models.DonationHistory
 
 class DonationHistoryRepository(private val donationHistoryDao: DonationHistoryDao) {
 

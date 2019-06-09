@@ -78,7 +78,7 @@ class AddRecepient : AppCompatActivity() {
                 })
                 if (username != null) {
                     var recepient = Recepient(name = name, phoneNumber = phoneNumber, location = location)
-                    recepient.user = username.value!!
+                    recepient.userId = username.value!!
                     recepientViewModel.insertRecepient(recepient)
                     recepientViewModel.insertResponse.observe(lifecycle, Observer { response ->
                         response.body()?.run {

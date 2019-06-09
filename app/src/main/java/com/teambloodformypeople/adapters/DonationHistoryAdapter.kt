@@ -15,9 +15,7 @@ import kotlinx.android.synthetic.main.home_item.view.donation_recpient_location_
 
 class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<DonationHistoryAdapter.DonationHistoryViewHolder>(){
 
-    private val donations = listOf(
-            DonationHistory(2,"June 11 2019",120F,1,12)
-    )
+    private var donationHistories :List<DonationHistory> = emptyList()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -27,11 +25,11 @@ class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<Donatio
         return DonationHistoryViewHolder(recyclerViewItem)    }
 
     override fun getItemCount(): Int {
-        return donations.size
+        return donationHistories.size
     }
 
     override fun onBindViewHolder(holder: DonationHistoryAdapter.DonationHistoryViewHolder, position: Int) {
-        val donoation= donations[position]
+        val donoation= donationHistories[position]
 
         holder.itemView.donation_date_textview.text=donoation.date
         holder.itemView.donation_recpient_location_textview.text = donoation.amount.toString()
@@ -45,4 +43,8 @@ class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<Donatio
 
     class DonationHistoryViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 
+    internal fun setDonationHistories(donationHistories :List<DonationHistory>){
+        this.donationHistories=donationHistories
+        notifyDataSetChanged()
+    }
 }

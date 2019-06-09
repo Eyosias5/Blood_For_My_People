@@ -24,9 +24,6 @@ import kotlinx.android.synthetic.main.user_fragment.view.*
 import androidx.navigation.Navigation
 
 class UserFragment : Fragment() {
-
-
-    class ProfileFragment : Fragment() {
         lateinit var _context: Context
         lateinit var sharedPreferences: SharedPreferences
         lateinit var nameTv: TextView
@@ -54,7 +51,8 @@ class UserFragment : Fragment() {
             nameTv = view.name_tv
             phoneTv = view.phone_tv
             emailTv = view.email_tv
-            updateView(currentRecepientId)
+            updateView(1)
+
             return view
 
         }
@@ -64,12 +62,15 @@ class UserFragment : Fragment() {
             donorViewModel.getDonorByUserId(id)
             donorViewModel.getResponse.observe(this, Observer { response ->
                 response.body()?.run {
-                    nameTv.text = this.fullName
-                    phoneTv.text = this.phoneNumber
+                    updateView(this.fullName , this.phoneNumber)
 
                 }
             })
         }
+    private fun updateView(name: String, phone: String){
+        nameTv.text =name
+        phoneTv.text = phone
+    }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
@@ -89,4 +90,3 @@ class UserFragment : Fragment() {
             }
         }
     }
-}
