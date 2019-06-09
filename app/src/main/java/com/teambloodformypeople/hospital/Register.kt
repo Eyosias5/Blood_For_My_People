@@ -13,10 +13,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.viewmodels.UserViewModel
-import kotlinx.android.synthetic.main.activity_testing.*
 import kotlinx.android.synthetic.main.hospital_login.*
 import kotlinx.coroutines.Dispatchers
-import okhttp3.Dispatcher
 
 class Register : AppCompatActivity() {
     lateinit var loginButton: Button
@@ -28,7 +26,7 @@ class Register : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.hospital_register)
-        loginButton = login
+        loginButton = logout
         registerButton = register
         usernameEditText = email
         passwordEditText = password

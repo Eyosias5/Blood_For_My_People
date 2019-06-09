@@ -33,6 +33,12 @@ class DonationHistoryViewModel : ViewModel(){
     fun getAllDonationHistorys() =viewModelScope.launch{
         _getAllResponse.postValue(donationHistoryRepository.findAllDonationHistories())
     }
+    fun getAllDonationHistorysByDonorId(donorId: Int) =viewModelScope.launch{
+        _getAllResponse.postValue(donationHistoryRepository.findAllDonationHistoriesByDonorId(donorId))
+    }
+    fun getAllDonationHistorysByRecepientId(recepientId: Int) =viewModelScope.launch{
+        _getAllResponse.postValue(donationHistoryRepository.findAllDonationHistoriesByRecepientId(recepientId))
+    }
     fun getDonationHistoryById(donationHistoryId: Int) =viewModelScope.launch{
         _getResponse.postValue(donationHistoryRepository.findDonationHistoryAsync(donationHistoryId))
     }

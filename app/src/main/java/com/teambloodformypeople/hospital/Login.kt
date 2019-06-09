@@ -10,9 +10,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.teambloodformypeople.Constants
 import com.teambloodformypeople.R
+import com.teambloodformypeople.data.models.Donor
+import com.teambloodformypeople.viewmodels.DonorViewModel
+import com.teambloodformypeople.viewmodels.RecepientViewModel
 import com.teambloodformypeople.viewmodels.UserViewModel
-import kotlinx.android.synthetic.main.activity_testing.*
 import kotlinx.android.synthetic.main.hospital_login.*
 import kotlinx.coroutines.Dispatchers
 
@@ -23,14 +26,18 @@ class Login : AppCompatActivity() {
     lateinit var passwordEditText: EditText
 
     private lateinit var userViewModel: UserViewModel
+    private lateinit var donorViewModel: DonorViewModel
+    private lateinit var recepientViewModel: RecepientViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.hospital_login)
-        loginButton = login
+        loginButton = logout
         registerButton = register
         usernameEditText = email
         passwordEditText = password
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        donorViewModel = ViewModelProviders.of(this).get(DonorViewModel::class.java)
+        recepientViewModel = ViewModelProviders.of(this).get(RecepientViewModel::class.java)
 
         loginButton.setOnClickListener {
             var username = usernameEditText.text.toString()
@@ -40,18 +47,32 @@ class Login : AppCompatActivity() {
                 userViewModel.getResponse.observe(this, Observer {response->
                     response.body()?.run{
                         when {
-                            this.role=="Hospital" -> {
+                            this.role=="Recepient" -> {
+                                recepientViewModel.getRecepientByUserId(this.id!!)
+                                recepientViewModel.getResponse.observe(Login(),Observer{response->
+                                    response.body()?.run {
+                                        var sharedPrefs = getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
+                                        sharedPrefs.edit().putInt(Constants().currentRecepient,this.id).apply()
+                                    }
+                                })
                                 val intent =  Intent(applicationContext,DonorList::class.java)
                                 startActivity(intent)
                                 finish()
                             }
                             this.role=="Donor" -> {
+                                donorViewModel.getDonorByUserId(this.id!!)
+                                donorViewModel.getResponse.observe(Login(),Observer{response->
+                                    response.body()?.run {
+                                        var sharedPrefs = getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
+                                        sharedPrefs.edit().putInt(Constants().currentDonor,this.id).apply()
+                                    }
+                                })
                                 val intent =  Intent(applicationContext,DonorList::class.java)
                                 startActivity(intent)
                                 finish()
                             }
                             this.role=="Admin" -> {
-                                val intent =  Intent(applicationContext,AddHospital::class.java)
+                                val intent =  Intent(applicationContext,AddRecepient::class.java)
                                 startActivity(intent)
                                 finish()
                             }

@@ -11,6 +11,14 @@ class DonationHistoryRepository(private val DonationHistoryApiService: DonationH
         withContext(Dispatchers.IO){
             DonationHistoryApiService.findDonationHistories().await()
         }
+    suspend fun findAllDonationHistoriesByDonorId(donorId: Int): Response<List<DonationHistory>> =
+        withContext(Dispatchers.IO){
+            DonationHistoryApiService.findDonationHistoriesByDonorId(donorId).await()
+        }
+    suspend fun findAllDonationHistoriesByRecepientId(recepientId: Int): Response<List<DonationHistory>> =
+        withContext(Dispatchers.IO){
+            DonationHistoryApiService.findDonationHistoriesByRecepientId(recepientId).await()
+        }
 
     suspend fun findDonationHistoryAsync(donationHistoryId: Int): Response<DonationHistory> =
         withContext(Dispatchers.IO){
