@@ -48,25 +48,13 @@ class Login : AppCompatActivity() {
                     response.body()?.run{
                         when {
                             this.role=="Recepient" -> {
-                                recepientViewModel.getRecepientByUserId(this.id!!)
-                                recepientViewModel.getResponse.observe(Login(),Observer{response->
-                                    response.body()?.run {
-                                        var sharedPrefs = getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
-                                        sharedPrefs.edit().putInt(Constants().currentRecepient,this.id).apply()
-                                    }
-                                })
+                                getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).edit().putInt(Constants().currentRecepient,this?.id!!).apply()
                                 val intent =  Intent(applicationContext,DonorList::class.java)
                                 startActivity(intent)
                                 finish()
                             }
                             this.role=="Donor" -> {
-                                donorViewModel.getDonorByUserId(this.id!!)
-                                donorViewModel.getResponse.observe(Login(),Observer{response->
-                                    response.body()?.run {
-                                        var sharedPrefs = getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
-                                        sharedPrefs.edit().putInt(Constants().currentDonor,this.id).apply()
-                                    }
-                                })
+                                getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).edit().putInt(Constants().currentDonor,this?.id!!).apply()
                                 val intent =  Intent(applicationContext,DonorList::class.java)
                                 startActivity(intent)
                                 finish()

@@ -4,27 +4,22 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.Recepient
-import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.viewmodels.RecepientViewModel
 import com.teambloodformypeople.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.hospital_add_recepient.*
-import kotlinx.android.synthetic.main.hospital_login.*
 import kotlinx.android.synthetic.main.hospital_login.email
 import kotlinx.android.synthetic.main.hospital_login.logout
 import kotlinx.android.synthetic.main.hospital_login.password
 import kotlinx.android.synthetic.main.hospital_login.register
 import kotlinx.coroutines.Dispatchers
-import java.lang.Thread.sleep
 
 class AddRecepient : AppCompatActivity() {
     lateinit var logoutButton: Button
@@ -60,35 +55,23 @@ class AddRecepient : AppCompatActivity() {
             var name = nameEditText.text.toString()
             var location = locationEditText.text.toString()
             var phoneNumber = phoneNumberEditText.text.toString()
-
-            val user = User(username,password,"recepient")
-            if(connected()) {
-                userViewModel.insertUser(user)
-                val lifecycle = this
-                userViewModel.insertResponse.observe(this, Observer { response ->
-                    response.body()?.run {
-                    }
-                })
-                userViewModel.getUserByEmailAndPassword(username, password)
-                var username: MutableLiveData<Int>?=MutableLiveData(0)
-                userViewModel.getResponse.observe(lifecycle, Observer { response ->
+            if (connected()) {
+                var recepient = Recepient(name = name, phoneNumber = phoneNumber, location = location)
+                var temporaryHolder = temporaryHolder(
+                    name =  name,
+                    phone = phoneNumber,
+                    location = location,
+                    username = username,
+                    password = password
+                )
+                recepientViewModel.insertRecepient(temporaryHolder)
+                recepientViewModel.insertResponse.observe(this, Observer { response->
                     response.body().run {
-                        username?.postValue(this?.id)
+                        with(Dispatchers.IO){
+                            Toast.makeText(this@AddRecepient, "Successfully Registered", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 })
-                if (username != null) {
-                    var recepient = Recepient(name = name, phoneNumber = phoneNumber, location = location)
-                    recepient.user = username.value!!
-                    recepientViewModel.insertRecepient(recepient)
-                    recepientViewModel.insertResponse.observe(lifecycle, Observer { response ->
-                        response.body()?.run {
-                            with(Dispatchers.Main) {
-                                Toast.makeText(this@AddRecepient, "Successfully Registered", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                        }
-                    })
-                }
             }
         }
         logoutButton.setOnClickListener {
@@ -110,3 +93,5 @@ class AddRecepient : AppCompatActivity() {
     }
 
 }
+data class temporaryHolder(var username:String, var password:String, var name:String, var location:String, var phone:String)
+

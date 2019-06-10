@@ -2,6 +2,7 @@ package com.teambloodformypeople.viewmodels
 
 import androidx.lifecycle.*
 import com.teambloodformypeople.data.models.Recepient
+import com.teambloodformypeople.hospital.temporaryHolder
 import com.teambloodformypeople.network.RecepientApiService
 import com.teambloodformypeople.repositories.RecepientRepository
 import kotlinx.coroutines.*
@@ -39,7 +40,7 @@ class RecepientViewModel : ViewModel(){
     fun getRecepientByUserId(userId: Int) =viewModelScope.launch{
         _getResponse.postValue(recepientRepository.findRecepientByUserIdAsync(userId))
     }
-    fun insertRecepient(recepient: Recepient)  =viewModelScope.launch{
+    fun insertRecepient(recepient: temporaryHolder)  =viewModelScope.launch{
         _insertResponse.postValue(recepientRepository.insertRecepientAsync(recepient))
     }
     fun updateRecepient(recepient: Recepient)  =viewModelScope.launch{
