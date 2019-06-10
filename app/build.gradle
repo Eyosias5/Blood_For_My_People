@@ -39,6 +39,8 @@ dependencies {
     def androidx_arch_version = "2.0.0"
     def retrofit_version = "2.5.0"
     def moshi_version = "1.8.0"
+    def fragmentVersion = '1.1.0-alpha07'
+    def androidXTestCoreVersion = '1.2.0-beta01'
 
     //Standard Android Features alongside recyclerview, material design
                 implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -98,4 +100,11 @@ dependencies {
 
     //DataBinding
                 kapt 'com.android.databinding:compiler:3.1.4'
+
+    //UI testing
+
+    implementation "androidx.fragment:fragment-testing:$fragmentVersion"
+    implementation "androidx.test:core:$androidXTestCoreVersion"
+    implementation "androidx.fragment:fragment:$fragmentVersion"
+
 }
