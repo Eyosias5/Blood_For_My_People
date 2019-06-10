@@ -2,24 +2,17 @@ package com.teambloodformypeople.viewmodels
 
 import android.app.Application
 import android.content.Context
-import android.opengl.Visibility
-import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
-import com.google.android.material.snackbar.Snackbar
-import com.teambloodformypeople.Constants
-import com.teambloodformypeople.data.DB
-import com.teambloodformypeople.data.daos.UserDao
 import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.network.UserApiService
 import com.teambloodformypeople.repositories.UserRepository
+import com.teambloodformypeople.util.Constants
 import kotlinx.android.synthetic.main.signup_fragment.view.*
 import kotlinx.coroutines.*
 import retrofit2.Response
-import java.lang.Thread.sleep
 
 class UserViewModel(application: Application) : AndroidViewModel(application){
     val email = MutableLiveData("")
@@ -30,7 +23,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
 
     //    val email: LiveData<String> = _email
 //    val password: LiveData<String> = _password
-    lateinit var  _context:Context
+    var  _context:Context
     private val userRepository: UserRepository
 
     init {
@@ -123,10 +116,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                 Toast.makeText(_context,"User already exist",Toast.LENGTH_SHORT).show()
             }
             else {
-                val user = User(emailSignup.value.toString(), passwordSignUp.value.toString(),"Donor")
+                val user2 = User(emailSignup.value.toString(), passwordSignUp.value.toString(),"Donor")
                 withContext(Dispatchers.Main) {
 
-                    if(userRepository.insertUserAsync(user).isSuccessful){
+                    if(userRepository.insertUserAsync(user2).isSuccessful){
                         view.progressBar.visibility=View.INVISIBLE
                         Toast.makeText(_context,"successfully registered !",Toast.LENGTH_SHORT).show()
                         Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)

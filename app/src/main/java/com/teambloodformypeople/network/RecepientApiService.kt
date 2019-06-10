@@ -3,7 +3,7 @@ package com.teambloodformypeople.network
 import com.teambloodformypeople.data.models.Recepient
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.teambloodformypeople.util.Constants
-import com.teambloodformypeople.hospital.temporaryHolder
+import com.teambloodformypeople.viewmodels.RecepientViewModel
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,7 +21,7 @@ interface RecepientApiService {
     @GET("recepients/{user}")
     fun findByUserIdAsync(@Path("user") id: Int): Deferred<Response<Recepient>>
     @POST("recepients")
-    fun insertRecepeintAsync(@Body newRecepient: temporaryHolder): Deferred<Response<Void>>
+    fun insertRecepeintAsync(@Body newRecepient: RecepientViewModel.temporaryHolder): Deferred<Response<Void>>
     @PUT("recepients/{id}")
     fun updateRecepeintAsnc(@Path("id") id: Int, @Body newRecepient: Recepient): Deferred<Response<Void>>
     @DELETE("recepients/{id}")
