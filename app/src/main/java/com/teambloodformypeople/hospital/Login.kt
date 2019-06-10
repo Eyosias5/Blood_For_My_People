@@ -20,7 +20,6 @@ import com.teambloodformypeople.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.hospital_login.*
 import kotlinx.coroutines.Dispatchers
 
-public var key: Int=0
 class Login : AppCompatActivity() {
     lateinit var loginButton: Button
     lateinit var registerButton: Button
@@ -51,13 +50,13 @@ class Login : AppCompatActivity() {
                     response.body()?.run{
                         when {
                             this.role=="Recepient" -> {
-                                getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).edit().putInt(Constants().currentRecepient,this?.id!!).apply()
+//                                getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).edit().putInt(Constants().currentRecepient,this?.id!!).apply()
                                 val intent =  Intent(applicationContext,DonorList::class.java)
                                 startActivity(intent)
                                 finish()
                             }
                             this.role=="Donor" -> {
-                                getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).edit().putInt(Constants().currentDonor,this?.id!!).apply()
+//                                getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).edit().putInt(Constants().currentDonor,this?.id!!).apply()
                                 val intent =  Intent(applicationContext,DonorList::class.java)
                                 startActivity(intent)
                                 finish()
@@ -81,9 +80,9 @@ class Login : AppCompatActivity() {
         }
     }
     private fun register(){
-        var intent =  Intent(applicationContext,Register::class.java)
-        startActivity(intent)
-        finish()
+//        var intent =  Intent(applicationContext,Register::class.java)
+//        startActivity(intent)
+//        finish()
 
     }
     private fun connected():Boolean {

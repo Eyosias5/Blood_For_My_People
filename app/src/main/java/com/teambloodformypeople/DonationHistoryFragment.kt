@@ -1,5 +1,6 @@
 package com.teambloodformypeople
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.adapters.DonationHistoryAdapter
 import com.teambloodformypeople.viewmodels.DonationHistoryViewModel
+import com.teambloodformypeople.viewmodels.DonorViewModel
 import kotlinx.android.synthetic.main.donation_history_fragment.*
 
 class DonationHistoryFragment : Fragment(){
     lateinit var recyclerView: RecyclerView
     private lateinit var donationHistoryViewModel: DonationHistoryViewModel
+    private lateinit var donorViewModel: DonorViewModel
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
@@ -31,10 +35,24 @@ class DonationHistoryFragment : Fragment(){
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = context?.let{DonationHistoryAdapter(it)}
         donationHistoryViewModel = ViewModelProviders.of(this).get(DonationHistoryViewModel::class.java)
-        donationHistoryViewModel.getAllDonationHistorysByDonorId(1)
-        donationHistoryViewModel.getAllResponse.observe(this, Observer {
-            (recyclerView.adapter as DonationHistoryAdapter?)?.setDonationHistories(it.body()!!)
-        })
+        donorViewModel = ViewModelProviders.of(this).get(DonorViewModel::class.java)
+        val id= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getInt(Constants().currentUser,0)
+        val role= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getString(Constants().currentRole,"null")
+        if(role=="Donor"){
+            donorViewModel.getDonorByUserId(id!!)
+            donorViewModel.getResponse.observe(this,Observer{
+                donationHistoryViewModel.getAllDonationHistorysByDonorId(it.body()!!.id)
+                donationHistoryViewModel.getAllResponse.observe(this, Observer { it1 ->
+                    (recyclerView.adapter as DonationHistoryAdapter?)?.setDonationHistories(it1.body()!!)
+                })
+            })
+        }
+        else if(role=="Recepient"){
+            donationHistoryViewModel.getAllDonationHistorysByRecepientId(id!!)
+            donationHistoryViewModel.getAllResponse.observe(this, Observer {
+                (recyclerView.adapter as DonationHistoryAdapter?)?.setDonationHistories(it.body()!!)
+            })
+        }
 
     }
     companion object{

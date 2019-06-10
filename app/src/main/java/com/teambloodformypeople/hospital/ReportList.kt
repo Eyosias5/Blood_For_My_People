@@ -26,19 +26,19 @@ class ReportList : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,false)
         reportRecyclerView.layoutManager = linearLayoutManager
         if(connected()){
-            var currentRecepientId = getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).getInt(
-                Constants().currentRecepient,0)
-            if(currentRecepientId==0){
-                Toast.makeText(this@ReportList,"User is non-existent", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                model.getAllReports()
-                model.getAllResponse.observe(this, Observer { response ->
-                    response.body().run {
-                        reportRecyclerView.adapter = ReportListAdapter(this!!)
-                    }
-                })
-            }
+//            var currentRecepientId = getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).getInt(
+//                Constants().currentRecepient,0)
+//            if(currentRecepientId==0){
+//                Toast.makeText(this@ReportList,"User is non-existent", Toast.LENGTH_SHORT).show()
+//            }
+//            else {
+//                model.getAllReports()
+//                model.getAllResponse.observe(this, Observer { response ->
+//                    response.body().run {
+//                        reportRecyclerView.adapter = ReportListAdapter(this!!)
+//                    }
+//                })
+//            }
         }
     }
 
