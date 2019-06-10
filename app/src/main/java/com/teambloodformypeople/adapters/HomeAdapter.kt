@@ -4,10 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.Recepient
+import com.teambloodformypeople.databinding.DonationHistoryItemBinding
+import com.teambloodformypeople.databinding.HomeItemBinding
+import com.teambloodformypeople.viewmodels.DonationHistoryViewModel
+import com.teambloodformypeople.viewmodels.RecepientViewModel
 import kotlinx.android.synthetic.main.home_item.view.*
 
 public class HomeAdapter(val context: Context): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
@@ -16,9 +21,10 @@ public class HomeAdapter(val context: Context): RecyclerView.Adapter<HomeAdapter
     private var recipients: List<Recepient> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val recyclerViewItem = inflater.inflate(R.layout.home_item, parent, false)
-        return HomeViewHolder(recyclerViewItem)
+        val view: HomeItemBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.home_item,parent,false)
+        return HomeAdapter.HomeViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -27,16 +33,16 @@ public class HomeAdapter(val context: Context): RecyclerView.Adapter<HomeAdapter
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val recipient = recipients[position]
+        holder.homeItemBinding.data = recipient
 
-        holder.itemView.recipient_name_textview.text = recipient.name
-        holder.itemView.donation_recpient_location_textview.text = recipient.location
 
-        holder.itemView.setOnClickListener {
-            Navigation.createNavigateOnClickListener(R.id.history_detail_des,null)
-        }
+
 
     }
-    class HomeViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
+//    class HomeViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
+    class HomeViewHolder(itemView: HomeItemBinding): RecyclerView.ViewHolder(itemView.root){
+        val homeItemBinding: HomeItemBinding = itemView
+    }
 
     internal fun setRecepients(recepients:List<Recepient>){
         this.recipients=recepients

@@ -39,13 +39,11 @@ class DonationHistoryFragment : Fragment(){
         val id= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getInt(Constants().currentUser,0)
         val role= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getString(Constants().currentRole,"null")
         if(role=="Donor"){
-            donorViewModel.getDonorByUserId(id!!)
-            donorViewModel.getResponse.observe(this,Observer{
-                donationHistoryViewModel.getAllDonationHistorysByDonorId(it.body()!!.id)
-                donationHistoryViewModel.getAllResponse.observe(this, Observer { it1 ->
-                    (recyclerView.adapter as DonationHistoryAdapter?)?.setDonationHistories(it1.body()!!)
-                })
+            donationHistoryViewModel.getAllDonationHistorysByDonorId(id!!)
+            donationHistoryViewModel.getAllResponse.observe(this, Observer { it1 ->
+                (recyclerView.adapter as DonationHistoryAdapter?)?.setDonationHistories(it1.body()!!)
             })
+
         }
         else if(role=="Recepient"){
             donationHistoryViewModel.getAllDonationHistorysByRecepientId(id!!)

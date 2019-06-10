@@ -83,9 +83,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                         user.role.equals("Donor") ->
                             Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.login_action)
                         user.role.equals("Recepient") ->
-                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.login_action)
-                        else ->
-                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.login_action)
+                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.recepient_action)
+                        user.role.equals("Admin") ->
+                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.admin_action)
+
                     }
                 }
             } else {
