@@ -3,7 +3,7 @@ package com.teambloodformypeople.network
 import com.teambloodformypeople.data.models.User
 import kotlinx.coroutines.Deferred
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.teambloodformypeople.Constants
+import com.teambloodformypeople.util.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response

@@ -2,7 +2,7 @@ package com.teambloodformypeople.network
 
 import com.teambloodformypeople.data.models.Recepient
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.teambloodformypeople.Constants
+import com.teambloodformypeople.util.Constants
 import com.teambloodformypeople.hospital.temporaryHolder
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient

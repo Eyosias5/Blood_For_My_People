@@ -79,9 +79,9 @@ class AddRecepient : AppCompatActivity() {
         }
     }
     private fun logout(){
-        var intent =  Intent(applicationContext,Login::class.java)
-        startActivity(intent)
-        finish()
+//        var intent =  Intent(applicationContext,Login::class.java)
+//        startActivity(intent)
+//        finish()
 
     }
     private fun connected():Boolean {

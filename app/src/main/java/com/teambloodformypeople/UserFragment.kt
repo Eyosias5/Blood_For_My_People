@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.user_fragment.view.*
 
 import androidx.navigation.Navigation
+import com.teambloodformypeople.util.Constants
 
 class UserFragment : Fragment() {
 
@@ -45,7 +46,7 @@ class UserFragment : Fragment() {
             val view = inflater.inflate(R.layout.user_fragment, container, false)
             _context = view.context
             sharedPreferences = _context.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
-            currentRecepientId = sharedPreferences.getInt(Constants().currentDonor, 0)
+            currentRecepientId = sharedPreferences.getInt(Constants().currentUser, 0)
             Toast.makeText(_context, currentRecepientId.toString(), Toast.LENGTH_SHORT).show()
             nameTv = view.name_tv
             phoneTv = view.phone_tv
