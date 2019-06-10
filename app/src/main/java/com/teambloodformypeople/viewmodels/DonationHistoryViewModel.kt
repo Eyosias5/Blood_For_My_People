@@ -9,7 +9,8 @@ import retrofit2.Response
 
 class DonationHistoryViewModel : ViewModel(){
     private val donationHistoryRepository: DonationHistoryRepository
-
+    val date = MutableLiveData("2019-09-02")
+    val location = MutableLiveData("Kirkos")
     init {
         val donationHistoryApiService =  DonationHistoryApiService.getInstance()
         donationHistoryRepository = DonationHistoryRepository(donationHistoryApiService)

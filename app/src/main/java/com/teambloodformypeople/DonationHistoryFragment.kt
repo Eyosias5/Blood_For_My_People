@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.adapters.DonationHistoryAdapter
-import com.teambloodformypeople.util.Constants
 import com.teambloodformypeople.viewmodels.DonationHistoryViewModel
 import com.teambloodformypeople.viewmodels.DonorViewModel
 import kotlinx.android.synthetic.main.donation_history_fragment.*
@@ -37,18 +36,14 @@ class DonationHistoryFragment : Fragment(){
         recyclerView.adapter = context?.let{DonationHistoryAdapter(it)}
         donationHistoryViewModel = ViewModelProviders.of(this).get(DonationHistoryViewModel::class.java)
         donorViewModel = ViewModelProviders.of(this).get(DonorViewModel::class.java)
-        val id= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getInt(
-            Constants().currentUser,0)
-        val role= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getString(
-            Constants().currentRole,"null")
+        val id= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getInt(Constants().currentUser,0)
+        val role= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getString(Constants().currentRole,"null")
         if(role=="Donor"){
-            donorViewModel.getDonorByUserId(id!!)
-            donorViewModel.getResponse.observe(this,Observer{
-                donationHistoryViewModel.getAllDonationHistorysByDonorId(it.body()!!.id)
-                donationHistoryViewModel.getAllResponse.observe(this, Observer { it1 ->
-                    (recyclerView.adapter as DonationHistoryAdapter?)?.setDonationHistories(it1.body()!!)
-                })
+            donationHistoryViewModel.getAllDonationHistorysByDonorId(id!!)
+            donationHistoryViewModel.getAllResponse.observe(this, Observer { it1 ->
+                (recyclerView.adapter as DonationHistoryAdapter?)?.setDonationHistories(it1.body()!!)
             })
+
         }
         else if(role=="Recepient"){
             donationHistoryViewModel.getAllDonationHistorysByRecepientId(id!!)

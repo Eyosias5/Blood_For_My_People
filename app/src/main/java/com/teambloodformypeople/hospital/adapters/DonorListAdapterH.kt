@@ -9,17 +9,17 @@ import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.Donor
 import kotlinx.android.synthetic.main.hospital_donor_list_custom_view.view.*
 
-class DonorListAdapter (val donors: List<Donor>)
-    : RecyclerView.Adapter<DonorListAdapter.ViewHolder>(){
+class DonorListAdapterH (val donors: List<Donor>)
+    : RecyclerView.Adapter<DonorListAdapterH.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-            : DonorListAdapter.ViewHolder {
+            : DonorListAdapterH.ViewHolder {
         val v: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.hospital_donor_list_custom_view,parent,false)
         return ViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: DonorListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DonorListAdapterH.ViewHolder, position: Int) {
         holder.fullName.text = donors[position].fullName
         holder.phoneNumber.text = donors[position].phoneNumber
     }

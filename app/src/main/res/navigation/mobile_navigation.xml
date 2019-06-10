@@ -37,6 +37,12 @@
         <action android:id="@+id/gotToSignUpAction" app:destination="@id/signupFragment"
                 app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
                 app:popEnterAnim="@anim/slide_in_right" app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/recepient_action" app:destination="@id/donorListFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/nav_default_exit_anim"/>
+        <action android:id="@+id/admin_action" app:destination="@id/adminFragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment android:id="@+id/signupFragment"
               android:name="com.teambloodformypeople.SignupFragment"
@@ -46,4 +52,8 @@
                 app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_out_left" app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+    <fragment android:id="@+id/donorListFragment" android:name="com.teambloodformypeople.DonorListFragment"
+              android:label="fragment_donor_list" tools:layout="@layout/fragment_donor_list"/>
+    <fragment android:id="@+id/adminFragment" android:name="com.teambloodformypeople.AdminFragment"
+              android:label="fragment_admin" tools:layout="@layout/fragment_admin"/>
 </navigation>

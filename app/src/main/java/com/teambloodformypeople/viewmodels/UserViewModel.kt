@@ -2,20 +2,33 @@ package com.teambloodformypeople.viewmodels
 
 import android.app.Application
 import android.content.Context
+import android.opengl.Visibility
+import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.lifecycle.*
 import androidx.navigation.Navigation
-import com.teambloodformypeople.util.Constants
+import com.google.android.material.snackbar.Snackbar
+import com.teambloodformypeople.Constants
+import com.teambloodformypeople.data.DB
+import com.teambloodformypeople.data.daos.UserDao
 import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.network.UserApiService
 import com.teambloodformypeople.repositories.UserRepository
+import kotlinx.android.synthetic.main.signup_fragment.view.*
 import kotlinx.coroutines.*
 import retrofit2.Response
+import java.lang.Thread.sleep
 
 class UserViewModel(application: Application) : AndroidViewModel(application){
     val email = MutableLiveData("")
     val password = MutableLiveData("")
-//    val email: LiveData<String> = _email
+
+    val emailSignup = MutableLiveData("")
+    val passwordSignUp = MutableLiveData("")
+
+    //    val email: LiveData<String> = _email
 //    val password: LiveData<String> = _password
     lateinit var  _context:Context
     private val userRepository: UserRepository
@@ -77,15 +90,54 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                         user.role.equals("Donor") ->
                             Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.login_action)
                         user.role.equals("Recepient") ->
-                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.login_action)
-                        else ->
-                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.login_action)
+                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.recepient_action)
+                        user.role.equals("Admin") ->
+                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.admin_action)
+
                     }
                 }
             } else {
 //                withContext(Dispatchers.Main) {
 //                    Toast.makeText(context, "Incorrect Username/Password", Toast.LENGTH_SHORT).show()
 //                }
+            }
+        }
+    }
+
+    fun onSignUp(view:View){
+        Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.gotToSignUpAction)
+    }
+    fun alreadyMember(view:View){
+        Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
+
+
+    }
+    fun onSignUpBtn(view:View){
+
+        view.progressBar.visibility=View.VISIBLE
+        GlobalScope.launch {
+            val response: Response<User> =
+                userRepository.findUserByEmailAndPasswordAsync(emailSignup.value.toString(), passwordSignUp.value.toString())
+            val user: User? = response.body()
+            if (user != null ) {
+                Toast.makeText(_context,"User already exist",Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val user = User(emailSignup.value.toString(), passwordSignUp.value.toString(),"Donor")
+                withContext(Dispatchers.Main) {
+
+                    if(userRepository.insertUserAsync(user).isSuccessful){
+                        view.progressBar.visibility=View.INVISIBLE
+                        Toast.makeText(_context,"successfully registered !",Toast.LENGTH_SHORT).show()
+                        Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
+
+                    }
+                    else{
+                        Toast.makeText(_context,"failed registeration !",Toast.LENGTH_SHORT).show()
+                        view.progressBar.visibility=View.INVISIBLE
+                    }
+
+                }
             }
         }
     }
