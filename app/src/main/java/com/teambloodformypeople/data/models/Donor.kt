@@ -11,9 +11,9 @@ import java.io.Serializable
 data class Donor (
     @PrimaryKey @ColumnInfo(name = "donorId", index = true) val id: Int,
     @ColumnInfo(name = "phoneNumber") val phoneNumber: String,
-    @ColumnInfo(name = "dateOfBirth") val birthDate: String,
+    @ColumnInfo(name = "dateOfBirth") val dateOfBirth: String,
     @ColumnInfo(name = "fullName") val fullName: String,
-    @ColumnInfo(name = "userId") val user: Int
+    @ColumnInfo(name = "userId") val userId: Int
 ): Serializable
 
 

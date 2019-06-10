@@ -4,17 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import com.teambloodformypeople.data.models.DonationHistory
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
+import kotlinx.android.synthetic.main.donation_history_item.view.*
+import kotlinx.android.synthetic.main.home_item.view.*
+import kotlinx.android.synthetic.main.home_item.view.donation_recpient_location_textview
 
 
 class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<DonationHistoryAdapter.DonationHistoryViewHolder>(){
 
-    private val donations = listOf(null
-//        Donation(1, "June 12 20", 200.0f, "0 +", 23, 11),
-//        Donation(2, "June 2 2019", 200.0F, "B -", 23, 11),
-//        Donation(3, "June 1 2019", 200.0F, "A ", 23, 11)
-    )
+    private var donationHistories :List<DonationHistory> = emptyList()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -24,15 +25,26 @@ class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<Donatio
         return DonationHistoryViewHolder(recyclerViewItem)    }
 
     override fun getItemCount(): Int {
-        return donations.size
+        return donationHistories.size
     }
 
     override fun onBindViewHolder(holder: DonationHistoryAdapter.DonationHistoryViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val donoation= donationHistories[position]
+
+        holder.itemView.donation_date_textview.text=donoation.date
+        holder.itemView.donation_recpient_location_textview.text = donoation.amount.toString()
+
+        holder.itemView.setOnClickListener {
+            Navigation.createNavigateOnClickListener(R.id.history_detail_des,null)
+        }
     }
 
 
 
     class DonationHistoryViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 
+    internal fun setDonationHistories(donationHistories :List<DonationHistory>){
+        this.donationHistories=donationHistories
+        notifyDataSetChanged()
+    }
 }

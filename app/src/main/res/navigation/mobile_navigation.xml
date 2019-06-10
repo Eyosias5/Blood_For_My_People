@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" app:startDestination="@id/home_des">
+            xmlns:tools="http://schemas.android.com/tools" app:startDestination="@id/login_des">
     <fragment android:id="@+id/home_des"
               tools:layout="@layout/home_fragment"
               android:name="com.teambloodformypeople.HomeFragment"
-              android:label="HomeFragment">
-        <action android:id="@+id/action_home_des_to_history_detail_des" app:destination="@+id/history_detail_des"
-                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
+              />
 
 
     <fragment android:id="@+id/history_des"
@@ -21,11 +17,33 @@
               android:name="com.teambloodformypeople.ReportFragment"
               android:label="ReportFragment"/>
     <fragment android:id="@+id/profile_des"
-              android:name="com.teambloodformypeople.ProfileFragment"
-              tools:layout="@layout/profile_fragment"
-              android:label="ProfileFragment"/>
+              android:name="com.teambloodformypeople.UserFragment"
+              tools:layout="@layout/user_fragment"
+              android:label="ProfileFragment">
+        <action android:id="@+id/signOutAction" app:destination="@id/login_des" app:enterAnim="@anim/slide_in_right"
+                app:popEnterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment android:id="@+id/history_detail_des"
               tools:layout="@layout/donation_history_detail_fragment"
               android:name="com.teambloodformypeople.DonationHistoryDetailFragment"
               android:label="DonationHistoryDetailFragment"/>
+    <fragment android:id="@+id/login_des" android:name="com.teambloodformypeople.LoginFragment"
+              tools:layout="@layout/login_fragment"
+              android:label="LoginFragment">
+        <action android:id="@+id/login_action" app:destination="@id/home_des"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/gotToSignUpAction" app:destination="@id/signupFragment"
+                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/slide_in_right" app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment android:id="@+id/signupFragment"
+              android:name="com.teambloodformypeople.SignupFragment"
+              tools:layout="@layout/signup_fragment"
+              android:label="SignupFragment">
+        <action android:id="@+id/alreadyMemberAction" app:destination="@id/login_des"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_out_left" app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

@@ -17,7 +17,7 @@ data class DonationHistory (
     @ColumnInfo(name = "date") val date: String,
     @ColumnInfo(name = "amount") val amount: Float,
 
-    @ColumnInfo(name = "donorId") val donor: Int,
-    @ColumnInfo(name = "recepientId") val recipient: Int
+    @ColumnInfo(name = "donorId") val donorId: Int,
+    @ColumnInfo(name = "recepientId") val recipientId: Int
 
 ): Serializable

@@ -10,14 +10,10 @@ import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.Recepient
 import kotlinx.android.synthetic.main.home_item.view.*
 
-class HomeAdapter(val context: Context): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
-
-    private  val recipients = listOf(
-        Recepient(12,"Brass Hospital","Bole","0912373184",2)
+public class HomeAdapter(val context: Context): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
 
-
-    )
+    private var recipients: List<Recepient> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -42,5 +38,9 @@ class HomeAdapter(val context: Context): RecyclerView.Adapter<HomeAdapter.HomeVi
     }
     class HomeViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 
+    internal fun setRecepients(recepients:List<Recepient>){
+        this.recipients=recepients
+        notifyDataSetChanged()
+    }
 
 }

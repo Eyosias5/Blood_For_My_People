@@ -8,9 +8,9 @@
     <application
             android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
+
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
         <activity android:name=".hospital.ReportList">
@@ -28,25 +28,28 @@
         <activity android:name=".hospital.Register">
         </activity>
         <activity android:name=".hospital.Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<action android:name="android.intent.action.VIEW"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
         </activity>
+
         <activity android:name=".TestingActivity">
         </activity>
         <activity
                 android:name=".MainActivity"
                 android:label="@string/app_name">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN"/>
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
+             <category android:name="android.intent.category.LAUNCHER"/>
+             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

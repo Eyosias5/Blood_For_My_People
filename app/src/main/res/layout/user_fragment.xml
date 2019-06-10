@@ -8,56 +8,57 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <TextView
-                android:text="    Eyosias Samson"
+                android:text="Eyosias Samson"
                 android:layout_width="187dp"
                 android:layout_height="31dp"
-                android:id="@+id/textView" app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/name_tv" app:layout_constraintStart_toStartOf="@+id/textView16"
                 android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                android:layout_marginTop="216dp" android:textSize="20sp" android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintEnd_toEndOf="@+id/textView16" android:layout_marginEnd="8dp"
+                android:layout_marginTop="212dp" android:textSize="20sp" android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.5"
+        />
         <TextView
                 android:text="+251 912 373 31 84"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView2"
+                android:id="@+id/phone_tv"
                 android:textStyle="bold"
                 android:layout_marginTop="336dp"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/textView12"
-                android:layout_marginStart="12dp"/>
+                android:layout_marginStart="16dp"/>
         <TextView
                 android:text="Addis Ababa, Ethiopia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView11"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                android:layout_marginTop="260dp" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.509"/>
+                app:layout_constraintStart_toStartOf="@+id/name_tv" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/name_tv" android:layout_marginEnd="8dp"
+                android:layout_marginTop="256dp" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"/>
         <TextView
                 android:text="Phone Number : "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView12"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="44dp" android:layout_marginTop="336dp"
+                app:layout_constraintStart_toStartOf="@+id/textView15"
+                android:layout_marginTop="336dp"
                 app:layout_constraintTop_toTopOf="parent"/>
         <TextView
-                android:text="eyosiassamson5@gmail.com"
+                android:text="1998-04-06"
                 android:layout_width="186dp"
                 android:layout_height="23dp"
-                android:id="@+id/textView14"
+                android:id="@+id/db_tv"
                 android:textStyle="bold"
                 android:layout_marginTop="372dp" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView15" android:layout_marginStart="20dp"
+                app:layout_constraintStart_toEndOf="@+id/textView15" android:layout_marginStart="40dp"
         />
         <TextView
-                android:text="Email Address: "
+                android:text="Date of birth"
                 android:layout_width="wrap_content"
                 android:layout_height="17dp"
                 android:id="@+id/textView15"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="40dp" android:layout_marginTop="372dp"
+                android:layout_marginStart="52dp" android:layout_marginTop="372dp"
         />
         <View
                 android:id="@+id/divider3"
@@ -72,11 +73,11 @@
                 android:text="Donator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView16" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/textView16" app:layout_constraintStart_toStartOf="@+id/imageView5"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="@+id/imageView5"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="164dp" app:layout_constraintTop_toTopOf="parent"
-        />
+                app:layout_constraintHorizontal_bias="0.5"/>
         <ImageView
                 android:layout_width="138dp"
                 android:layout_height="135dp" app:srcCompat="@drawable/ic_person_black_24dp"
@@ -84,6 +85,20 @@
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                 android:layout_marginTop="28dp"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.498"/>
+                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.5"
+        />
+        <Button
+                android:text="Sign Out"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/signOutButton" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="55dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="55dp" app:layout_constraintTop_toTopOf="@+id/imageView5"
+                android:layout_marginTop="420dp" app:layout_constraintHorizontal_bias="0.498"
+                android:textColor="@android:color/white" android:background="@drawable/signinbutton"/>
+        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content" android:id="@+id/guideline7"
+                                                    app:layout_constraintGuide_begin="20dp"
+                                                    android:orientation="vertical"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
