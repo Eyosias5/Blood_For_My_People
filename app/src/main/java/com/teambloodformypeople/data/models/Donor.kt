@@ -13,7 +13,7 @@ data class Donor (
     @ColumnInfo(name = "phoneNumber") val phoneNumber: String,
     @ColumnInfo(name = "dateOfBirth") val dateOfBirth: String,
     @ColumnInfo(name = "fullName") val fullName: String,
-    @ColumnInfo(name = "userId") val userId: Int
+    @ColumnInfo(name = "userId", index = true) val userId: Int
 ): Serializable
 
 

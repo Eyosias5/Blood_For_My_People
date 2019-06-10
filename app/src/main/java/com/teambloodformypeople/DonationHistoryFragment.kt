@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.adapters.DonationHistoryAdapter
+import com.teambloodformypeople.util.Constants
 import com.teambloodformypeople.viewmodels.DonationHistoryViewModel
 import com.teambloodformypeople.viewmodels.DonorViewModel
 import kotlinx.android.synthetic.main.donation_history_fragment.*

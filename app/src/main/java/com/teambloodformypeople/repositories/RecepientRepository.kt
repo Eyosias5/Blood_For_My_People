@@ -1,8 +1,8 @@
 package com.teambloodformypeople.repositories
 
 import com.teambloodformypeople.data.models.Recepient
-import com.teambloodformypeople.hospital.temporaryHolder
 import com.teambloodformypeople.network.RecepientApiService
+import com.teambloodformypeople.viewmodels.RecepientViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -21,7 +21,7 @@ class RecepientRepository(private val RecepientApiService: RecepientApiService) 
             RecepientApiService.findByUserIdAsync(userId).await()
         }
 
-    suspend fun insertRecepientAsync(recepient: temporaryHolder): Response<Void> =
+    suspend fun insertRecepientAsync(recepient: RecepientViewModel.temporaryHolder): Response<Void> =
         withContext(Dispatchers.IO){
             RecepientApiService.insertRecepeintAsync(recepient).await()
         }

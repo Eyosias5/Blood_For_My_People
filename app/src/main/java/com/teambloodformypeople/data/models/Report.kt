@@ -10,7 +10,7 @@ import java.io.Serializable
 )
 data class Report (
     @PrimaryKey @ColumnInfo(name = "reportId", index = true) val id: Int,
-    @ColumnInfo(name = "donationHistoryId") val donationHistoryId: Int,
+    @ColumnInfo(name = "donationHistoryId", index = true) val donationHistoryId: Int,
 
     @ColumnInfo(name = "bloodType") val bloodType: String
 ): Serializable

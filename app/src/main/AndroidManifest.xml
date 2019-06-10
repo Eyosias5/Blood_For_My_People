@@ -13,27 +13,6 @@
 
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".hospital.ReportList">
-        </activity>
-        <activity android:name=".hospital.AddReport">
-        </activity>
-        <activity android:name=".hospital.DonationHistoryList">
-        </activity>
-        <activity android:name=".hospital.AddDonationHistory">
-        </activity>
-        <activity android:name=".hospital.DonorList">
-        </activity>
-        <activity android:name=".hospital.AddRecepient">
-        </activity>
-        <activity android:name=".hospital.Register">
-        </activity>
-        <activity android:name=".hospital.Login">
-
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
-        </activity>
 
         <activity android:name=".TestingActivity">
         </activity>

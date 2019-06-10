@@ -14,7 +14,7 @@ data class Recepient (
     @ColumnInfo(name = "location") var location: String,
     @ColumnInfo(name = "phoneNumber") var phoneNumber: String,
 
-    @ColumnInfo(name = "userId") var userId: Int
+    @ColumnInfo(name = "userId", index = true) var userId: Int
 ): Serializable{
     constructor(name:String, location: String, phoneNumber: String): this(0,name, location, phoneNumber,0)
 }
