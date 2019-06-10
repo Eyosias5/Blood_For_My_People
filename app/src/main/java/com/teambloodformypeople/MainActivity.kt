@@ -12,10 +12,11 @@ import androidx.navigation.ui.setupWithNavController
 interface TempToolbarTitleListener {
     fun updateTitle(title: String)
 }
-class MainActivity : AppCompatActivity(){
+ class MainActivity : AppCompatActivity(){
 
 
     private lateinit var appBarConfiguration : AppBarConfiguration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,16 +26,17 @@ class MainActivity : AppCompatActivity(){
             .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
 
 
-        val navController = host.navController
+         val navController = host.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
         setupBottomNavMenu(navController)
 
     }
 
-    private fun setupBottomNavMenu(navController: NavController) {
+    public  fun setupBottomNavMenu(navController: NavController) {
         // TODO STEP 9.3 - Use NavigationUI to set up Bottom Nav
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+
         bottomNav?.setupWithNavController(navController)
         // TODO END STEP 9.3
     }

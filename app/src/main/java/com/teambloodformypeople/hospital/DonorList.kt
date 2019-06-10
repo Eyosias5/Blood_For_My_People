@@ -1,24 +1,16 @@
 package com.teambloodformypeople.hospital
 
 import android.content.Context
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.teambloodformypeople.Constants
 import com.teambloodformypeople.R
-import com.teambloodformypeople.adapters.DonationHistoryAdapter
-import com.teambloodformypeople.data.models.Donor
-import com.teambloodformypeople.hospital.adapters.DonorListAdapter
 import com.teambloodformypeople.viewmodels.DonorViewModel
 import kotlinx.android.synthetic.main.hospital_donor_list.*
-import kotlinx.coroutines.Dispatchers
 
 class DonorList : AppCompatActivity() {
 
@@ -41,7 +33,7 @@ class DonorList : AppCompatActivity() {
 //            else {
 //                model.getAllDonors()
 //                var d:List<Donor>  = List<Donor>()
-//                donorRecyclerView.adapter = DonorListAdapter(d)
+//                donorRecyclerView.adapter = DonorListAdapterH(d)
 //                model.getAllResponse.observe(this, Observer {
 //                    (donorRecyclerView.adapter)?.(it.body()!!)
 //                })

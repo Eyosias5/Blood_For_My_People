@@ -29,7 +29,10 @@ class HomeFragment : Fragment(){
         setHasOptionsMenu(true)
         this.activity?.title = "Hello"
         view?.let { Navigation.findNavController(it).getCurrentDestination()?.setLabel("Hello") }
-        return inflater.inflate(R.layout.home_fragment,container,false)
+            val view = inflater.inflate(R.layout.home_fragment,container,false)
+
+
+        return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

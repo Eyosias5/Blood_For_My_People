@@ -5,20 +5,12 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.teambloodformypeople.Constants
 import com.teambloodformypeople.R
-import com.teambloodformypeople.adapters.DonationHistoryAdapter
-import com.teambloodformypeople.hospital.adapters.DonationHistoryListAdapter
-import com.teambloodformypeople.hospital.adapters.DonorListAdapter
 import com.teambloodformypeople.viewmodels.DonationHistoryViewModel
-import com.teambloodformypeople.viewmodels.DonorViewModel
 import kotlinx.android.synthetic.main.hospital_donation_history_list.*
-import kotlinx.android.synthetic.main.hospital_donor_list.*
 
 class DonationHistoryList : AppCompatActivity() {
     lateinit var model: DonationHistoryViewModel
