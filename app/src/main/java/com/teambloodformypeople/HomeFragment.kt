@@ -4,20 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.teambloodformypeople.adapters.DonationHistoryAdapter
-import com.teambloodformypeople.adapters.HomeAdapter
+import com.teambloodformypeople.adapters.RecepientsListAdapter
 import com.teambloodformypeople.viewmodels.RecepientViewModel
-import com.teambloodformypeople.viewmodels.UserViewModel
-import kotlinx.android.synthetic.main.donation_history_fragment.*
-import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.recepient_fragment.*
 
 class HomeFragment : Fragment(){
     lateinit var recyclerView: RecyclerView
@@ -29,7 +24,7 @@ class HomeFragment : Fragment(){
         setHasOptionsMenu(true)
         this.activity?.title = "Hello"
         view?.let { Navigation.findNavController(it).getCurrentDestination()?.setLabel("Hello") }
-            val view = inflater.inflate(R.layout.home_fragment,container,false)
+            val view = inflater.inflate(R.layout.recepient_fragment,container,false)
 
 
         return view
@@ -40,11 +35,11 @@ class HomeFragment : Fragment(){
         bottom_nav?.visibility = View.VISIBLE
         recyclerView = recycler_view_home
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = context?.let{ HomeAdapter(it) }
+        recyclerView.adapter = context?.let{ RecepientsListAdapter(it) }
         recepientViewModel = ViewModelProviders.of(this).get(RecepientViewModel::class.java)
         recepientViewModel.getAllRecepients()
         recepientViewModel.getAllResponse.observe(this, Observer {
-            (recyclerView.adapter as HomeAdapter?)?.setRecepients(it.body()!!)
+            (recyclerView.adapter as RecepientsListAdapter?)?.setRecepients(it.body()!!)
         })
     }
     companion object{

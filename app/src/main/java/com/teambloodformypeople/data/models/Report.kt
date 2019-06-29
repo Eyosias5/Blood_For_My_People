@@ -1,6 +1,9 @@
 package com.teambloodformypeople.data.models
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity(tableName = "reports",
@@ -9,8 +12,8 @@ import java.io.Serializable
     ]
 )
 data class Report (
-    @PrimaryKey @ColumnInfo(name = "reportId", index = true) val id: Int,
-    @ColumnInfo(name = "donationHistoryId", index = true) val donationHistoryId: Int,
+    @PrimaryKey @ColumnInfo(name = "reportId", index = true) var id: Int,
+    @ColumnInfo(name = "donationHistoryId", index = true) var donationHistoryId: Int,
 
-    @ColumnInfo(name = "bloodType") val bloodType: String
+    @ColumnInfo(name = "bloodType") var bloodType: String
 ): Serializable

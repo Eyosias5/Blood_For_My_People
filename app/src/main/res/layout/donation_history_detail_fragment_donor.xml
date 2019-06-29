@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
     <data>
 
     </data>
@@ -12,16 +14,17 @@
                 android:text="Date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
                 android:id="@+id/textView_time" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView_title" app:layout_constraintVertical_bias="0.936"/>
+                app:layout_constraintBottom_toTopOf="@+id/date" app:layout_constraintVertical_bias="0.936"/>
         <TextView
                 android:text="July 6 2019"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView_title" android:textSize="26sp" app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/date" android:textSize="30sp" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="88dp" app:layout_constraintTop_toTopOf="parent" android:textStyle="bold"/>
@@ -38,15 +41,17 @@
                 android:text="Donater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:id="@+id/textView3" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="44dp"
                 app:layout_constraintTop_toBottomOf="@+id/divider" android:layout_marginTop="44dp"
-                app:layout_constraintEnd_toStartOf="@+id/textView5" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/donorName" android:layout_marginEnd="8dp"
                 app:layout_constraintHorizontal_bias="0.0"/>
         <TextView
                 android:text="To"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:id="@+id/textView4" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="44dp" android:layout_marginTop="24dp"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
@@ -55,61 +60,58 @@
                 android:text="Eyosias Samson"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView5"
+                android:textSize="16sp"
+                android:id="@+id/donorName"
                 app:layout_constraintTop_toBottomOf="@+id/divider" android:layout_marginTop="44dp"
                 android:textStyle="bold" android:layout_marginEnd="60dp" app:layout_constraintEnd_toEndOf="parent"/>
         <TextView
                 android:text="Brass Hospital"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView6" app:layout_constraintStart_toEndOf="@+id/textView4"
-                android:layout_marginStart="188dp" app:layout_constraintTop_toBottomOf="@+id/textView5"
+                android:textSize="16sp"
+                android:id="@+id/recepientName" app:layout_constraintStart_toEndOf="@+id/textView4"
+                android:layout_marginStart="172dp" app:layout_constraintTop_toBottomOf="@+id/donorName"
                 android:layout_marginTop="24dp" android:textStyle="bold"/>
-        <TextView
-                android:text="Operated By"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="44dp"/>
         <TextView
                 android:text="Amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView8"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="44dp" app:layout_constraintTop_toBottomOf="@+id/textView7"
-                android:layout_marginTop="20dp"/>
-        <TextView
-                android:text="Dr. Tigist Dagnachew"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView9" app:layout_constraintStart_toEndOf="@+id/textView7"
-                android:layout_marginStart="128dp" app:layout_constraintTop_toBottomOf="@+id/textView6"
-                android:layout_marginTop="24dp" android:textStyle="bold"/>
+                android:id="@+id/textView7"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="44dp"/>
+
         <TextView
                 android:text="470 ml"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView10" android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/textView8"
-                android:layout_marginStart="152dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" android:layout_marginTop="20dp"/>
+                android:textSize="16sp"
+                android:id="@+id/textView9" app:layout_constraintStart_toEndOf="@+id/textView7"
+                android:layout_marginStart="132dp" app:layout_constraintTop_toBottomOf="@+id/recepientName"
+                android:layout_marginTop="24dp" android:textStyle="bold"/>
         <ImageView
                 android:layout_width="53dp"
                 android:layout_height="41dp" app:srcCompat="@drawable/ic_check_circle_black_24dp"
                 android:id="@+id/imageView2" android:layout_marginTop="316dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView_title" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"/>
         <TextView
                 android:text="Blood is Donated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView13" android:textSize="18sp"
+                android:id="@+id/textView13" android:textSize="24sp"
                 android:textColor="#00B01D" android:layout_marginTop="28dp"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"/>
+        <Button
+                android:text="See Report"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/AddReportBtn" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp" app:layout_constraintHorizontal_bias="1.0"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

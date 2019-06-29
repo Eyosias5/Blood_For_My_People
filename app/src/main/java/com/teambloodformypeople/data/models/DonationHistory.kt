@@ -1,7 +1,9 @@
 package com.teambloodformypeople.data.models
 
-import androidx.room.*
-import com.teambloodformypeople.data.models.Donor
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 import com.teambloodformypeople.data.models.Recepient
 import java.io.Serializable
 
@@ -13,11 +15,11 @@ import java.io.Serializable
 )
 
 data class DonationHistory (
-    @PrimaryKey @ColumnInfo(name = "donationHistoryId", index = true) val id: Int,
-    @ColumnInfo(name = "date") val date: String,
-    @ColumnInfo(name = "amount") val amount: Float,
+    @PrimaryKey @ColumnInfo(name = "donationHistoryId", index = true) var id: Int,
+    @ColumnInfo(name = "date") var date: String,
+    @ColumnInfo(name = "amount") var amount: Float,
 
-    @ColumnInfo(name = "donorId", index = true) val donorId: Int,
-    @ColumnInfo(name = "recepientId", index = true) val recipientId: Int
+    @ColumnInfo(name = "donorId", index = true) var donorId: Int,
+    @ColumnInfo(name = "recepientId", index = true) var recepientId: Int
 
 ): Serializable

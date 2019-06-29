@@ -1,9 +1,10 @@
 package com.teambloodformypeople.network
 
-import com.teambloodformypeople.data.models.User
-import kotlinx.coroutines.Deferred
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.util.Constants
+import com.teambloodformypeople.util.TemporaryDonorHolder
+import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -21,7 +22,7 @@ interface UserApiService {
     @GET("Users/{email}&{password}")
     fun findByUserEmailAndPasswordAsync(@Path("email") email: String,@Path("password") password: String): Deferred<Response<User>>
     @POST("Users")
-    fun insertUserAsync(@Body newUser: User): Deferred<Response<Void>>
+    fun insertUserAsync(@Body newUser: TemporaryDonorHolder): Deferred<Response<Void>>
     @PUT("Users/{id}")
     fun updateUserAsnc(@Path("id") id: Int?, @Body newUser: User): Deferred<Response<Void>>
     @DELETE("Users/{id}")

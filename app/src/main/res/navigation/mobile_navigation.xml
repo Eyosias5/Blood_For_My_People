@@ -1,59 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" app:startDestination="@id/login_des">
-    <fragment android:id="@+id/home_des"
-              tools:layout="@layout/home_fragment"
-              android:name="com.teambloodformypeople.HomeFragment"
-              />
-
-
-    <fragment android:id="@+id/history_des"
-              tools:layout="@layout/donation_history_fragment"
-              android:name="com.teambloodformypeople.DonationHistoryFragment"
-              android:label="DonationHistoryFragment"/>
-    <fragment android:id="@+id/report_des"
-              tools:layout="@layout/report_fragment"
-              android:name="com.teambloodformypeople.ReportFragment"
-              android:label="ReportFragment"/>
-    <fragment android:id="@+id/profile_des"
-              android:name="com.teambloodformypeople.UserFragment"
-              tools:layout="@layout/user_fragment"
-              android:label="ProfileFragment">
-        <action android:id="@+id/signOutAction" app:destination="@id/login_des" app:enterAnim="@anim/slide_in_right"
-                app:popEnterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_left"
-                app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
-    <fragment android:id="@+id/history_detail_des"
-              tools:layout="@layout/donation_history_detail_fragment"
-              android:name="com.teambloodformypeople.DonationHistoryDetailFragment"
-              android:label="DonationHistoryDetailFragment"/>
-    <fragment android:id="@+id/login_des" android:name="com.teambloodformypeople.LoginFragment"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@id/login_des" android:id="@+id/donor_home_des">
+    <fragment android:id="@+id/login_des"
+              android:name="com.teambloodformypeople.LoginFragment"
               tools:layout="@layout/login_fragment"
               android:label="LoginFragment">
-        <action android:id="@+id/login_action" app:destination="@id/home_des"
-                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
-        <action android:id="@+id/gotToSignUpAction" app:destination="@id/signupFragment"
-                app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
-                app:popEnterAnim="@anim/slide_in_right" app:popExitAnim="@anim/slide_out_left"/>
-        <action android:id="@+id/recepient_action" app:destination="@id/donorListFragment"
-                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/nav_default_exit_anim"/>
-        <action android:id="@+id/admin_action" app:destination="@id/adminFragment" app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/fade_in"
+        <action android:id="@+id/gotToSignUpAction"
+                app:destination="@id/signupFragment"
+                app:enterAnim="@anim/slide_in_left"
+                app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/recepient_action"
+                app:destination="@id/recepient_home_des"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/nav_default_exit_anim"/>
+        <action android:id="@+id/admin_action"
+                app:destination="@id/adminFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+                android:id="@+id/action_login_des_to_donor_home_des"
+                app:destination="@id/donor_home_des"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment android:id="@+id/signupFragment"
               android:name="com.teambloodformypeople.SignupFragment"
               tools:layout="@layout/signup_fragment"
               android:label="SignupFragment">
-        <action android:id="@+id/alreadyMemberAction" app:destination="@id/login_des"
-                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_out_left" app:popExitAnim="@anim/slide_out_right"/>
+        <action
+                android:id="@+id/alreadyMemberAction"
+                app:destination="@id/login_des"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_out_left"
+                app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
-    <fragment android:id="@+id/donorListFragment" android:name="com.teambloodformypeople.DonorListFragment"
-              android:label="fragment_donor_list" tools:layout="@layout/fragment_donor_list"/>
-    <fragment android:id="@+id/adminFragment" android:name="com.teambloodformypeople.AdminFragment"
-              android:label="fragment_admin" tools:layout="@layout/fragment_admin"/>
+    <fragment android:id="@+id/profile_des"
+              android:name="com.teambloodformypeople.UserFragment"
+              tools:layout="@layout/user_fragment"
+              android:label="ProfileFragment">
+        <action android:id="@+id/signOutAction"
+                app:destination="@id/login_des"
+                app:enterAnim="@anim/slide_in_right"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:exitAnim="@anim/slide_out_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+            android:id="@+id/recepient_home_des"
+            android:name="com.teambloodformypeople.DonorListFragment"
+            android:label="fragment_donor_list"
+            tools:layout="@layout/donor_fragment">
+        <action android:id="@+id/action_recepient_home_des_to_dialog_Donor_Donate_Fragment_des"
+                app:destination="@id/dialog_Donor_Donate_Fragment_des"
+                app:enterAnim="@anim/slide_in_right"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:exitAnim="@anim/slide_out_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
+        <action android:id="@+id/action_recepient_home_des_to_donor_home_des"
+                app:destination="@id/donor_home_des"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment
+            android:id="@+id/adminFragment"
+            android:name="com.teambloodformypeople.AdminFragment"
+            android:label="fragment_admin"
+            tools:layout="@layout/fragment_admin"/>
+    <fragment android:id="@+id/donation_history_detail"
+              android:name="com.teambloodformypeople.DonationHistoryDetailFragment"
+              android:label="Donation_History_Detail"
+              tools:layout="@layout/donation_history_fragment">
+        <action android:id="@+id/action_donation_history_detail_to_report_fragment"
+                app:destination="@id/report_fragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:exitAnim="@anim/slide_out_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment android:id="@+id/report_fragment"
+              android:name="com.teambloodformypeople.ReportFragment"
+              android:label="Report_Fragment"
+              tools:layout="@layout/report_fragment"/>
+    <fragment android:id="@+id/donor_home_des"
+              android:name="com.teambloodformypeople.DonationHistoryFragment"
+              android:label="Donation_History_Fragment"
+              tools:layout="@layout/donation_history_fragment">
+        <action android:id="@+id/action_donor_home_des_to_donation_history_detail"
+                app:destination="@id/donation_history_detail"
+                app:enterAnim="@anim/slide_in_right"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:exitAnim="@anim/slide_out_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment android:id="@+id/dialog_Donor_Donate_Fragment_des"
+              android:name="com.teambloodformypeople.DialogDonorDonateFragment"
+              android:label="dialog_Donor_Donate_Fragment_des"
+              tools:layout="@layout/dialog_donor_donate">
+        <action android:id="@+id/action_dialog_Donor_Donate_Fragment_des_to_recepient_home_des"
+                app:destination="@id/recepient_home_des"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    </fragment>
 </navigation>

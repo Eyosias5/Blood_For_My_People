@@ -2,7 +2,7 @@ package com.teambloodformypeople
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.teambloodformypeople.hospital.temporaryHolder
+import com.teambloodformypeople.util.TemporaryRecepientHolder
 import com.teambloodformypeople.viewmodels.RecepientViewModel
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,7 +19,7 @@ class AddRecepientInputTest {
 
     @Test
     fun onValidRecepientAdding(){
-        var recepient = temporaryHolder(
+        var recepient = TemporaryRecepientHolder(
             username = "Abebe@Kebede.com",
             password = "12345678qwertyAAAA",
             location = "Addis Ababa",
@@ -39,7 +39,7 @@ class AddRecepientInputTest {
     }
     @Test
     fun onInValidRecepientAdding_onEmptyUsername(){
-        var recepient = temporaryHolder(
+        var recepient = TemporaryRecepientHolder(
             username = "",
             password = "12345678qwertyAAAA",
             location = "Addis Ababa",
@@ -59,7 +59,7 @@ class AddRecepientInputTest {
     }
     @Test
     fun onInValidRecepientAdding_onEmptyPassword(){
-        var recepient = temporaryHolder(
+        var recepient = TemporaryRecepientHolder(
             username = "Abebe@Kebede.com",
             password = "",
             location = "Addis Ababa",
@@ -79,7 +79,7 @@ class AddRecepientInputTest {
     }
     @Test
     fun onInValidRecepientAdding_onEmptyPhoneNumber(){
-        var recepient = temporaryHolder(
+        var recepient = TemporaryRecepientHolder(
             username = "Abebe@Kebede.com",
             password = "12345678qwertyAAAA",
             location = "Addis Ababa",
@@ -99,7 +99,7 @@ class AddRecepientInputTest {
     }
     @Test
     fun onValidRecepientAdding_onEmptyAddress(){
-        var recepient = temporaryHolder(
+        var recepient = TemporaryRecepientHolder(
             username = "Abebe@Kebede.com",
             password = "12345678qwertyAAAA",
             location = "",
@@ -119,7 +119,7 @@ class AddRecepientInputTest {
     }
     @Test
     fun onValidRecepientAdding_onEmptyName(){
-        var recepient = temporaryHolder(
+        var recepient = TemporaryRecepientHolder(
             username = "Abebe@Kebede.com",
             password = "12345678qwertyAAAA",
             location = "Addis Ababa",
@@ -139,7 +139,7 @@ class AddRecepientInputTest {
     }
     @Test
     fun onValidRecepientAdding_onCombinationOfEmptyFields(){
-        var recepient = temporaryHolder(
+        var recepient = TemporaryRecepientHolder(
             username = "",
             password = "12345678qwertyAAAA",
             location = "Addis Ababa",
@@ -159,7 +159,7 @@ class AddRecepientInputTest {
     }
     @Test
     fun onValidRecepientAdding_onAllEmptyFields(){
-        var recepient = temporaryHolder(
+        var recepient = TemporaryRecepientHolder(
             username = "",
             password = "",
             location = "",

@@ -2,7 +2,9 @@ package com.teambloodformypeople.repositories
 
 import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.network.UserApiService
-import kotlinx.coroutines.*
+import com.teambloodformypeople.util.TemporaryDonorHolder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class UserRepository(private val UserApiService: UserApiService) {
@@ -22,10 +24,10 @@ class UserRepository(private val UserApiService: UserApiService) {
             UserApiService.findByUserEmailAndPasswordAsync(email, password).await()
         }
 
-    suspend fun insertUserAsync(user: User): Response<Void> =
+    suspend fun insertUserAsync(user: TemporaryDonorHolder): Response<Void> =
         withContext(Dispatchers.IO){
-        UserApiService.insertUserAsync(user).await()
-    }
+          UserApiService.insertUserAsync(user).await()
+        }
     suspend fun updateUserAsync(user: User):Response<Void> =
         withContext(Dispatchers.IO){
         UserApiService.updateUserAsnc(user.id,user).await()

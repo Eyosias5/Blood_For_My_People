@@ -1,18 +1,29 @@
 package com.teambloodformypeople.viewmodels
 
-import androidx.lifecycle.*
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.teambloodformypeople.data.models.Donor
 import com.teambloodformypeople.network.DonorApiService
 import com.teambloodformypeople.repositories.DonorRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class DonorViewModel : ViewModel(){
+class DonorViewModel(application: Application) : AndroidViewModel(application){
+    val phoneNumber = MutableLiveData("")
+    val dateOfBirth = MutableLiveData("")
+    val fullName = MutableLiveData("")
+
+    var  _context: Context
     private val donorRepository: DonorRepository
 
     init {
         val donorApiService =  DonorApiService.getInstance()
         donorRepository = DonorRepository(donorApiService)
+        _context=application
     }
     private val _getResponse = MutableLiveData<Response<Donor>>()
     val getResponse:LiveData<Response<Donor>>

@@ -2,40 +2,42 @@ package com.teambloodformypeople.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
-import com.teambloodformypeople.data.models.Recepient
-import kotlinx.android.synthetic.main.report_item.view.*
-
-class ReportAdapter (val context: Context): RecyclerView.Adapter<ReportAdapter.ReportViewHolder>(){
-
-    private  val recipients = listOf(
-        Recepient(12,"Brass Hospital","Bole","0912373184",2)
+import com.teambloodformypeople.data.models.Report
+import com.teambloodformypeople.databinding.ReportItemBinding
 
 
+class ReportAdapter(val context: Context): RecyclerView.Adapter<ReportAdapter.ReportViewHolder>() {
 
-    )
+    private var donationHistories: List<Report> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val recyclerViewItem = inflater.inflate(R.layout.report_item, parent, false)
-        return ReportViewHolder(recyclerViewItem)
+        val view: ReportItemBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.donor_item,parent,false)
+        return ReportAdapter.ReportViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return recipients.size
+        return donationHistories.size
     }
 
-    override fun onBindViewHolder(holder: ReportViewHolder, position: Int) {
-        val recipient = recipients[position]
+    override fun onBindViewHolder(holder: ReportAdapter.ReportViewHolder, position: Int) {
+        val donors = donationHistories[position]
+        holder.reportItemBinding.data = donors
 
-        holder.itemView.report_name_textview.text = recipient.name
-        holder.itemView.report_location_textview.text = recipient.location
     }
 
+    class ReportViewHolder(itemView: ReportItemBinding): RecyclerView.ViewHolder(itemView.root){
+        val reportItemBinding: ReportItemBinding = itemView
+    }
 
-    class ReportViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    internal fun setDonationHistories(donationHistories:List<Report>){
+        this.donationHistories=donationHistories
+        notifyDataSetChanged()
+    }
 
 }

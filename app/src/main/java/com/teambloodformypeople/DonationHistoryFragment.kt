@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.adapters.DonationHistoryAdapter
+//import com.teambloodformypeople.adapters.DonationHistoryAdapter
 import com.teambloodformypeople.util.Constants
 import com.teambloodformypeople.viewmodels.DonationHistoryViewModel
 import com.teambloodformypeople.viewmodels.DonorViewModel
@@ -34,7 +35,7 @@ class DonationHistoryFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         recyclerView = recycler_view_history
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = context?.let{DonationHistoryAdapter(it)}
+        recyclerView.adapter = context?.let{ DonationHistoryAdapter(it) }
         donationHistoryViewModel = ViewModelProviders.of(this).get(DonationHistoryViewModel::class.java)
         donorViewModel = ViewModelProviders.of(this).get(DonorViewModel::class.java)
         val id= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getInt(Constants().currentUser,0)

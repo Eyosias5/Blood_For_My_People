@@ -4,7 +4,10 @@ import android.app.Application
 import android.content.Context
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import com.teambloodformypeople.data.models.Recepient
 import com.teambloodformypeople.data.models.User
@@ -12,8 +15,12 @@ import com.teambloodformypeople.network.RecepientApiService
 import com.teambloodformypeople.network.UserApiService
 import com.teambloodformypeople.repositories.RecepientRepository
 import com.teambloodformypeople.repositories.UserRepository
+import com.teambloodformypeople.util.TemporaryRecepientHolder
 import kotlinx.android.synthetic.main.signup_fragment.view.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class RecepientViewModel(application: Application) : AndroidViewModel(application){
@@ -60,7 +67,7 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
     fun getRecepientByUserId(userId: Int) =viewModelScope.launch{
         _getResponse.postValue(recepientRepository.findRecepientByUserIdAsync(userId))
     }
-    fun insertRecepient(recepient: temporaryHolder)  =viewModelScope.launch{
+    fun insertRecepient(recepient: TemporaryRecepientHolder)  =viewModelScope.launch{
         _insertResponse.postValue(recepientRepository.insertRecepientAsync(recepient))
     }
     fun updateRecepient(recepient: Recepient)  =viewModelScope.launch{
@@ -71,26 +78,21 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
 
-    fun onSignUp(view: View){
-        Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.gotToSignUpAction)
-    }
     fun alreadyMember(view: View){
         Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
 
 
     }
     fun onSignUpBtn(view: View){
-
         view.progressBar.visibility= View.VISIBLE
         GlobalScope.launch {
-            val response: Response<User> =
-                userRepository.findUserByEmailAndPasswordAsync(email.value.toString(), password.value.toString())
+            val response: Response<User> = userRepository.findUserByEmailAndPasswordAsync(email.value.toString(), password.value.toString())
             val user: User? = response.body()
             if (user != null ) {
-                Toast.makeText(_context,"User already exist", Toast.LENGTH_SHORT).show()
+                Toast.makeText(_context,"User already exists. Try a different Username/Password Combination.",Toast.LENGTH_SHORT).show()
             }
             else {
-                var temporaryHolder = temporaryHolder(
+                val temporaryHolder = TemporaryRecepientHolder(
                     name =  name.value.toString(),
                     phone = phone.value.toString(),
                     location = location.value.toString(),
@@ -100,11 +102,11 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
                 withContext(Dispatchers.Main) {
                     if(recepientRepository.insertRecepientAsync(temporaryHolder).isSuccessful){
                         view.progressBar.visibility= View.INVISIBLE
-                        Toast.makeText(_context,"successfully registered !", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(_context,"Successfully Registered!", Toast.LENGTH_SHORT).show()
                         Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
                     }
                     else{
-                        Toast.makeText(_context,"failed registeration !", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(_context,"Failed To Register !", Toast.LENGTH_SHORT).show()
                         view.progressBar.visibility= View.INVISIBLE
                     }
 
@@ -112,6 +114,5 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
             }
         }
     }
-    data class temporaryHolder(var username:String, var password:String, var name:String, var location:String, var phone:String)
 
 }

@@ -4,31 +4,48 @@ import android.app.Application
 import android.content.Context
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
+import com.teambloodformypeople.data.models.Donor
+import com.teambloodformypeople.data.models.Recepient
 import com.teambloodformypeople.data.models.User
+import com.teambloodformypeople.network.DonorApiService
+import com.teambloodformypeople.network.RecepientApiService
 import com.teambloodformypeople.network.UserApiService
+import com.teambloodformypeople.repositories.DonorRepository
+import com.teambloodformypeople.repositories.RecepientRepository
 import com.teambloodformypeople.repositories.UserRepository
 import com.teambloodformypeople.util.Constants
+import com.teambloodformypeople.util.TemporaryDonorHolder
 import kotlinx.android.synthetic.main.signup_fragment.view.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class UserViewModel(application: Application) : AndroidViewModel(application){
     val email = MutableLiveData("")
     val password = MutableLiveData("")
+    val fullName = MutableLiveData("")
+    val dateOfBirth = MutableLiveData("")
+    val phoneNumber = MutableLiveData("")
 
-    val emailSignup = MutableLiveData("")
-    val passwordSignUp = MutableLiveData("")
-
-    //    val email: LiveData<String> = _email
-//    val password: LiveData<String> = _password
     var  _context:Context
     private val userRepository: UserRepository
+    private val donorRepository: DonorRepository
+    private val recepientRepository : RecepientRepository
 
     init {
         val userApiService =  UserApiService.getInstance()
+        val donorApiService = DonorApiService.getInstance()
+        val recepientApiService = RecepientApiService.getInstance()
         userRepository = UserRepository(userApiService)
+        donorRepository = DonorRepository(donorApiService)
+        recepientRepository = RecepientRepository(recepientApiService)
         _context=application
    }
     private val _getResponse = MutableLiveData<Response<User>>()
@@ -56,7 +73,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
     fun getUserByEmailAndPassword(email:String, password: String) =viewModelScope.launch{
         _getResponse.postValue(userRepository.findUserByEmailAndPasswordAsync(email, password))
     }
-    fun insertUser(user: User)  =viewModelScope.launch{
+    fun insertUser(user: TemporaryDonorHolder)  =viewModelScope.launch{
         _insertResponse.postValue(userRepository.insertUserAsync(user))
     }
     fun updateUser(user: User)  =viewModelScope.launch{
@@ -68,31 +85,47 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
 
     fun onLogin(view: View) {
         GlobalScope.launch {
-            val response: Response<User> =
-                userRepository.findUserByEmailAndPasswordAsync(email.value.toString(), password.value.toString())
+            val response: Response<User> = userRepository.findUserByEmailAndPasswordAsync(email.value.toString(), password.value.toString())
             val user: User? = response.body()
             if (user != null && user.password.equals(password.value)) {
                 withContext(Dispatchers.Main) {
                     val sharedPreferences = _context.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
                     with(sharedPreferences.edit()) {
-                        putInt(Constants().currentUser, user.id!!)
                         putString(Constants().currentRole, user.role!!)
                         apply()
                     }
                     when {
                         user.role.equals("Donor") ->
-                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.login_action)
+                        {
+                            val donor: Donor? = donorRepository.findDonorByUserIdAsync(user.id!!).body()
+                            if(donor!=null){
+                                with(sharedPreferences.edit()){
+                                    putInt(Constants().currentUser, donor.id)
+                                    apply()
+                                }
+                                Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.donor_home_des)
+                            }
+                        }
                         user.role.equals("Recepient") ->
-                            Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.recepient_action)
+                        {
+                            val recepient: Recepient? = recepientRepository.findRecepientByUserIdAsync(user.id!!).body()
+                            if (recepient != null) {
+                                with(sharedPreferences.edit()) {
+                                    putInt(Constants().currentUser, recepient.id)
+                                    apply()
+                                }
+                                Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.recepient_action)
+                            }
+                        }
                         user.role.equals("Admin") ->
                             Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.admin_action)
-
                     }
                 }
-            } else {
-//                withContext(Dispatchers.Main) {
-//                    Toast.makeText(context, "Incorrect Username/Password", Toast.LENGTH_SHORT).show()
-//                }
+            }
+            else {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(_context, "Incorrect Username/Password", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -102,31 +135,32 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
     }
     fun alreadyMember(view:View){
         Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
-
-
     }
-    fun onSignUpBtn(view:View){
 
+    fun onSignUpBtn(view:View){
         view.progressBar.visibility=View.VISIBLE
         GlobalScope.launch {
-            val response: Response<User> =
-                userRepository.findUserByEmailAndPasswordAsync(emailSignup.value.toString(), passwordSignUp.value.toString())
+            val response: Response<User> = userRepository.findUserByEmailAndPasswordAsync(email.value.toString(), password.value.toString())
             val user: User? = response.body()
             if (user != null ) {
-                Toast.makeText(_context,"User already exist",Toast.LENGTH_SHORT).show()
+                Toast.makeText(_context,"User already exists. Try a different Username/Password Combination.",Toast.LENGTH_SHORT).show()
             }
             else {
-                val user2 = User(emailSignup.value.toString(), passwordSignUp.value.toString(),"Donor")
+                val user2 = TemporaryDonorHolder(
+                    username = email.value.toString(),
+                    password = password.value.toString(),
+                    name =  fullName.value.toString(),
+                    phone =  phoneNumber.value.toString(),
+                    dateOfBirth =  dateOfBirth.value.toString()
+                )
                 withContext(Dispatchers.Main) {
-
                     if(userRepository.insertUserAsync(user2).isSuccessful){
                         view.progressBar.visibility=View.INVISIBLE
-                        Toast.makeText(_context,"successfully registered !",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(_context,"Successfully Registered !",Toast.LENGTH_SHORT).show()
                         Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
-
                     }
                     else{
-                        Toast.makeText(_context,"failed registeration !",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(_context,"Failed to Register!",Toast.LENGTH_SHORT).show()
                         view.progressBar.visibility=View.INVISIBLE
                     }
 
