@@ -37,7 +37,7 @@ class DialogDonorReportFragment : Fragment(){
         var args = arguments
         var currentDonationHistoryId = args?.getInt("DonationHistory")
         report = Report(
-            id = 0,
+            reportId = 0,
             donationHistoryId = currentDonationHistoryId!!,
             bloodType = ""
         )

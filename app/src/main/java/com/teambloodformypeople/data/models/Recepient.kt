@@ -1,6 +1,9 @@
 package com.teambloodformypeople.data.models
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity(tableName = "recepients",
@@ -9,7 +12,7 @@ import java.io.Serializable
     ]
 )
 data class Recepient (
-    @PrimaryKey @ColumnInfo(name = "recepientId", index = true) var id: Int,
+    @PrimaryKey @ColumnInfo(name = "recepientId", index = true) var recepientId: Int,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "location") var location: String,
     @ColumnInfo(name = "phoneNumber") var phoneNumber: String,

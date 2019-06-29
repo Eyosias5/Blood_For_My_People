@@ -2,7 +2,8 @@ package com.teambloodformypeople.repositories
 
 import com.teambloodformypeople.data.models.DonationHistory
 import com.teambloodformypeople.network.DonationHistoryApiService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class DonationHistoryRepository(private val DonationHistoryApiService: DonationHistoryApiService) {
@@ -31,7 +32,7 @@ class DonationHistoryRepository(private val DonationHistoryApiService: DonationH
         }
     suspend fun updateDonationHistoryAsync(donationHistory: DonationHistory):Response<Void> =
         withContext(Dispatchers.IO){
-            DonationHistoryApiService.updateDonationHistoryAsnc(donationHistory.id,donationHistory).await()
+            DonationHistoryApiService.updateDonationHistoryAsnc(donationHistory.donationHistoryId,donationHistory).await()
         }
     suspend fun deleteDonationHistoryAsync(donationHistoryId: Int):Response<Void> =
         withContext(Dispatchers.IO){

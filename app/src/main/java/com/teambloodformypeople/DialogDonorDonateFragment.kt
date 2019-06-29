@@ -43,7 +43,7 @@ class DialogDonorDonateFragment : Fragment(){
         var currentRecepientId = view.context.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE).getInt(Constants().currentUser,-10)
 
         donationHistory = DonationHistory(
-            id = 0,
+            donationHistoryId = 0,
             date = "",
             amount = 0.00f,
             donorId = 0,

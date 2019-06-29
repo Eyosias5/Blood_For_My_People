@@ -41,7 +41,7 @@
                 <TextView
 
                         android:gravity="end"
-                        android:text="@{data.recepientId}"
+                        android:text="@{data.date}"
                         android:layout_width="150dp"
                         android:layout_height="25dp"
                         android:id="@+id/donation_recpient_location_textview"

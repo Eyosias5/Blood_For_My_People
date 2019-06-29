@@ -1,9 +1,6 @@
 package com.teambloodformypeople.repositories
 
-import androidx.lifecycle.LiveData
-import com.teambloodformypeople.data.daos.ReportDao
 import com.teambloodformypeople.data.models.Report
-import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.network.ReportApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -33,7 +30,7 @@ class ReportRepository(private val ReportApiService: ReportApiService) {
         }
     suspend fun updateReportAsync(report: Report): Response<Void> =
         withContext(Dispatchers.IO){
-            ReportApiService.updateReportAsync(report.id,report).await()
+            ReportApiService.updateReportAsync(report.reportId,report).await()
         }
     suspend fun deleteReportAsync(reportId: Int): Response<Void> =
         withContext(Dispatchers.IO){

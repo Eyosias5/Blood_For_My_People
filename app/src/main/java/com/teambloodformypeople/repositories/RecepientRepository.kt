@@ -26,7 +26,7 @@ class RecepientRepository(private val RecepientApiService: RecepientApiService) 
         }
     suspend fun updateRecepientAsync(recepient: Recepient): Response<Void> =
         withContext(Dispatchers.IO){
-            RecepientApiService.updateRecepeintAsnc(recepient.id,recepient).await()
+            RecepientApiService.updateRecepeintAsnc(recepient.recepientId,recepient).await()
         }
     suspend fun deleteRecepientAsync(recepientId: Int): Response<Void> =
         withContext(Dispatchers.IO){

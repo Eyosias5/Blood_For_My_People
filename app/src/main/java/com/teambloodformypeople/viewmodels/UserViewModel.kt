@@ -97,10 +97,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                     when {
                         user.role.equals("Donor") ->
                         {
-                            val donor: Donor? = donorRepository.findDonorByUserIdAsync(user.id!!).body()
+                            val donor: Donor? = donorRepository.findDonorByUserIdAsync(user.userId!!).body()
                             if(donor!=null){
                                 with(sharedPreferences.edit()){
-                                    putInt(Constants().currentUser, donor.id)
+                                    putInt(Constants().currentUser, donor.donorId)
                                     apply()
                                 }
                                 Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.donor_home_des)
@@ -108,10 +108,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                         }
                         user.role.equals("Recepient") ->
                         {
-                            val recepient: Recepient? = recepientRepository.findRecepientByUserIdAsync(user.id!!).body()
+                            val recepient: Recepient? = recepientRepository.findRecepientByUserIdAsync(user.userId!!).body()
                             if (recepient != null) {
                                 with(sharedPreferences.edit()) {
-                                    putInt(Constants().currentUser, recepient.id)
+                                    putInt(Constants().currentUser, recepient.recepientId)
                                     apply()
                                 }
                                 Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.recepient_action)

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            app:startDestination="@id/login_des" android:id="@+id/donor_home_des">
+            app:startDestination="@id/login_des" >
     <fragment android:id="@+id/login_des"
               android:name="com.teambloodformypeople.LoginFragment"
               tools:layout="@layout/login_fragment"

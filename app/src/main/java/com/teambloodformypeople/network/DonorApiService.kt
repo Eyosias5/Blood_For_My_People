@@ -1,7 +1,7 @@
 package com.teambloodformypeople.network
 
-import com.teambloodformypeople.data.models.Donor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.teambloodformypeople.data.models.Donor
 import com.teambloodformypeople.util.Constants
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
@@ -17,8 +17,8 @@ interface DonorApiService {
     fun findDonors(): Deferred<Response<List<Donor>>>
     @GET("donors/{id}")
     fun findByDonorIdAsync(@Path("id") id: Int): Deferred<Response<Donor>>
-    @GET("donors/byUser/{userId}")
-    fun findByUserIdAsync(@Path("userId") id: Int): Deferred<Response<Donor>>
+    @GET("donors/byUser/{id}")
+    fun findByUserIdAsync(@Path("id") id: Int): Deferred<Response<Donor>>
     @POST("donors")
     fun insertDonorAsync(@Body newDonor: Donor): Deferred<Response<Void>>
     @PUT("donors/{id}")

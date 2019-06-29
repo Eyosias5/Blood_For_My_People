@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -54,9 +53,8 @@ class DonorListAdapter(val context: Context): RecyclerView.Adapter<DonorListAdap
         this.viewModel = viewModel
     }
     override fun onDonateButtonClicked(view: View, donor: Donor) {
-        Toast.makeText(view.context, "${donor.phoneNumber} ${donor.fullName} ${donor.id} ${donor.userId}",Toast.LENGTH_SHORT).show()
         val args = Bundle()
-        args.putInt("Donor",donor.id)
+        args.putInt("Donor",donor.donorId)
         Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.dialog_Donor_Donate_Fragment_des,args)
 
 //        var action = DonorListDirections.actionMemberFragmentToDetailFragment()

@@ -12,7 +12,7 @@ import java.io.Serializable
     ]
 )
 data class Report (
-    @PrimaryKey @ColumnInfo(name = "reportId", index = true) var id: Int,
+    @PrimaryKey @ColumnInfo(name = "reportId", index = true) var reportId: Int,
     @ColumnInfo(name = "donationHistoryId", index = true) var donationHistoryId: Int,
 
     @ColumnInfo(name = "bloodType") var bloodType: String

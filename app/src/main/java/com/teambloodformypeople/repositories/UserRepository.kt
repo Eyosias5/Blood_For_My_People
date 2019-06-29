@@ -30,7 +30,7 @@ class UserRepository(private val UserApiService: UserApiService) {
         }
     suspend fun updateUserAsync(user: User):Response<Void> =
         withContext(Dispatchers.IO){
-        UserApiService.updateUserAsnc(user.id,user).await()
+        UserApiService.updateUserAsnc(user.userId,user).await()
     }
     suspend fun deleteUserAsync(userId: Int):Response<Void> =
         withContext(Dispatchers.IO){

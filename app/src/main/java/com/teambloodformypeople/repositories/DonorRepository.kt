@@ -1,9 +1,6 @@
 package com.teambloodformypeople.repositories
 
-import androidx.lifecycle.LiveData
-import com.teambloodformypeople.data.daos.DonorDao
 import com.teambloodformypeople.data.models.Donor
-import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.network.DonorApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -29,7 +26,7 @@ class DonorRepository(private val DonorApiService: DonorApiService) {
         }
     suspend fun updateDonorAsync(donor: Donor): Response<Void> =
         withContext(Dispatchers.IO){
-            DonorApiService.updateDonorAsnc(donor.id,donor).await()
+            DonorApiService.updateDonorAsnc(donor.donorId,donor).await()
         }
     suspend fun deleteDonorAsync(donorId: Int): Response<Void> =
         withContext(Dispatchers.IO){

@@ -15,7 +15,7 @@ import java.io.Serializable
 )
 
 data class DonationHistory (
-    @PrimaryKey @ColumnInfo(name = "donationHistoryId", index = true) var id: Int,
+    @PrimaryKey @ColumnInfo(name = "donationHistoryId", index = true) var donationHistoryId: Int,
     @ColumnInfo(name = "date") var date: String,
     @ColumnInfo(name = "amount") var amount: Float,
 
