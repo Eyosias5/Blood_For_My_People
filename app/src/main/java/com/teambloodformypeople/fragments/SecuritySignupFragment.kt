@@ -1,4 +1,4 @@
-package com.teambloodformypeople
+package com.teambloodformypeople.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.teambloodformypeople.R
 import com.teambloodformypeople.databinding.SignupFragmentBinding
 import com.teambloodformypeople.viewmodels.UserViewModel
 
-class SignupFragment : Fragment(){
+class SecuritySignupFragment : Fragment(){
     private lateinit var binding: SignupFragmentBinding
     private lateinit var viewModel:UserViewModel
 
@@ -41,7 +42,7 @@ class SignupFragment : Fragment(){
     }
 
     companion object{
-        fun newInstance(): SignupFragment{
+        fun newInstance(): SecuritySignupFragment {
             return newInstance()
         }
     }

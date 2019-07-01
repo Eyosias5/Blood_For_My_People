@@ -1,10 +1,13 @@
 package com.teambloodformypeople.viewmodels
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.teambloodformypeople.data.models.Report
 import com.teambloodformypeople.network.ReportApiService
 import com.teambloodformypeople.repositories.ReportRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class ReportViewModel : ViewModel(){
@@ -41,6 +44,9 @@ class ReportViewModel : ViewModel(){
     }
     fun getReportById(reportId: Int) =viewModelScope.launch{
         _getResponse.postValue(reportRepository.findReportByIdAsync(reportId))
+    }
+    fun getReportByDonationHistoryId(donationHistoryId: Int) =viewModelScope.launch{
+        _getResponse.postValue(reportRepository.findReportByDonationHistoryIdAsync(donationHistoryId))
     }
     fun insertReport(report: Report)  =viewModelScope.launch{
         _insertResponse.postValue(reportRepository.insertReportAsync(report))

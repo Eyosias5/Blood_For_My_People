@@ -8,6 +8,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.runner.AndroidJUnit4
+import com.teambloodformypeople.fragments.ProfileFragment
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
@@ -15,12 +16,12 @@ import org.mockito.Mockito.verify
 
 
 @RunWith(AndroidJUnit4::class)
-class UserFragmentTest {
+class ProfileFragmentTest {
 
     @Test
     fun testNavigationToSignInScreen() {
         val mockNavController = mock(NavController::class.java)
-        val scenario = launchFragmentInContainer<UserFragment>()
+        val scenario = launchFragmentInContainer<ProfileFragment>()
 
 
         scenario.onFragment {

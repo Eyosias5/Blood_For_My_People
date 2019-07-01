@@ -1,7 +1,7 @@
 package com.teambloodformypeople.network
 
-import com.teambloodformypeople.data.models.DonationHistory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.teambloodformypeople.data.models.DonationHistory
 import com.teambloodformypeople.util.Constants
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
@@ -18,7 +18,7 @@ interface DonationHistoryApiService {
     @GET("donationHistories/byDonor/{donorId}")
     fun findDonationHistoriesByDonorId(@Path("donorId") donorId:Int): Deferred<Response<List<DonationHistory>>>
 
-    @GET("donationHistories/{recepientId}")
+    @GET("donationHistories/byRecepient/{recepientId}")
     fun findDonationHistoriesByRecepientId(@Path("recepientId") recepientId: Int): Deferred<Response<List<DonationHistory>>>
 
     @GET("donationHistories/{id}")

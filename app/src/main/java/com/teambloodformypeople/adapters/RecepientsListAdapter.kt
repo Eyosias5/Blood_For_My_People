@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.Recepient
 import com.teambloodformypeople.databinding.RecepientItemBinding
+import com.teambloodformypeople.viewmodels.RecepientViewModel
 
-public class RecepientsListAdapter(val context: Context): RecyclerView.Adapter<RecepientsListAdapter.RecepeintViewHolder>() {
-
+class RecepientsListAdapter(val context: Context): RecyclerView.Adapter<RecepientsListAdapter.RecepeintViewHolder>() {
 
     private var recipients: List<Recepient> = emptyList()
+    private var viewModel: RecepientViewModel?=null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecepeintViewHolder {
         val view: RecepientItemBinding = DataBindingUtil.inflate(
@@ -28,6 +29,7 @@ public class RecepientsListAdapter(val context: Context): RecyclerView.Adapter<R
     override fun onBindViewHolder(holder: RecepeintViewHolder, position: Int) {
         val recipient = recipients[position]
         holder.recepientItemBinding.data = recipient
+        holder.recepientItemBinding.executePendingBindings()
     }
 
     class RecepeintViewHolder(itemView: RecepientItemBinding): RecyclerView.ViewHolder(itemView.root){
@@ -37,6 +39,9 @@ public class RecepientsListAdapter(val context: Context): RecyclerView.Adapter<R
     internal fun setRecepients(recepients:List<Recepient>){
         this.recipients=recepients
         notifyDataSetChanged()
+    }
+    internal fun setViewModel(viewModel: RecepientViewModel){
+        this.viewModel = viewModel
     }
 
 }

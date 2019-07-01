@@ -1,0 +1,75 @@
+package com.teambloodformypeople.fragments
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.teambloodformypeople.R
+import com.teambloodformypeople.adapters.RecepientsListAdapter
+import com.teambloodformypeople.viewmodels.RecepientViewModel
+import kotlinx.android.synthetic.main.recepient_fragment.*
+
+class RecyclerViewRecepientListFragment : Fragment(){
+    lateinit var recyclerView: RecyclerView
+    private lateinit var recepientViewModel: RecepientViewModel
+    private lateinit var binding: com.teambloodformypeople.databinding.RecepientFragmentBinding
+    private lateinit var viewModel: RecepientViewModel
+    private lateinit var recepientsListAdapter: RecepientsListAdapter
+
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?
+    ): View? {
+        setHasOptionsMenu(true)
+        this.activity?.title = "Hello"
+        view?.let { Navigation.findNavController(it).getCurrentDestination()?.setLabel("Hello") }
+
+        var bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view) as BottomNavigationView
+        bottom_nav.visibility = View.VISIBLE
+        bottom_nav.menu.clear()
+        bottom_nav.inflateMenu(R.menu.donor_bottom_nav_menu)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.recepient_fragment, container, false)
+        viewModel = ViewModelProviders.of(this).get(RecepientViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        recepientsListAdapter = RecepientsListAdapter(this.requireContext())
+        recepientsListAdapter.setViewModel(viewModel)
+        binding.recyclerViewRecepientList.layoutManager = LinearLayoutManager(this.requireContext())
+        binding.recyclerViewRecepientList.adapter = recepientsListAdapter
+        viewModel.getAllRecepients()
+        viewModel.getAllResponse.observe(this, Observer {
+                recepients->recepients?.let { recepientsListAdapter.setRecepients(recepients.body()!!) }
+        })
+        return binding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view) as BottomNavigationView
+        bottom_nav.visibility = View.VISIBLE
+
+        recyclerView = recycler_view_recepient_list
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.adapter = context?.let{ RecepientsListAdapter(it) }
+        recepientViewModel = ViewModelProviders.of(this).get(RecepientViewModel::class.java)
+        recepientViewModel.getAllRecepients()
+        recepientViewModel.getAllResponse.observe(this, Observer {
+            (recyclerView.adapter as RecepientsListAdapter?)?.setRecepients(it.body()!!)
+        })
+    }
+    companion object{
+        fun newInstance(): RecyclerViewRecepientListFragment {
+            return RecyclerViewRecepientListFragment()
+        }
+    }
+
+}

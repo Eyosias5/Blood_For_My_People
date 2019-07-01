@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/adminFragment"
+            android:icon="@drawable/ic_add_to_photos_black_24dp"
+            android:title="Add Recepient"/>
+    <item
+            android:id="@+id/user_list_des"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="Users"/>
+    <item
+            android:id="@+id/profile_des"
+            android:icon="@drawable/ic_person_dark_24dp"
+            android:title="@string/title_profile"/>
+</menu>

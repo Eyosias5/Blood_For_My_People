@@ -19,7 +19,7 @@
 //            .perform(navigateTo(R.id.history_des))
 //
 //        onView(withId(R.id.bottom_nav_view))
-//            .perform(navigateTo(R.id.DonationHistoryFragment))
+//            .perform(navigateTo(R.id.RecyclerViewDonationHistoryFragment))
 //
 //        onView(withId(R.id.history_des)).check(matches(isDisplayed()))
 //    }
@@ -31,7 +31,7 @@
 //            .perform(navigateTo(R.id.report_des))
 //
 //        onView(withId(R.id.bottom_nav_view))
-//            .perform(navigateTo(R.id.ReportFragment))
+//            .perform(navigateTo(R.id.RecyclerViewReportFragment))
 //
 //        onView(withId(R.id.repot_des)).check(matches(isDisplayed()))
 //
@@ -45,7 +45,7 @@
 //            .perform(navigateTo(R.id.profile_des))
 //
 //        onView(withId(R.id.bottom_nav_view))
-//            .perform(navigateTo(R.id.UserFragment))
+//            .perform(navigateTo(R.id.ProfileFragment))
 //
 //        onView(withId(R.id.repot_des)).check(matches(isDisplayed()))
 //    }

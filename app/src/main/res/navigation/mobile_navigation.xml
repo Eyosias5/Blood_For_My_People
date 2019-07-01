@@ -4,7 +4,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             app:startDestination="@id/login_des">
     <fragment android:id="@+id/login_des"
-              android:name="com.teambloodformypeople.LoginFragment"
+              android:name="com.teambloodformypeople.fragments.SecurityLoginFragment"
               tools:layout="@layout/login_fragment"
               android:label="LoginFragment">
         <action android:id="@+id/gotToSignUpAction"
@@ -25,16 +25,16 @@
                 app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/fade_in"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
-        <action
-                android:id="@+id/action_login_des_to_donor_home_des"
-                app:destination="@id/donor_home_des"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_login_des_to_recepientListFragment"
+                app:destination="@id/recepientListFragment"
+                app:enterAnim="@anim/slide_in_left"
+                app:exitAnim="@anim/slide_out_right"
+                app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_left"/>
+
     </fragment>
     <fragment android:id="@+id/signupFragment"
-              android:name="com.teambloodformypeople.SignupFragment"
+              android:name="com.teambloodformypeople.fragments.SecuritySignupFragment"
               tools:layout="@layout/signup_fragment"
               android:label="SignupFragment">
         <action
@@ -46,8 +46,8 @@
                 app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment android:id="@+id/profile_des"
-              android:name="com.teambloodformypeople.UserFragment"
-              tools:layout="@layout/user_fragment"
+              android:name="com.teambloodformypeople.fragments.ProfileFragment"
+              tools:layout="@layout/profile_fragment"
               android:label="ProfileFragment">
         <action android:id="@+id/signOutAction"
                 app:destination="@id/login_des"
@@ -58,8 +58,8 @@
     </fragment>
     <fragment
             android:id="@+id/recepient_home_des"
-            android:name="com.teambloodformypeople.DonorListFragment"
-            android:label="fragment_donor_list"
+            android:name="com.teambloodformypeople.fragments.RecyclerViewDonorListFragment"
+            android:label="DonorListFragment"
             tools:layout="@layout/donor_fragment">
         <action android:id="@+id/action_recepient_home_des_to_dialog_Donor_Donate_Fragment_des"
                 app:destination="@id/dialog_Donor_Donate_Fragment_des"
@@ -77,37 +77,34 @@
     </fragment>
     <fragment
             android:id="@+id/adminFragment"
-            android:name="com.teambloodformypeople.AdminFragment"
+            android:name="com.teambloodformypeople.fragments.RegisterRecepientFragment"
             android:label="fragment_admin"
-            tools:layout="@layout/fragment_admin"/>
-    <fragment android:id="@+id/donation_history_detail"
-              android:name="com.teambloodformypeople.DonationHistoryDetailFragment"
-              android:label="Donation_History_Detail"
-              tools:layout="@layout/donation_history_fragment">
-        <action android:id="@+id/action_donation_history_detail_to_report_fragment"
-                app:destination="@id/report_fragment"
+            tools:layout="@layout/fragment_admin">
+        <action android:id="@+id/action_adminFragment_to_recycler_view_user_list"
+                app:destination="@id/user_list_des"
                 app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:exitAnim="@anim/slide_out_left"
-                app:popExitAnim="@anim/slide_out_right"/>
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
     </fragment>
     <fragment android:id="@+id/report_fragment"
-              android:name="com.teambloodformypeople.ReportFragment"
+              android:name="com.teambloodformypeople.fragments.RecyclerViewReportFragment"
               android:label="Report_Fragment"
               tools:layout="@layout/report_fragment"/>
     <fragment android:id="@+id/donor_home_des"
-              android:name="com.teambloodformypeople.DonationHistoryFragment"
-              android:label="Donation_History_Fragment"
+              android:name="com.teambloodformypeople.fragments.RecyclerViewDonationHistoryFragment"
+              android:label="DonationHistoryListFragment"
               tools:layout="@layout/donation_history_fragment">
-        <action android:id="@+id/action_donor_home_des_to_donation_history_detail"
-                app:destination="@id/donation_history_detail"
+        <action android:id="@+id/action_donor_home_des_to_report_add_fragment"
+                app:destination="@id/report_add_fragment"
                 app:enterAnim="@anim/slide_in_right"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:exitAnim="@anim/slide_out_left"
-                app:popExitAnim="@anim/slide_out_right"/>
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment android:id="@+id/dialog_Donor_Donate_Fragment_des"
-              android:name="com.teambloodformypeople.DialogDonorDonateFragment"
+              android:name="com.teambloodformypeople.fragments.AddDonationHistoryFragment"
               android:label="dialog_Donor_Donate_Fragment_des"
               tools:layout="@layout/dialog_donor_donate">
         <action android:id="@+id/action_dialog_Donor_Donate_Fragment_des_to_recepient_home_des"
@@ -118,4 +115,23 @@
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
 
     </fragment>
+    <fragment android:id="@+id/recepientListFragment"
+              android:name="com.teambloodformypeople.fragments.RecyclerViewRecepientListFragment"
+              android:label="RecepientListFragment"
+              tools:layout="@layout/recepient_fragment">
+        <action android:id="@+id/action_recepientListFragment_to_donor_home_des"
+                app:destination="@id/donor_home_des"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment android:id="@+id/user_list_des"
+              android:name="com.teambloodformypeople.fragments.RecyclerViewUserListFragment"
+              android:label="RecyclerViewUserListFragment"
+              tools:layout="@layout/user_list_fragment"/>
+    <fragment android:id="@+id/report_add_fragment"
+              android:name="com.teambloodformypeople.fragments.AddReportFragment"
+              android:label="AddReportFragment"
+              tools:layout="@layout/dialog_donor_report"/>
 </navigation>

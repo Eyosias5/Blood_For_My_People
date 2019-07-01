@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
 >
     <data>
-        <variable name="fragment" type="com.teambloodformypeople.DialogDonorDonateFragment"/>
+        <variable name="fragment" type="com.teambloodformypeople.fragments.AddDonationHistoryFragment"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

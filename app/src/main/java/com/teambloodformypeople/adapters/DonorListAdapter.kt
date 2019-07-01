@@ -26,14 +26,14 @@ class DonorListAdapter(val context: Context): RecyclerView.Adapter<DonorListAdap
             LayoutInflater.from(parent.context),
             R.layout.donor_item, parent, false
         )
-        return DonorListAdapter.DonorViewHolder(view)
+        return DonorViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return donors.size
     }
 
-    override fun onBindViewHolder(holder: DonorListAdapter.DonorViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DonorViewHolder, position: Int) {
         val donors = donors[position]
         holder.donorItemBinding.data = donors
         holder.donorItemBinding.executePendingBindings()
@@ -55,10 +55,6 @@ class DonorListAdapter(val context: Context): RecyclerView.Adapter<DonorListAdap
     override fun onDonateButtonClicked(view: View, donor: Donor) {
         val args = Bundle()
         args.putInt("Donor",donor.donorId)
-        Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.dialog_Donor_Donate_Fragment_des,args)
-
-//        var action = DonorListDirections.actionMemberFragmentToDetailFragment()
-//        action.argId = news.id
-//        Navigation.findNavController(view).navigate(action)
+        Navigation.findNavController(view).navigate(R.id.dialog_Donor_Donate_Fragment_des,args)
     }
 }
