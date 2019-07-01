@@ -23,6 +23,10 @@ class ReportRepository(private val ReportApiService: ReportApiService) {
         withContext(Dispatchers.IO){
             ReportApiService.findByReportIdAsync(reportId).await()
         }
+    suspend fun findReportByDonationHistoryIdAsync(donationHistoryId: Int): Response<Report> =
+        withContext(Dispatchers.IO){
+            ReportApiService.findByDonationHistoryIdAsync(donationHistoryId).await()
+        }
 
     suspend fun insertReportAsync(report: Report): Response<Void> =
         withContext(Dispatchers.IO){

@@ -1,4 +1,4 @@
-package com.teambloodformypeople
+package com.teambloodformypeople.fragments
 
 
 import android.content.Context
@@ -14,11 +14,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.teambloodformypeople.R
 import com.teambloodformypeople.util.Constants
 import com.teambloodformypeople.viewmodels.DonorViewModel
-import kotlinx.android.synthetic.main.user_fragment.view.*
+import kotlinx.android.synthetic.main.profile_fragment.view.*
 
-class UserFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     lateinit var _context: Context
     lateinit var sharedPreferences: SharedPreferences
@@ -34,7 +35,7 @@ class UserFragment : Fragment() {
         bottom_nav?.visibility = View.VISIBLE
 
 
-        val view = inflater.inflate(R.layout.user_fragment, container, false)
+        val view = inflater.inflate(R.layout.profile_fragment, container, false)
         _context = view.context
         sharedPreferences = _context.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
         currentRecepientId = sharedPreferences.getInt(Constants().currentUser, 0)
@@ -68,17 +69,12 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.signOutButton)?.setOnClickListener(
-
-            //Log out
             Navigation.createNavigateOnClickListener(R.id.signOutAction, null)
-
         )
-
-
     }
 
     companion object {
-        fun newInstance(): UserFragment {
+        fun newInstance(): ProfileFragment {
             return newInstance()
         }
     }

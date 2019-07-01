@@ -1,4 +1,4 @@
-package com.teambloodformypeople
+package com.teambloodformypeople.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,11 @@ import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.teambloodformypeople.R
 import com.teambloodformypeople.adapters.ReportAdapter
 import kotlinx.android.synthetic.main.report_fragment.*
 
-class ReportFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class RecyclerViewReportFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var recyclerView: RecyclerView
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -45,7 +46,7 @@ class ReportFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     companion object{
-        fun newInstance(): ReportFragment{
+        fun newInstance(): RecyclerViewReportFragment {
             return newInstance()
         }
     }

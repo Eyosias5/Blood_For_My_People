@@ -1,4 +1,4 @@
-package com.teambloodformypeople
+package com.teambloodformypeople.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.DonationHistory
 import com.teambloodformypeople.util.Constants
 import com.teambloodformypeople.viewmodels.DonationHistoryViewModel
@@ -20,7 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class DialogDonorDonateFragment : Fragment(){
+class AddDonationHistoryFragment : Fragment(){
     private lateinit var viewModel: DonorViewModel
     private lateinit var recepientViewModel: RecepientViewModel
     private lateinit var donationHistoryViewModel : DonationHistoryViewModel
@@ -73,9 +74,8 @@ class DialogDonorDonateFragment : Fragment(){
         view.AddDonationHistoryBtn.setOnClickListener {
             donationHistory.amount = view.editText.text.toString().toFloat()
             donationHistoryViewModel.insertDonationHistory(donationHistory)
-            Toast.makeText(view.context, "Donation History is added", Toast.LENGTH_SHORT).show()
+            Toast.makeText(view.context, "Donation History has been added", Toast.LENGTH_SHORT).show()
         }
-
         return view
     }
 

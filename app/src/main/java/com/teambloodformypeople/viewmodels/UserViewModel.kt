@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
+import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.Donor
 import com.teambloodformypeople.data.models.Recepient
 import com.teambloodformypeople.data.models.User
@@ -103,7 +104,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                                     putInt(Constants().currentUser, donor.donorId)
                                     apply()
                                 }
-                                Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.donor_home_des)
+                                Navigation.findNavController(view).navigate(R.id.recepientListFragment)
                             }
                         }
                         user.role.equals("Recepient") ->
@@ -114,7 +115,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                                     putInt(Constants().currentUser, recepient.recepientId)
                                     apply()
                                 }
-                                Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.recepient_action)
+                                Navigation.findNavController(view).navigate(R.id.recepient_home_des)
                             }
                         }
                         user.role.equals("Admin") ->

@@ -1,7 +1,7 @@
 package com.teambloodformypeople.network
 
-import com.teambloodformypeople.data.models.Report
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.teambloodformypeople.data.models.Report
 import com.teambloodformypeople.util.Constants
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
@@ -16,13 +16,16 @@ interface ReportApiService {
     @GET("reports")
     fun findReports(): Deferred<Response<List<Report>>>
 
-    @GET("reports/{donorId}")
+    @GET("reports/ByDonor/{donorId}")
     fun findReportsByDonorId(@Path("donorId") donorId: Int): Deferred<Response<List<Report>>>
-    @GET("reports/{recepientId}")
+    @GET("reports/ByRecepient/{recepientId}")
     fun findReportsByRecepientId(@Path("recepientId") recepientId : Int): Deferred<Response<List<Report>>>
 
     @GET("reports/{id}")
     fun findByReportIdAsync(@Path("id") id: Int): Deferred<Response<Report>>
+    @GET("reports/ByDonationHistory/{donationHistoryId}")
+    fun findByDonationHistoryIdAsync(@Path("donationHistoryId") donationHistoryId: Int): Deferred<Response<Report>>
+
     @POST("reports")
     fun insertReportAsync(@Body newReport: Report): Deferred<Response<Void>>
     @PUT("reports/{id}")
