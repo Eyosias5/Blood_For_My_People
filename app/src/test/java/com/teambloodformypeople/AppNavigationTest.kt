@@ -10,7 +10,7 @@
 //import java.util.regex.Pattern.matches
 //
 //@RunWith(MockitoJUnitRunner::class)
-//class  AppNavigationTest{
+class  AppNavigationTest{
 //
 //    @Test
 //    fun bottomNavigationFromHomeToHistory(){
@@ -51,4 +51,4 @@
 //    }
 //
 //
-//}
+}

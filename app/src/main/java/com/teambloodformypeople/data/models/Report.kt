@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity(tableName = "reports",
-    foreignKeys = [ForeignKey
+        foreignKeys = [ForeignKey
         (entity = DonationHistory::class, parentColumns = arrayOf("donationHistoryId"), childColumns = arrayOf("donationHistoryId"))
     ]
 )

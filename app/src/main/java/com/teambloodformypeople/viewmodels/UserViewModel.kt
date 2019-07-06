@@ -139,7 +139,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
     }
 
     fun onSignUpBtn(view:View){
-        view.progressBar.visibility=View.VISIBLE
+        //view.progressBar.visibility=View.VISIBLE
         GlobalScope.launch {
             val response: Response<User> = userRepository.findUserByEmailAndPasswordAsync(email.value.toString(), password.value.toString())
             val user: User? = response.body()
@@ -156,13 +156,13 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                 )
                 withContext(Dispatchers.Main) {
                     if(userRepository.insertUserAsync(user2).isSuccessful){
-                        view.progressBar.visibility=View.INVISIBLE
+//                        view.progressBar.visibility=View.INVISIBLE
                         Toast.makeText(_context,"Successfully Registered !",Toast.LENGTH_SHORT).show()
                         Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
                     }
                     else{
                         Toast.makeText(_context,"Failed to Register!",Toast.LENGTH_SHORT).show()
-                        view.progressBar.visibility=View.INVISIBLE
+                     //   view.progressBar.visibility=View.INVISIBLE
                     }
 
                 }
