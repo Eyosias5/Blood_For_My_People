@@ -84,7 +84,7 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
 
     }
     fun onSignUpBtn(view: View){
-        view.progressBar.visibility= View.VISIBLE
+//        view.progressBar.visibility= View.VISIBLE
         GlobalScope.launch {
             val response: Response<User> = userRepository.findUserByEmailAndPasswordAsync(email.value.toString(), password.value.toString())
             val user: User? = response.body()
@@ -93,26 +93,37 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
             }
             else {
                 val temporaryHolder = TemporaryRecepientHolder(
-                    name =  name.value.toString(),
-                    phone = phone.value.toString(),
-                    location = location.value.toString(),
-                    username = email.value.toString(),
-                    password = password.value.toString()
+                    email.value.toString(),
+                    password.value.toString(),
+                     name.value.toString(),
+                    location.value.toString(),
+                    phone.value.toString()
+
+
                 )
                 withContext(Dispatchers.Main) {
                     if(recepientRepository.insertRecepientAsync(temporaryHolder).isSuccessful){
-                        view.progressBar.visibility= View.INVISIBLE
+                     //   view.progressBar.visibility= View.INVISIBLE
                         Toast.makeText(_context,"Successfully Registered!", Toast.LENGTH_SHORT).show()
-                        Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
+                        clearFields()
+                       // Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
                     }
                     else{
                         Toast.makeText(_context,"Failed To Register !", Toast.LENGTH_SHORT).show()
-                        view.progressBar.visibility= View.INVISIBLE
+                      //  view.progressBar.visibility= View.INVISIBLE
                     }
 
                 }
             }
         }
+    }
+
+    private fun clearFields() {
+         email.value=""
+         password.value=""
+         name.value=""
+         phone.value=""
+         location.value=""
     }
 
 }

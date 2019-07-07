@@ -2,6 +2,8 @@ package com.teambloodformypeople.viewmodels
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
@@ -34,6 +36,12 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
     val fullName = MutableLiveData("")
     val dateOfBirth = MutableLiveData("")
     val phoneNumber = MutableLiveData("")
+    val role1 = MutableLiveData("")
+    val email1 = MutableLiveData("")
+    val fullName1 = MutableLiveData("")
+    val phoneNumber1 = MutableLiveData("")
+    lateinit var sharedPreferences: SharedPreferences
+
 
     var  _context:Context
     private val userRepository: UserRepository
@@ -47,7 +55,11 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
         userRepository = UserRepository(userApiService)
         donorRepository = DonorRepository(donorApiService)
         recepientRepository = RecepientRepository(recepientApiService)
+
         _context=application
+        role1.value="Donor"
+        fullName1.value="donator"
+        phoneNumber1.value="0911334455"
    }
     private val _getResponse = MutableLiveData<Response<User>>()
     val getResponse:LiveData<Response<User>>
@@ -104,6 +116,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                                     putInt(Constants().currentUser, donor.donorId)
                                     apply()
                                 }
+                                role1.value=user.role
+                                fullName1.value=donor.fullName
+                                phoneNumber1.value=donor.phoneNumber
                                 Navigation.findNavController(view).navigate(R.id.recepientListFragment)
                             }
                         }
@@ -138,6 +153,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
         Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
     }
 
+
     fun onSignUpBtn(view:View){
         //view.progressBar.visibility=View.VISIBLE
         GlobalScope.launch {
@@ -148,15 +164,16 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
             }
             else {
                 val user2 = TemporaryDonorHolder(
-                    username = email.value.toString(),
-                    password = password.value.toString(),
-                    name =  fullName.value.toString(),
-                    phone =  phoneNumber.value.toString(),
-                    dateOfBirth =  dateOfBirth.value.toString()
+                    email.value.toString(),
+                     password.value.toString(),
+                     fullName.value.toString(),
+                    dateOfBirth.value.toString(),
+                     phoneNumber.value.toString()
                 )
                 withContext(Dispatchers.Main) {
-                    if(userRepository.insertUserAsync(user2).isSuccessful){
+                    if(donorRepository.insertDonorAsync(user2).isSuccessful){
 //                        view.progressBar.visibility=View.INVISIBLE
+
                         Toast.makeText(_context,"Successfully Registered !",Toast.LENGTH_SHORT).show()
                         Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
                     }
@@ -168,5 +185,13 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
                 }
             }
         }
+    }
+    fun updateProfile(view: View){
+
+        val args = Bundle()
+        sharedPreferences = _context.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getInt(Constants().currentUser, 2)
+        args.putInt("user", userId)
+        Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.action_profile_des_to_userUpdateFragment,args)
     }
 }

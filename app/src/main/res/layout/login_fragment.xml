@@ -41,7 +41,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"/>
         <com.google.android.material.textfield.TextInputEditText
                 android:text="@={viewModel.email}"
-                android:layout_width="282dp"
+                android:layout_width="0dp"
                 android:layout_height="42dp"
                 android:inputType="textWebEmailAddress|textPersonName"
                 android:ems="10"
@@ -64,7 +64,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"/>
         <com.google.android.material.textfield.TextInputEditText
                 android:text="@={viewModel.password}"
-                android:layout_width="282dp"
+                android:layout_width="0dp"
                 android:layout_height="43dp"
                 android:inputType="textPersonName|textPassword"
                 android:ems="10"

@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.teambloodformypeople.R
@@ -18,6 +19,7 @@ class RecyclerViewUserListFragment : Fragment(){
     private lateinit var userViewModel: UserViewModel
     private lateinit var binding: com.teambloodformypeople.databinding.UserListFragmentBinding
     private lateinit var userListAdapter: UserListAdapter
+
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,

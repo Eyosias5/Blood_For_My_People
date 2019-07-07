@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.teambloodformypeople.data.models.Donor
 import com.teambloodformypeople.network.DonorApiService
 import com.teambloodformypeople.repositories.DonorRepository
+import com.teambloodformypeople.util.TemporaryDonorHolder
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -50,7 +51,7 @@ class DonorViewModel(application: Application) : AndroidViewModel(application){
     fun getDonorByUserId(userId: Int) =viewModelScope.launch{
         _getResponse.postValue(donorRepository.findDonorByUserIdAsync(userId))
     }
-    fun insertDonor(donor: Donor)  =viewModelScope.launch{
+    fun insertDonor(donor: TemporaryDonorHolder)  =viewModelScope.launch{
         _insertResponse.postValue(donorRepository.insertDonorAsync(donor))
     }
     fun updateDonor(donor: Donor)  =viewModelScope.launch{
