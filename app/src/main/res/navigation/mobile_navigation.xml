@@ -55,6 +55,8 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:exitAnim="@anim/slide_out_left"
                 app:popExitAnim="@anim/slide_out_right"/>
+        <action android:id="@+id/action_profile_des_to_userUpdateFragment" app:destination="@id/userUpdateFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_enter_anim"/>
     </fragment>
     <fragment
             android:id="@+id/recepient_home_des"
@@ -129,9 +131,16 @@
     <fragment android:id="@+id/user_list_des"
               android:name="com.teambloodformypeople.fragments.RecyclerViewUserListFragment"
               android:label="RecyclerViewUserListFragment"
-              tools:layout="@layout/user_list_fragment"/>
+              tools:layout="@layout/user_list_fragment">
+
+        <action android:id="@+id/action_user_list_des_to_userUpdateFragment" app:destination="@id/userUpdateFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"/>
+        <argument android:name="userid" app:argType="integer" android:defaultValue="1"/>
+    </fragment>
     <fragment android:id="@+id/report_add_fragment"
               android:name="com.teambloodformypeople.fragments.AddReportFragment"
               android:label="AddReportFragment"
               tools:layout="@layout/dialog_donor_report"/>
+    <fragment android:id="@+id/userUpdateFragment" android:name="com.teambloodformypeople.fragments.UserUpdateFragment"
+              android:label="UserUpdateFragment"/>
 </navigation>

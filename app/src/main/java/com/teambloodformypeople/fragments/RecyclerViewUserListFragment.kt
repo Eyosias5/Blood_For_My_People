@@ -19,6 +19,7 @@ class RecyclerViewUserListFragment : Fragment(){
     private lateinit var binding: com.teambloodformypeople.databinding.UserListFragmentBinding
     private lateinit var userListAdapter: UserListAdapter
 
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?

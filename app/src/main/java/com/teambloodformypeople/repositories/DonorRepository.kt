@@ -2,6 +2,7 @@ package com.teambloodformypeople.repositories
 
 import com.teambloodformypeople.data.models.Donor
 import com.teambloodformypeople.network.DonorApiService
+import com.teambloodformypeople.util.TemporaryDonorHolder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -20,7 +21,7 @@ class DonorRepository(private val DonorApiService: DonorApiService) {
             DonorApiService.findByUserIdAsync(userId).await()
         }
 
-    suspend fun insertDonorAsync(donor: Donor): Response<Void> =
+    suspend fun insertDonorAsync(donor: TemporaryDonorHolder): Response<Void> =
         withContext(Dispatchers.IO){
             DonorApiService.insertDonorAsync(donor).await()
         }

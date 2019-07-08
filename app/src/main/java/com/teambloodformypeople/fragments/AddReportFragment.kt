@@ -90,7 +90,8 @@ class AddReportFragment : Fragment() {
             if(view.bloodTypeEditText.text.toString() == "") view.bloodTypeEditText.setText("Not Available Yet.")
             view.AddReportBtn.visibility = View.GONE
             view.bloodTypeEditText.isEnabled = false
-        } else if (role == "Recepient") {
+        }
+        else if (role == "Recepient") {
             view.AddReportBtn.setOnClickListener {
                 if (report.reportId!=0) {
                     report.bloodType = view.bloodTypeEditText.text.toString()
@@ -104,6 +105,18 @@ class AddReportFragment : Fragment() {
             }
 
         }
+//        view.delete_report_btn.setOnClickListener{
+//            if (report.reportId!=0) {
+//                report.bloodType = view.bloodTypeEditText.text.toString()
+//                viewModel.deleteReport(report.reportId)
+//                Toast.makeText(view.context, "Report is deleted", Toast.LENGTH_SHORT).show()
+//                Navigation.findNavController(view).popBackStack()
+//
+//            }
+//            else{
+//                Toast.makeText(view.context, "Report not deleted", Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
         return view
     }
@@ -121,6 +134,17 @@ class AddReportFragment : Fragment() {
                 viewModel.insertReport(report)
                 Toast.makeText(view.context, "Report is added", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+    fun deleteReport(view: View) {
+        GlobalScope.launch {
+            if (view.bloodTypeEditText.text.toString() != "") {
+                report.bloodType = view.bloodTypeEditText.text.toString()
+                report.reportId = reportId.value!!
+                viewModel.deleteReport(report.reportId)
+                Toast.makeText(view.context, "Report is deleted", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 }

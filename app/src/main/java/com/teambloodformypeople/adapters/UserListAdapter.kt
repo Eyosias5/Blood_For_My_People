@@ -1,11 +1,13 @@
 package com.teambloodformypeople.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.User
@@ -15,6 +17,7 @@ import com.teambloodformypeople.viewmodels.UserViewModel
 
 
 class UserListAdapter(val context: Context): RecyclerView.Adapter<UserListAdapter.UserViewHolder>(), UserListener {
+
 
     private var users: List<User> = emptyList()
     private var viewModel: UserViewModel? = null
@@ -55,5 +58,10 @@ class UserListAdapter(val context: Context): RecyclerView.Adapter<UserListAdapte
         viewModel?.deleteUser(user.userId!!)
         Toast.makeText(view.context,"Deleted User",Toast.LENGTH_SHORT).show()
         notifyDataSetChanged()
+    }
+    override fun onUpdateButtonClicked(view: View, user: User) {
+        val args = Bundle()
+        args.putInt("user", user.userId!!)
+        Navigation.findNavController(view).navigate(R.id.action_user_list_des_to_userUpdateFragment,args)
     }
 }
