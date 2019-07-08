@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
 >
     <data>
         <variable name="donorListener" type="com.teambloodformypeople.listeners.DonorListener"/>
@@ -7,46 +9,74 @@
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="10dp"
             android:layout_height="wrap_content">
         <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.MaterialComponents.CardView"
-                android:layout_width="match_parent" android:id="@+id/materialCardView"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.32" app:cardCornerRadius="5dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:id="@+id/materialCardView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-                                                               android:layout_height="128dp" android:elevation="6dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minHeight="100dp"
+                    android:padding="10dp"
+                    android:background="@drawable/home_gradient_maths">
+
                 <TextView
-                        android:layout_width="368dp" android:layout_height="35dp"
-                        android:text="@{data.fullName}"
-
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="25sp" android:id="@+id/recipient_name_textview"
-                        app:layout_constraintTop_toTopOf="@+id/donateBtn"
-                        app:layout_constraintBottom_toBottomOf="@+id/donateBtn"
-                        android:layout_marginStart="8dp" app:layout_constraintStart_toEndOf="@+id/imageView3"/>
-                <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="35dp" app:srcCompat="@drawable/ic_person_dark_24dp"
-                        android:id="@+id/imageView3"
-                        app:layout_constraintTop_toTopOf="@+id/recipient_name_textview"
-                        app:layout_constraintBottom_toBottomOf="@+id/recipient_name_textview"
+                        android:layout_height="wrap_content"
+                        android:text="@{data.fullName}"
+                        android:id="@+id/donor_name_textview"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/whiteTextColor"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_alignParentTop="true"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/donateBtn"
-                        android:layout_marginEnd="263dp"/>
-                <Button
-                        android:text="Donate"
+                        app:layout_constraintEnd_toStartOf="@+id/donateBtn"
+                        android:layout_marginStart="16dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+                <TextView
+                        android:text="@{data.phoneNumber}"
                         android:layout_width="wrap_content"
-                        android:layout_height="41dp"
-                        android:onClick="@{(v)->donorListener.onDonateButtonClicked(v,data)}"
-                        android:id="@+id/donateBtn"
-                        app:layout_constraintStart_toEndOf="@+id/imageView3" app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginEnd="11dp"/>
+                        android:layout_height="wrap_content"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:textColor="@color/whiteTextColor"
+                        android:textSize="14sp"
+                        android:textStyle="italic"
+                        android:id="@+id/donor_phoneNumber_textview"
+                        app:layout_constraintStart_toStartOf="parent"
+                        style="@android:style/Widget.Holo.Light.TextView"
+                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"
+                        android:layout_marginStart="16dp"/>
 
+                <ImageView
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:maxHeight="90dp"
+                        android:id="@+id/donateBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:layout_centerVertical="true"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:src="@drawable/heart"
+                        android:onClick="@{(v)->donorListener.onDonateButtonClicked(v,data)}"
+                />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>

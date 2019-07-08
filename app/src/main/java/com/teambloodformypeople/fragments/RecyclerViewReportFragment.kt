@@ -22,13 +22,6 @@ class RecyclerViewReportFragment : Fragment(), AdapterView.OnItemSelectedListene
         val bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view)
         bottom_nav?.visibility = View.VISIBLE
         val view = inflater.inflate(R.layout.report_fragment,container,false)
-
-//        val spinner: Spinner = view.bloodType_spinner
-//        spinner.onItemSelectedListener = this
-//        ArrayAdapter.createFromResource(view.context, R.array.blood_types_array,android.R.layout.simple_spinner_item).also { adapter ->
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            spinner.adapter = adapter
-//        }
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

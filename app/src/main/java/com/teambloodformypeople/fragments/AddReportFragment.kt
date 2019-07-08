@@ -87,9 +87,7 @@ class AddReportFragment : Fragment() {
             }
         })
         if (role == "Donor") {
-            if(view.bloodTypeEditText.text.toString() == "") {
-                view.bloodTypeEditText.hint = "Not Available Yet."
-            }
+            if(view.bloodTypeEditText.text.toString() == "") view.bloodTypeEditText.setText("Not Available Yet.")
             view.AddReportBtn.visibility = View.GONE
             view.bloodTypeEditText.isEnabled = false
         } else if (role == "Recepient") {

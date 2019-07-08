@@ -67,7 +67,8 @@ class AddDonationHistoryFragment : Fragment(){
             })
 
             with(Dispatchers.IO){
-                view.date.text = java.util.Date().toString()
+                var date = java.util.Date()
+                view.date.text = """${date.day} - ${date.month} - ${date.year+1900}"""
             }
         }
 
