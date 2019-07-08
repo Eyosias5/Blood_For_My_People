@@ -147,7 +147,8 @@
                                     android:textSize="17sp"
                                     android:text="Already have an account?"
                                     android:onClick="@{(view)->viewModel.alreadyMember(view)}"
-                                    android:layout_marginTop="@dimen/registerViewsMargin"/>
+                                    android:layout_marginTop="@dimen/registerViewsMargin"
+                                    android:id="@+id/textview_have_account"/>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>

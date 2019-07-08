@@ -144,10 +144,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
     }
 
     fun onSignUp(view:View){
-        Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.gotToSignUpAction)
+        Navigation.findNavController(view).navigate(R.id.gotToSignUpAction)
     }
     fun alreadyMember(view:View){
-        Navigation.findNavController(view).navigate(com.teambloodformypeople.R.id.alreadyMemberAction)
+        Navigation.findNavController(view).navigate(R.id.alreadyMemberAction)
     }
 
 
