@@ -40,7 +40,7 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
         val userApiService = UserApiService.getInstance()
         recepientRepository = RecepientRepository(recepientApiService)
         val userDao = DB.getDatabase(application).userDao()
-        userRepository = UserRepository(userApiService,userDao)
+        userRepository = UserRepository(userApiService,userDao,application)
         _context = application
     }
     private val _getResponse = MutableLiveData<Response<Recepient>>()

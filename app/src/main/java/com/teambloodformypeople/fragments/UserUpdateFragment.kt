@@ -29,16 +29,16 @@ class UserUpdateFragment : Fragment() {
 
          userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
          userViewModel.getUserById(userId!!)
-        userViewModel.getResponse.observe(this, Observer {
-            with(Dispatchers.IO){
-                view.email_tv1.text= it.body()?.email
-                view.password_tv.text= it.body()?.password
-                view.role_tv.text= it.body()?.role
-                view.email_et.setText(it.body()?.email)
-                view.password_et.setText(it.body()?.password)
-                view.role_et.setText(it.body()?.role)
-            }
-        })
+//        userViewModel.getResponse.observe(this, Observer {
+//            with(Dispatchers.IO){
+//                view.email_tv1.text= it.body()?.email
+//                view.password_tv.text= it.body()?.password
+//                view.role_tv.text= it.body()?.role
+//                view.email_et.setText(it.body()?.email)
+//                view.password_et.setText(it.body()?.password)
+//                view.role_et.setText(it.body()?.role)
+//            }
+//        })
         view.update_btn.setOnClickListener{
             val user =  User(userId, view.email_et.text.toString(), view.password_et.text.toString(), view.role_et.text.toString())
             if(!userViewModel.updateUser(user).isCompleted){
