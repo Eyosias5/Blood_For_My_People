@@ -40,12 +40,13 @@ class RecyclerViewDonorListFragment : Fragment(){
         donorListAdapter.setViewModel(donorViewModel)
         binding.recyclerViewDonorList.layoutManager = LinearLayoutManager(this.requireContext())
         binding.recyclerViewDonorList.adapter = donorListAdapter
-        donorViewModel.getAllDonors()
-        donorViewModel.getAllResponse.observe(this, Observer {
-            donors->donors.let {
-                donorListAdapter.setDonors(donors.value!!)
-            }
+        val response = donorViewModel.getAllDonors()
+        response.observe(this, Observer {
+                donors->donors.let {
+            donorListAdapter.setDonors(it)
+        }
         })
+
         return binding.root
 
     }

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.teambloodformypeople.data.DB
 import com.teambloodformypeople.data.models.DonationHistory
 import com.teambloodformypeople.network.DonationHistoryApiService
 import com.teambloodformypeople.repositories.DonationHistoryRepository
@@ -25,15 +26,14 @@ class DonationHistoryViewModel(application: Application) : AndroidViewModel(appl
     var  _context: Context
     init {
         val donationHistoryApiService =  DonationHistoryApiService.getInstance()
-        donationHistoryRepository = DonationHistoryRepository(donationHistoryApiService)
         _context=application
+        val donationHistoryDao= DB.getDatabase(application).donationHistoryDao()
+        donationHistoryRepository = DonationHistoryRepository(donationHistoryApiService,donationHistoryDao,application)
     }
     private val _getResponse = MutableLiveData<Response<DonationHistory>>()
     val getResponse:LiveData<Response<DonationHistory>>
         get() = _getResponse
-    private val _getAllResponse = MutableLiveData<Response<List<DonationHistory>>>()
-    val getAllResponse:LiveData<Response<List<DonationHistory>>>
-        get() = _getAllResponse
+
     private val _insertResponse = MutableLiveData<Response<Void>>()
     val insertResponse:LiveData<Response<Void>>
         get() = _insertResponse
@@ -44,14 +44,15 @@ class DonationHistoryViewModel(application: Application) : AndroidViewModel(appl
     val updateResponse:LiveData<Response<Void>>
         get() = _updateResponse
 
-    fun getAllDonationHistorys() =viewModelScope.launch{
-        _getAllResponse.postValue(donationHistoryRepository.findAllDonationHistories())
+    fun getAllDonationHistories(): LiveData<List<DonationHistory>>{
+        return donationHistoryRepository.findAllDonationHistories()
     }
-    fun getAllDonationHistorysByDonorId(donorId: Int) =viewModelScope.launch{
-        _getAllResponse.postValue(donationHistoryRepository.findAllDonationHistoriesByDonorId(donorId))
+
+    fun getAllDonationHistorysByDonorId(donorId: Int) :LiveData<List<DonationHistory>>{
+        return donationHistoryRepository.findAllDonationHistoriesByDonorId(donorId)
     }
-    fun getAllDonationHistorysByRecepientId(recepientId: Int) =viewModelScope.launch{
-        _getAllResponse.postValue(donationHistoryRepository.findAllDonationHistoriesByRecepientId(recepientId))
+    fun getAllDonationHistorysByRecepientId(recepientId: Int):LiveData<List<DonationHistory>>{
+        return donationHistoryRepository.findAllDonationHistoriesByRecepientId(recepientId)
     }
     fun getDonationHistoryById(donationHistoryId: Int) =viewModelScope.launch{
         _getResponse.postValue(donationHistoryRepository.findDonationHistoryAsync(donationHistoryId))
@@ -65,6 +66,7 @@ class DonationHistoryViewModel(application: Application) : AndroidViewModel(appl
     fun deleteDonationHistory(donationHistoryId: Int)   =viewModelScope.launch{
         _deleteResponse.postValue(donationHistoryRepository.deleteDonationHistoryAsync(donationHistoryId))
     }
+
     fun insertDonationHistory(view: View, deleteChecker: Boolean) {
         viewModelScope.launch{
             if(deleteChecker){

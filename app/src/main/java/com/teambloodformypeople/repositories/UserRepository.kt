@@ -27,9 +27,18 @@ class UserRepository(private val UserApiService: UserApiService, val userDao: Us
 
         return userDao.getUsers()
     }
-    suspend fun findUserByIdAsync(userId: Int): Response<User> =withContext(Dispatchers.IO){
-        UserApiService.findByUserIdAsync(userId).await()
-    }
+     fun findUserByIdAsync(userId: Int): LiveData<User> {
+
+         if(Constants.connected(application )){
+             GlobalScope.launch{
+                 var user :User = UserApiService.findByUserIdAsync(userId).await().body()!!
+                 userDao.insertUser(user)
+
+             }
+         }
+
+         return userDao.getUserById(userId)
+     }
 
 
     suspend fun findUserByEmailAndPasswordAsync(email: String, password: String): Response<User> =

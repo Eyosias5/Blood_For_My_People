@@ -45,22 +45,24 @@ class RecyclerViewDonationHistoryFragment : Fragment(){
         val role= context?.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)?.getString(Constants().currentRole,"null")
         if(role=="Donor"){
 
-            donationHistoryViewModel.getAllDonationHistorysByDonorId(id!!)
-            donationHistoryViewModel.getAllResponse.observe(this, Observer {
-                donationHistories->donationHistories.let {
-                    donationHistoryAdapter.setDonationHistories(donationHistories.body()!!)
-                }
+            val response= donationHistoryViewModel.getAllDonationHistorysByDonorId(id!!)
+            response.observe(this, Observer {
+                    donationHistories->donationHistories.let {
+                donationHistoryAdapter.setDonationHistories(it)
+            }
             })
+
 
         }
         else if(role=="Recepient"){
 
-            donationHistoryViewModel.getAllDonationHistorysByRecepientId(id!!)
-            donationHistoryViewModel.getAllResponse.observe(this, Observer {
-                donationHistories->donationHistories.let {
-                    donationHistoryAdapter.setDonationHistories(donationHistories.body()!!)
-                }
-            })
+            val response = donationHistoryViewModel.getAllDonationHistorysByRecepientId(id!!)
+            response.observe(this, Observer {
+                    donationHistories->donationHistories.let {
+                donationHistoryAdapter.setDonationHistories(it)
+            } }
+            )
+
         }
 
         return binding.root
