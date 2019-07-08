@@ -8,6 +8,8 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+//apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -64,6 +66,7 @@ dependencies {
                 androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
                 testImplementation 'androidx.test:core:1.2.0'
                 testImplementation 'org.mockito:mockito-core:2.19.0'
+                androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.25.0"
                 androidTestImplementation "androidx.arch.core:core-testing:$androidx_arch_version"
                 testImplementation "org.mockito:mockito-all:1.10.19"
                 testImplementation "org.hamcrest:hamcrest-all:1.3"

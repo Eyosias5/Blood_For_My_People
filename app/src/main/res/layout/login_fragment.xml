@@ -106,7 +106,8 @@
                                         android:textSize="17sp"
                                         android:text="New user? Register Now"
                                         android:layout_marginTop="@dimen/loginViewsMargin"
-                                        android:onClick="@{(view)->viewModel.onSignUp(view)}"/>
+                                        android:onClick="@{(view)->viewModel.onSignUp(view)}"
+                                        android:id="@+id/textview_newUser"/>
                             </LinearLayout>
                     </androidx.cardview.widget.CardView>
 

@@ -44,6 +44,8 @@
                 app:exitAnim="@anim/slide_out_right"
                 app:popEnterAnim="@anim/slide_in_right"
                 app:popExitAnim="@anim/slide_out_left"/>
+        <action android:id="@+id/action_signupFragment_to_recepientListFragment"
+                app:destination="@id/recepientListFragment"/>
     </fragment>
     <fragment android:id="@+id/profile_des"
               android:name="com.teambloodformypeople.fragments.ProfileFragment"
