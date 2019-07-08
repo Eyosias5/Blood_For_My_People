@@ -109,13 +109,17 @@
               android:name="com.teambloodformypeople.fragments.AddDonationHistoryFragment"
               android:label="dialog_Donor_Donate_Fragment_des"
               tools:layout="@layout/dialog_donor_donate">
-        <action android:id="@+id/action_dialog_Donor_Donate_Fragment_des_to_recepient_home_des"
+        <argument
+                android:name="donorId"
+                app:argType="integer"
+                android:defaultValue="0"/>
+        <action android:id="@+id/action_recepient_home_des_to_dialog_Donor_Donate_Fragment_des"
                 app:destination="@id/recepient_home_des"
                 app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/fade_in"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
-
+                app:popEnterAnim="@anim/slide_in_left"
+                app:exitAnim="@anim/slide_out_left"
+                app:popExitAnim="@anim/slide_out_right"
+        />
     </fragment>
     <fragment android:id="@+id/recepientListFragment"
               android:name="com.teambloodformypeople.fragments.RecyclerViewRecepientListFragment"
@@ -140,7 +144,18 @@
     <fragment android:id="@+id/report_add_fragment"
               android:name="com.teambloodformypeople.fragments.AddReportFragment"
               android:label="AddReportFragment"
-              tools:layout="@layout/dialog_donor_report"/>
+              tools:layout="@layout/dialog_donor_report">
+        <argument
+                android:name="donationHistoryId"
+                app:argType="integer"
+                android:defaultValue="0"/>
+        <action android:id="@+id/action_donor_home_des_to_report_add_fragment"
+                app:destination="@id/donor_home_des"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
     <fragment android:id="@+id/userUpdateFragment" android:name="com.teambloodformypeople.fragments.UserUpdateFragment"
               android:label="UserUpdateFragment"/>
 </navigation>

@@ -35,7 +35,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
     val dateOfBirth = MutableLiveData("")
     val phoneNumber = MutableLiveData("")
     val role1 = MutableLiveData("")
-    val email1 = MutableLiveData("")
     val fullName1 = MutableLiveData("")
     val phoneNumber1 = MutableLiveData("")
     lateinit var sharedPreferences: SharedPreferences

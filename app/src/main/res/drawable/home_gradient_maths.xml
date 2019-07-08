@@ -5,9 +5,9 @@
         />
     <gradient
         android:angle="0"
-        android:centerX="0%"
-        android:startColor="#FF4168"
-        android:endColor="#9C82E9"
+        android:centerX="5%"
+        android:startColor="@color/register_bk_color"
+        android:endColor="#FFFFFF"
         android:type="linear"
         />
 

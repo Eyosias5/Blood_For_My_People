@@ -1,9 +1,7 @@
 package com.teambloodformypeople.adapters
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
@@ -11,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.Donor
 import com.teambloodformypeople.databinding.DonorItemBinding
-import com.teambloodformypeople.listeners.DonorListener
+import com.teambloodformypeople.fragments.RecyclerViewDonorListFragmentDirections
 import com.teambloodformypeople.viewmodels.DonorViewModel
 
 
-class DonorListAdapter(val context: Context): RecyclerView.Adapter<DonorListAdapter.DonorViewHolder>(), DonorListener {
+class DonorListAdapter(val context: Context): RecyclerView.Adapter<DonorListAdapter.DonorViewHolder>() {
 
     private var donors: List<Donor> = emptyList()
     private var viewModel: DonorViewModel? = null
@@ -36,8 +34,14 @@ class DonorListAdapter(val context: Context): RecyclerView.Adapter<DonorListAdap
     override fun onBindViewHolder(holder: DonorViewHolder, position: Int) {
         val donors = donors[position]
         holder.donorItemBinding.data = donors
-        holder.donorItemBinding.executePendingBindings()
-        holder.donorItemBinding.donorListener = this
+
+        holder.itemView.setOnClickListener {
+            var action = RecyclerViewDonorListFragmentDirections.actionRecepientHomeDesToDialogDonorDonateFragmentDes(donors.donorId)
+            Navigation.findNavController(it).navigate(action)
+        }
+
+//        holder.donorItemBinding.executePendingBindings()
+//        holder.donorItemBinding.donorListener = this
 
     }
 
@@ -51,10 +55,5 @@ class DonorListAdapter(val context: Context): RecyclerView.Adapter<DonorListAdap
     }
     internal fun setViewModel(viewModel: DonorViewModel){
         this.viewModel = viewModel
-    }
-    override fun onDonateButtonClicked(view: View, donor: Donor) {
-        val args = Bundle()
-        args.putInt("Donor",donor.donorId)
-        Navigation.findNavController(view).navigate(R.id.dialog_Donor_Donate_Fragment_des,args)
     }
 }

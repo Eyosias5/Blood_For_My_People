@@ -1,19 +1,32 @@
 package com.teambloodformypeople.viewmodels
 
-import androidx.lifecycle.*
+import android.app.Application
+import android.content.Context
+import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.teambloodformypeople.data.models.DonationHistory
 import com.teambloodformypeople.network.DonationHistoryApiService
 import com.teambloodformypeople.repositories.DonationHistoryRepository
-import kotlinx.coroutines.*
+import com.teambloodformypeople.util.Constants
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class DonationHistoryViewModel : ViewModel(){
+class DonationHistoryViewModel(application: Application) : AndroidViewModel(application){
     private val donationHistoryRepository: DonationHistoryRepository
-    val date = MutableLiveData("2019-09-02")
-    val location = MutableLiveData("Kirkos")
+
+    val donorId = MutableLiveData(0)
+    var amount = MutableLiveData("")
+    val donationHistoryId = MutableLiveData(0)
+
+    var  _context: Context
     init {
         val donationHistoryApiService =  DonationHistoryApiService.getInstance()
         donationHistoryRepository = DonationHistoryRepository(donationHistoryApiService)
+        _context=application
     }
     private val _getResponse = MutableLiveData<Response<DonationHistory>>()
     val getResponse:LiveData<Response<DonationHistory>>
@@ -52,5 +65,28 @@ class DonationHistoryViewModel : ViewModel(){
     fun deleteDonationHistory(donationHistoryId: Int)   =viewModelScope.launch{
         _deleteResponse.postValue(donationHistoryRepository.deleteDonationHistoryAsync(donationHistoryId))
     }
-
+    fun insertDonationHistory(view: View, deleteChecker: Boolean) {
+        viewModelScope.launch{
+            if(deleteChecker){
+                if (donationHistoryId.value!=0) {
+                    deleteDonationHistory(donationHistoryId=donationHistoryId.value!!)
+                    Toast.makeText(view.context, "Donation History is deleted", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(view.context, "Donation History doesn't exit", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else{
+                var recepientId = _context.getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE)?.getInt(Constants().currentUser,0)
+                if(recepientId!=0){
+                    if (donationHistoryId.value!=0) {
+                        updateDonationHistory(DonationHistory(donationHistoryId = donationHistoryId.value!!, date= "",donorId = donorId.value!!,recepientId = recepientId!!, amount = amount.value!!.toFloat()))
+                        Toast.makeText(view.context, "Donation History is updated", Toast.LENGTH_SHORT).show()
+                    } else {
+                        insertDonationHistory(DonationHistory(donationHistoryId = donationHistoryId.value!!, date= "",donorId = donorId.value!!,recepientId = recepientId!!, amount = amount.value!!.toFloat()))
+                        Toast.makeText(view.context, "Donation History is added", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
 }
