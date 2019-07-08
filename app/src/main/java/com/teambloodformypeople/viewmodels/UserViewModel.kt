@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import com.teambloodformypeople.R
+import com.teambloodformypeople.data.DB
 import com.teambloodformypeople.data.models.Donor
 import com.teambloodformypeople.data.models.Recepient
 import com.teambloodformypeople.data.models.User
@@ -49,8 +50,11 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
         val userApiService =  UserApiService.getInstance()
         val donorApiService = DonorApiService.getInstance()
         val recepientApiService = RecepientApiService.getInstance()
-        userRepository = UserRepository(userApiService)
-        donorRepository = DonorRepository(donorApiService)
+
+        val donorDao = DB.getDatabase(application).donorDao()
+        val userDao = DB.getDatabase(application).userDao()
+        userRepository = UserRepository(userApiService,userDao)
+        donorRepository = DonorRepository(donorApiService,donorDao)
         recepientRepository = RecepientRepository(recepientApiService)
 
         _context=application
@@ -61,8 +65,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
     private val _getResponse = MutableLiveData<Response<User>>()
     val getResponse:LiveData<Response<User>>
         get() = _getResponse
-    private val _getAllResponse = MutableLiveData<Response<List<User>>>()
-    val getAllResponse:LiveData<Response<List<User>>>
+    private val _getAllResponse = MutableLiveData<LiveData<List<User>>>()
+    val getAllResponse:LiveData<LiveData<List<User>>>
         get() = _getAllResponse
     private val _insertResponse = MutableLiveData<Response<Void>>()
     val insertResponse:LiveData<Response<Void>>

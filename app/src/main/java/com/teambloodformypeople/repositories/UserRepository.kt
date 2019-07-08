@@ -1,5 +1,7 @@
 package com.teambloodformypeople.repositories
 
+import androidx.lifecycle.LiveData
+import com.teambloodformypeople.data.daos.UserDao
 import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.network.UserApiService
 import com.teambloodformypeople.util.TemporaryDonorHolder
@@ -7,13 +9,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class UserRepository(private val UserApiService: UserApiService) {
+class UserRepository(private val UserApiService: UserApiService, val userDao: UserDao){
 
-    suspend fun findAllUsers(): Response<List<User>> =
+    suspend fun findAllUsers(): LiveData<List<User>> {
         withContext(Dispatchers.IO){
-            UserApiService.findUsers().await()
+            var userList : List<User> = UserApiService.findUsers().await().body()!!
+            userList.forEach {
+                userDao.insertUser(it)
+            }
+        }
+        var users =  userDao.getUsers()
+        return users
     }
-
     suspend fun findUserByIdAsync(userId: Int): Response<User> =
         withContext(Dispatchers.IO){
             UserApiService.findByUserIdAsync(userId).await()

@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.teambloodformypeople.data.DB
 import com.teambloodformypeople.data.models.Donor
 import com.teambloodformypeople.network.DonorApiService
 import com.teambloodformypeople.repositories.DonorRepository
@@ -23,15 +24,17 @@ class DonorViewModel(application: Application) : AndroidViewModel(application){
 
     init {
         val donorApiService =  DonorApiService.getInstance()
-        donorRepository = DonorRepository(donorApiService)
+        val donorDao= DB.getDatabase(application).donorDao()
+        donorRepository = DonorRepository(donorApiService,donorDao)
         _context=application
     }
     private val _getResponse = MutableLiveData<Response<Donor>>()
     val getResponse:LiveData<Response<Donor>>
         get() = _getResponse
-    private val _getAllResponse = MutableLiveData<Response<List<Donor>>>()
-    val getAllResponse:LiveData<Response<List<Donor>>>
+    private val _getAllResponse = MutableLiveData<LiveData<List<Donor>>>()
+    val getAllResponse:LiveData<LiveData<List<Donor>>>
         get() = _getAllResponse
+
     private val _insertResponse = MutableLiveData<Response<Void>>()
     val insertResponse:LiveData<Response<Void>>
         get() = _insertResponse

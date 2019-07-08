@@ -39,9 +39,9 @@ class RecyclerViewUserListFragment : Fragment(){
         binding.recyclerViewUserList.adapter = userListAdapter
         userViewModel.getAllUsers()
         userViewModel.getAllResponse.observe(this, Observer {
-                users->users.let {
-            userListAdapter.setUsers(users.body()!!)
-        }
+            users->users.let {
+                userListAdapter.setUsers(it.value!!)
+            }
         })
         return binding.root
 

@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
+import com.teambloodformypeople.data.DB
 import com.teambloodformypeople.data.models.Recepient
 import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.network.RecepientApiService
@@ -38,7 +39,8 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
         val recepientApiService =  RecepientApiService.getInstance()
         val userApiService = UserApiService.getInstance()
         recepientRepository = RecepientRepository(recepientApiService)
-        userRepository = UserRepository(userApiService)
+        val userDao = DB.getDatabase(application).userDao()
+        userRepository = UserRepository(userApiService,userDao)
         _context = application
     }
     private val _getResponse = MutableLiveData<Response<Recepient>>()

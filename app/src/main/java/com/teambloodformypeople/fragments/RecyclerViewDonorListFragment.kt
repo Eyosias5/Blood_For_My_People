@@ -43,7 +43,7 @@ class RecyclerViewDonorListFragment : Fragment(){
         donorViewModel.getAllDonors()
         donorViewModel.getAllResponse.observe(this, Observer {
             donors->donors.let {
-                donorListAdapter.setDonors(donors.body()!!)
+                donorListAdapter.setDonors(donors.value!!)
             }
         })
         return binding.root
