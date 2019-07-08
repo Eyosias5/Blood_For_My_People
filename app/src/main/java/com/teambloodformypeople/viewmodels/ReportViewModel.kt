@@ -1,8 +1,12 @@
 package com.teambloodformypeople.viewmodels
 
+import android.app.Application
+import android.content.Context
+import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teambloodformypeople.data.models.Report
 import com.teambloodformypeople.network.ReportApiService
@@ -10,13 +14,20 @@ import com.teambloodformypeople.repositories.ReportRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class ReportViewModel : ViewModel(){
+class ReportViewModel(application: Application) : AndroidViewModel(application){
     private val reportRepository: ReportRepository
 
+    val donationHistoryId = MutableLiveData(0)
+    var bloodType = MutableLiveData("")
+    val reportId = MutableLiveData(0)
+
+    var  _context: Context
     init {
         val reportApiService =  ReportApiService.getInstance()
         reportRepository = ReportRepository(reportApiService)
+        _context=application
     }
+
     private val _getResponse = MutableLiveData<Response<Report>>()
     val getResponse:LiveData<Response<Report>>
         get() = _getResponse
@@ -57,5 +68,25 @@ class ReportViewModel : ViewModel(){
     fun deleteReport(reportId: Int)   =viewModelScope.launch{
         _deleteResponse.postValue(reportRepository.deleteReportAsync(reportId))
     }
-
+    fun insertReport(view: View, deleteChecker: Boolean) {
+        viewModelScope.launch{
+            if(deleteChecker){
+                if (reportId.value!=0) {
+                    deleteReport(reportId=reportId.value!!)
+                    Toast.makeText(view.context, "Report is deleted", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(view.context, "Report doesn't exit", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else{
+                if (reportId.value!=0) {
+                    updateReport(Report(reportId=reportId.value!!,bloodType = bloodType.value!!, donationHistoryId = donationHistoryId.value!!))
+                    Toast.makeText(view.context, "Report is updated", Toast.LENGTH_SHORT).show()
+                } else {
+                    insertReport(Report(reportId=reportId.value!!,bloodType = bloodType.value!!, donationHistoryId = donationHistoryId.value!!))
+                    Toast.makeText(view.context, "Report is added", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 }

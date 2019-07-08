@@ -37,12 +37,15 @@ class RecyclerViewUserListFragment : Fragment(){
         userListAdapter.setViewModel(userViewModel)
         binding.recyclerViewUserList.layoutManager = LinearLayoutManager(this.requireContext())
         binding.recyclerViewUserList.adapter = userListAdapter
-        userViewModel.getAllUsers()
-        userViewModel.getAllResponse.observe(this, Observer {
-                users->users.let {
-            userListAdapter.setUsers(users.body()!!)
-        }
+        userViewModel.getAllUsers().observe(this, Observer {
+            userListAdapter.setUsers(it!!)
         })
+
+//        userViewModel.getAllResponse.observe(this, Observer {
+//            users->users?.let {
+//                userListAdapter.setUsers(it.value!!)
+//            }
+//        })
         return binding.root
 
     }

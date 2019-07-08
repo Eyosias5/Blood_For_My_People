@@ -1,7 +1,6 @@
 package com.teambloodformypeople.adapters
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.teambloodformypeople.R
 import com.teambloodformypeople.data.models.DonationHistory
 import com.teambloodformypeople.databinding.DonationHistoryItemBinding
-import com.teambloodformypeople.util.Constants
+import com.teambloodformypeople.fragments.RecyclerViewDonationHistoryFragmentDirections
 import com.teambloodformypeople.viewmodels.DonationHistoryViewModel
 
 
@@ -34,14 +33,9 @@ class DonationHistoryAdapter(val context: Context): RecyclerView.Adapter<Donatio
         val donationHistory = donationHistories[position]
         holder.donationHistoryItemBinding.data = donationHistory
         holder.itemView.setOnClickListener {
-            val args = Bundle()
-            args.putSerializable("DonationHistory",donationHistory)
-
-            val sharedPreferences = it.context.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE)
-            val role = sharedPreferences.getString(Constants().currentRole,"Not Known")
-            Navigation.findNavController(it).navigate(R.id.report_add_fragment,args)
+            var action = RecyclerViewDonationHistoryFragmentDirections.actionDonorHomeDesToReportAddFragment(donationHistory.donationHistoryId)
+            Navigation.findNavController(it).navigate(action)
         }
-//        holder.donationHistoryItemBinding.executePendingBindings()
 
     }
     internal fun setViewModel(viewModel: DonationHistoryViewModel){
