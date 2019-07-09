@@ -42,17 +42,15 @@ class AddDonationHistoryFragment : Fragment(){
         val donorId = safeArgs.donorId
 
         binding.viewModel?.donorId?.value = donorId
-        donorViewModel.getDonorById(donorId)
-        donorViewModel.getResponse.observe(this, Observer {
+        donorViewModel.getDonorById(donorId).observe(this, Observer {
             with(Dispatchers.IO){
-                binding.donorName.text = it.body()?.fullName
+                binding.donorName.text = it.fullName
             }
         })
         var user = binding.root.context.getSharedPreferences(Constants().currentUser, Context.MODE_PRIVATE).getInt(Constants().currentUser, 0)
-        recepientViewModel.getRecepientById(user)
-        recepientViewModel.getResponse.observe(this, Observer{
+        recepientViewModel.getRecepientById(user).observe(this, Observer{
             with(Dispatchers.IO){
-                binding.recepientName.text = it.body()?.name
+                binding.recepientName.text = it.name
             }
         })
         binding.DeleteDonationHistoryBtn.visibility = View.GONE

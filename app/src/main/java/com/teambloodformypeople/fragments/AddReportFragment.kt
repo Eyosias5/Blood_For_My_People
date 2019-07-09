@@ -48,12 +48,11 @@ class AddReportFragment : Fragment() {
 
         binding.viewModel?.donationHistoryId?.value=donationHistoryId
 
-        viewModel.getReportByDonationHistoryId(donationHistoryId)
-        viewModel.getResponse.observe(this, Observer {
+        var report = viewModel.getReportByDonationHistoryId(donationHistoryId).observe(this, Observer{
             with(Dispatchers.IO){
-                if(it.body()!=null){
-                    binding.viewModel?.bloodType?.value=(it.body()?.bloodType!!)
-                    binding.viewModel?.reportId?.value=(it.body()?.reportId!!)
+                if(it!=null){
+                    binding.viewModel?.bloodType?.value=(it.bloodType)
+                    binding.viewModel?.reportId?.value=(it.reportId)
                     binding.AddReportBtn.text = "Update Report"
                 }
                 else{
@@ -61,26 +60,23 @@ class AddReportFragment : Fragment() {
                 }
             }
         })
-        donationHistoryViewModel.getDonationHistoryById(donationHistoryId)
         var ctx = this
-        donationHistoryViewModel.getResponse.observe(ctx, Observer{
+        donationHistoryViewModel.getDonationHistoryById(donationHistoryId).observe(ctx, Observer{
             with(Dispatchers.IO){
-                if(it.body()!=null){
-                    binding.amount.text = it.body()?.amount.toString()
-                    binding.date.text = it.body()?.date
-                    donorViewModel.getDonorById(it.body()?.donorId!!)
-                    donorViewModel.getResponse.observe(ctx, Observer {
+                if(it!=null){
+                    binding.amount.text = it.amount.toString()
+                    binding.date.text = it.date
+                    donorViewModel.getDonorById(it.donorId!!).observe(ctx, Observer {
                         it.let {
                             with(Dispatchers.IO) {
-                                binding.donorName.text = it.body()?.fullName
+                                binding.donorName.text = it.fullName
                             }
                         }
                     })
-                    recepientViewModel.getRecepientById(it.body()?.recepientId!!)
-                    recepientViewModel.getResponse.observe(ctx, Observer {
-                        it.let {
+                    recepientViewModel.getRecepientById(it.recepientId).observe(ctx, Observer {
+                        it?.let {
                             with(Dispatchers.IO) {
-                                binding.recepientName.text = it.body()?.name
+                                binding.recepientName.text = it.name
                             }
                         }
                     })

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.teambloodformypeople.data.DB
 import com.teambloodformypeople.data.models.Report
 import com.teambloodformypeople.network.ReportApiService
 import com.teambloodformypeople.repositories.ReportRepository
@@ -24,16 +25,10 @@ class ReportViewModel(application: Application) : AndroidViewModel(application){
     var  _context: Context
     init {
         val reportApiService =  ReportApiService.getInstance()
-        reportRepository = ReportRepository(reportApiService)
+        reportRepository = ReportRepository(reportApiService, DB.getDatabase(application).reportDao(), application)
         _context=application
     }
 
-    private val _getResponse = MutableLiveData<Response<Report>>()
-    val getResponse:LiveData<Response<Report>>
-        get() = _getResponse
-    private val _getAllResponse = MutableLiveData<Response<List<Report>>>()
-    val getAllResponse:LiveData<Response<List<Report>>>
-        get() = _getAllResponse
     private val _insertResponse = MutableLiveData<Response<Void>>()
     val insertResponse:LiveData<Response<Void>>
         get() = _insertResponse
@@ -45,19 +40,19 @@ class ReportViewModel(application: Application) : AndroidViewModel(application){
         get() = _updateResponse
 
     fun getAllReports() =viewModelScope.launch{
-        _getAllResponse.postValue(reportRepository.findAllReportsAsync())
+        (reportRepository.findAllReportsAsync())
     }
     fun getAllReportsByDonorId(donorId:Int) =viewModelScope.launch{
-        _getAllResponse.postValue(reportRepository.findAllReportsByDonorIdAsync(donorId))
+        (reportRepository.findAllReportsByDonorIdAsync(donorId))
     }
     fun getAllReportsByRecepientId(recepientId:Int) =viewModelScope.launch{
-        _getAllResponse.postValue(reportRepository.findAllReportsByRecepientIdAsync(recepientId))
+       (reportRepository.findAllReportsByRecepientIdAsync(recepientId))
     }
-    fun getReportById(reportId: Int) =viewModelScope.launch{
-        _getResponse.postValue(reportRepository.findReportByIdAsync(reportId))
+    fun getReportById(reportId: Int) :LiveData<Report>{
+        return reportRepository.findReportByIdAsync(reportId)
     }
-    fun getReportByDonationHistoryId(donationHistoryId: Int) =viewModelScope.launch{
-        _getResponse.postValue(reportRepository.findReportByDonationHistoryIdAsync(donationHistoryId))
+    fun getReportByDonationHistoryId(donationHistoryId: Int) : LiveData<Report>{
+        return reportRepository.findReportByDonationHistoryIdAsync(donationHistoryId)
     }
     fun insertReport(report: Report)  =viewModelScope.launch{
         _insertResponse.postValue(reportRepository.insertReportAsync(report))
@@ -66,7 +61,7 @@ class ReportViewModel(application: Application) : AndroidViewModel(application){
         _updateResponse.postValue(reportRepository.updateReportAsync(report))
     }
     fun deleteReport(reportId: Int)   =viewModelScope.launch{
-        _deleteResponse.postValue(reportRepository.deleteReportAsync(reportId))
+        reportRepository.deleteReportAsync(reportId)
     }
     fun insertReport(view: View, deleteChecker: Boolean) {
         viewModelScope.launch{

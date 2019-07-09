@@ -1,7 +1,6 @@
 package com.teambloodformypeople
 
 import android.app.Application
-import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import com.teambloodformypeople.data.DB
@@ -13,12 +12,7 @@ import kotlinx.coroutines.launch
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.O_MR1])
 public class Repository_DonorRepositoryTest {
     @get:Rule
     val testRule = InstantTaskExecutorRule()

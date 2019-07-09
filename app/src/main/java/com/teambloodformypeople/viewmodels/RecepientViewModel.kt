@@ -38,7 +38,7 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
     init {
         val recepientApiService =  RecepientApiService.getInstance()
         val userApiService = UserApiService.getInstance()
-        recepientRepository = RecepientRepository(recepientApiService)
+        recepientRepository = RecepientRepository(recepientApiService,DB.getDatabase(application).recipientDao(),application)
         val userDao = DB.getDatabase(application).userDao()
         userRepository = UserRepository(userApiService,userDao,application)
         _context = application
@@ -62,8 +62,8 @@ class RecepientViewModel(application: Application) : AndroidViewModel(applicatio
     fun getAllRecepients() =viewModelScope.launch{
         _getAllResponse.postValue(recepientRepository.findAllRecepientsAsync())
     }
-    fun getRecepientById(recepientId: Int) =viewModelScope.launch{
-        _getResponse.postValue(recepientRepository.findRecepientByIdAsync(recepientId))
+    fun getRecepientById(recepientId: Int) :LiveData<Recepient>{
+        return (recepientRepository.findRecepientByIdAsync(recepientId))
     }
     fun getRecepientByUserId(userId: Int) =viewModelScope.launch{
         _getResponse.postValue(recepientRepository.findRecepientByUserIdAsync(userId))

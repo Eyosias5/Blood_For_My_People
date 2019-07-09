@@ -25,4 +25,7 @@ interface DonorDao {
     @Query("DELETE FROM donors")
     fun deleteAll()
 
+    @Query("SELECT * FROM donors Where userId = :userId")
+    fun getDonorByUserId(userId: Int): LiveData<Donor>
+
 }

@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.teambloodformypeople.R
 import com.teambloodformypeople.databinding.ProfileFragmentBinding
+import com.teambloodformypeople.util.Constants
 import com.teambloodformypeople.viewmodels.DonorViewModel
 import com.teambloodformypeople.viewmodels.UserViewModel
 
@@ -51,7 +52,9 @@ class ProfileFragment : Fragment() {
 //        phoneTv = view.phone_tv
 //        dbTv = view.db_tv
 //        updateView(1)
-
+        _context = binding.root.context
+        var id = _context.getSharedPreferences(Constants().currentUser,Context.MODE_PRIVATE).getInt(Constants().currentUser,0)
+        updateView(id)
         return binding.root
 
     }
@@ -68,9 +71,10 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateView(name: String, phone: String, db: String) {
-        nameTv.text = name
-        phoneTv.text = phone
-        dbTv.text = db
+        binding.viewModel?.fullName1?.value = name
+        binding.viewModel?.phoneNumber1?.value = phone
+        binding.viewModel?.dateOfBirth?.value = db
+        binding.viewModel?.role1?.value = "Donor"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

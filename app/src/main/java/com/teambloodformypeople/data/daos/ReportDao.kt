@@ -9,6 +9,8 @@ interface ReportDao {
 
     @Query("SELECT * FROM reports Where reportId = :id")
     fun getReportById(id: Int): LiveData<Report>
+    @Query("SELECT * FROM reports Where donationHistoryId = :id")
+    fun getReportByDonationHistoryId(id: Int): LiveData<Report>
 
     @Query("SELECT * FROM reports")
     fun getReports():LiveData<List<Report>>
@@ -24,5 +26,9 @@ interface ReportDao {
 
     @Query("DELETE FROM reports")
     fun deleteAll()
+    @Query("DELETE FROM reports WHERE reportId = :reportId")
+    fun deleteById(reportId: Int)
+
+
 
 }

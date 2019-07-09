@@ -49,8 +49,8 @@ class DonorViewModel(application: Application) : AndroidViewModel(application){
         return donorRepository.findAllDonorsAsync()
     }
 
-    fun getDonorById(donorId: Int) =viewModelScope.launch{
-        _getResponse.postValue(donorRepository.findDonorByIdAsync(donorId))
+    fun getDonorById(donorId: Int) : LiveData<Donor>{
+      return (donorRepository.findDonorByIdAsync(donorId))
     }
     fun getDonorByUserId(userId: Int) =viewModelScope.launch{
         _getResponse.postValue(donorRepository.findDonorByUserIdAsync(userId))

@@ -1,9 +1,9 @@
 package com.teambloodformypeople
 
 import android.app.Application
-import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.runner.AndroidJUnit4
 import com.teambloodformypeople.data.DB
 import com.teambloodformypeople.network.UserApiService
 import com.teambloodformypeople.repositories.UserRepository
@@ -14,11 +14,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.O_MR1])
+@RunWith(AndroidJUnit4::class)
 public class Repository_UserRepositoryTest {
     @get:Rule
     val testRule = InstantTaskExecutorRule()

@@ -54,8 +54,8 @@ class DonationHistoryViewModel(application: Application) : AndroidViewModel(appl
     fun getAllDonationHistorysByRecepientId(recepientId: Int):LiveData<List<DonationHistory>>{
         return donationHistoryRepository.findAllDonationHistoriesByRecepientId(recepientId)
     }
-    fun getDonationHistoryById(donationHistoryId: Int) =viewModelScope.launch{
-        _getResponse.postValue(donationHistoryRepository.findDonationHistoryAsync(donationHistoryId))
+    fun getDonationHistoryById(donationHistoryId: Int) : LiveData<DonationHistory>{
+        return donationHistoryRepository.findDonationHistoryAsync(donationHistoryId)
     }
     fun insertDonationHistory(donationHistory: DonationHistory)  =viewModelScope.launch{
         _insertResponse.postValue(donationHistoryRepository.insertDonationHistoryAsync(donationHistory))

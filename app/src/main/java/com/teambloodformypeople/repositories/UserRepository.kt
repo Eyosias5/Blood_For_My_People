@@ -19,6 +19,7 @@ class UserRepository(private val UserApiService: UserApiService, val userDao: Us
          if(Constants.connected(application )){
              GlobalScope.launch{
                  var userList : List<User> = UserApiService.findUsers().await().body()!!
+                 userDao.deleteAll()
                  userList.forEach {
                      userDao.insertUser(it)
                  }
@@ -57,5 +58,7 @@ class UserRepository(private val UserApiService: UserApiService, val userDao: Us
     suspend fun deleteUserAsync(userId: Int):Response<Void> =
         withContext(Dispatchers.IO){
         UserApiService.deleteUserAsync(userId).await()
+
     }
+
 }

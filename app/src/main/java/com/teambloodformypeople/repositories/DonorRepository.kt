@@ -27,13 +27,22 @@ class DonorRepository(private val DonorApiService: DonorApiService, val donorDao
         return donorDao.getDonors()
     }
 
-    suspend fun findDonorByIdAsync(donorId: Int): Response<Donor> =
-        withContext(Dispatchers.IO){
-            DonorApiService.findByDonorIdAsync(donorId).await()
+     fun findDonorByIdAsync(donorId: Int): LiveData<Donor> {
+        if(Constants.connected(application)){
+            GlobalScope.launch{
+                var donor : Donor = DonorApiService.findByDonorIdAsync(donorId).await().body()!!
+
+                    donorDao.insertDonor(donor)
+
+            }
+        }
+
+        return donorDao.getDonorById(donorId)
+
         }
     suspend fun findDonorByUserIdAsync(userId: Int): Response<Donor> =
         withContext(Dispatchers.IO){
-            DonorApiService.findByUserIdAsync(userId).await()
+               DonorApiService.findByUserIdAsync(userId).await()
         }
 
     suspend fun insertDonorAsync(donor: TemporaryDonorHolder): Response<Void> =

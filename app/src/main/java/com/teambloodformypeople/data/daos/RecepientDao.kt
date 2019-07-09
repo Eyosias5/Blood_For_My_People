@@ -25,4 +25,6 @@ interface RecepientDao {
     @Query("DELETE FROM recepients")
     fun deleteAll()
 
+    @Query("SELECT * FROM recepients Where userId = :userId")
+    fun getRecipientByUserId(userId: Int): LiveData<Recepient>
 }

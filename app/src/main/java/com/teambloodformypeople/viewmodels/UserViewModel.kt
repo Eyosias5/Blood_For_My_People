@@ -55,7 +55,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
         val userDao = DB.getDatabase(application).userDao()
         userRepository = UserRepository(userApiService,userDao,application)
         donorRepository = DonorRepository(donorApiService,donorDao,application)
-        recepientRepository = RecepientRepository(recepientApiService)
+        recepientRepository = RecepientRepository(recepientApiService,DB.getDatabase(application).recipientDao(),application)
         _context=application
 
    }

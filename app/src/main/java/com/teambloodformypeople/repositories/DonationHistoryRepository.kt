@@ -3,9 +3,7 @@ package com.teambloodformypeople.repositories
 import android.app.Application
 import androidx.lifecycle.LiveData
 import com.teambloodformypeople.data.daos.DonationHistoryDao
-import com.teambloodformypeople.data.daos.UserDao
 import com.teambloodformypeople.data.models.DonationHistory
-import com.teambloodformypeople.data.models.User
 import com.teambloodformypeople.network.DonationHistoryApiService
 import com.teambloodformypeople.util.Constants
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +18,7 @@ class DonationHistoryRepository(private val donationHistoryApiService: DonationH
         if(Constants.connected(application )){
             GlobalScope.launch{
                 var donationHistories : List<DonationHistory>? = donationHistoryApiService.findDonationHistories().await().body()
+                donationHistoryDao.deleteAll()
                 donationHistories?.forEach {
                     donationHistoryDao.insertDonationHistory(it)
                 }
@@ -36,6 +35,7 @@ class DonationHistoryRepository(private val donationHistoryApiService: DonationH
         if(Constants.connected(application )){
             GlobalScope.launch{
                 var donationHistories : List<DonationHistory>? = donationHistoryApiService.findDonationHistoriesByDonorId(donorId).await().body()
+
                 donationHistories?.forEach {
                     donationHistoryDao.insertDonationHistory(it)
                 }
@@ -62,10 +62,19 @@ class DonationHistoryRepository(private val donationHistoryApiService: DonationH
 
         return donationHistoryDao.getDonationHistoriesByRecepient(recepientId)
     }
-    suspend fun findDonationHistoryAsync(donationHistoryId: Int): Response<DonationHistory> =
-        withContext(Dispatchers.IO){
-            donationHistoryApiService.findByDonationHistoryIdAsync(donationHistoryId).await()
+     fun findDonationHistoryAsync(donationHistoryId: Int): LiveData<DonationHistory> {
+
+        if(Constants.connected(application )){
+            GlobalScope.launch{
+                var donationHistory : DonationHistory = donationHistoryApiService.findByDonationHistoryIdAsync(donationHistoryId).await().body()!!
+                donationHistoryDao.insertDonationHistory(donationHistory)
+
+            }
+
         }
+         return donationHistoryDao.getDonationHistoryById(donationHistoryId)
+    }
+
 
     suspend fun insertDonationHistoryAsync(donationHistory: DonationHistory): Response<Void> =
         withContext(Dispatchers.IO){
