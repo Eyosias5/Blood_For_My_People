@@ -12,7 +12,10 @@ interface DonationHistoryDao {
 
     @Query("SELECT * FROM donationHistories")
     fun getDonationHistories(): LiveData<List<DonationHistory>>
-
+    @Query("SELECT * FROM donationHistories WHERE donorId = :donorId")
+    fun getDonationHistoriesByDonor(donorId : Int): LiveData<List<DonationHistory>>
+    @Query("SELECT * FROM donationHistories WHERE recepientId = :recepientId")
+    fun getDonationHistoriesByRecepient(recepientId : Int): LiveData<List<DonationHistory>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDonationHistory(donationHistory: DonationHistory)
 

@@ -6,10 +6,10 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity(tableName = "donors",
-    foreignKeys = [ForeignKey
-            (entity = User::class, parentColumns = arrayOf("userId"), childColumns = arrayOf("userId"))
-    ]
+@Entity(tableName = "donors"
+//    foreignKeys = [ForeignKey
+//            (entity = User::class, parentColumns = arrayOf("userId"), childColumns = arrayOf("userId"))
+//    ]
 )
 data class Donor (
     @PrimaryKey @ColumnInfo(name = "donorId", index = true) val donorId: Int,

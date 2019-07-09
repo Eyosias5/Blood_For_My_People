@@ -25,7 +25,7 @@ class DonorViewModel(application: Application) : AndroidViewModel(application){
     init {
         val donorApiService =  DonorApiService.getInstance()
         val donorDao= DB.getDatabase(application).donorDao()
-        donorRepository = DonorRepository(donorApiService,donorDao)
+        donorRepository = DonorRepository(donorApiService,donorDao,application)
         _context=application
     }
     private val _getResponse = MutableLiveData<Response<Donor>>()
@@ -45,9 +45,10 @@ class DonorViewModel(application: Application) : AndroidViewModel(application){
     val updateResponse:LiveData<Response<Void>>
         get() = _updateResponse
 
-    fun getAllDonors() =viewModelScope.launch{
-        _getAllResponse.postValue(donorRepository.findAllDonorsAsync())
+    fun getAllDonors() :LiveData<List<Donor>>{
+        return donorRepository.findAllDonorsAsync()
     }
+
     fun getDonorById(donorId: Int) =viewModelScope.launch{
         _getResponse.postValue(donorRepository.findDonorByIdAsync(donorId))
     }

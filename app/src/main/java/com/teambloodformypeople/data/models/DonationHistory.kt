@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 import com.teambloodformypeople.data.models.Recepient
 import java.io.Serializable
 
-@Entity(tableName = "donationHistories",
-    foreignKeys = [
-        ForeignKey(entity = Donor::class, parentColumns = arrayOf("donorId"), childColumns = arrayOf("recepientId")),
-        ForeignKey(entity = Recepient::class, parentColumns = arrayOf("recepientId"), childColumns = arrayOf("recepientId"))
-    ]
+@Entity(tableName = "donationHistories"
+//    foreignKeys = [
+//        ForeignKey(entity = Donor::class, parentColumns = arrayOf("donorId"), childColumns = arrayOf("recepientId")),
+//        ForeignKey(entity = Recepient::class, parentColumns = arrayOf("recepientId"), childColumns = arrayOf("recepientId"))
+//    ]
 )
 
 data class DonationHistory (
@@ -19,7 +19,7 @@ data class DonationHistory (
     @ColumnInfo(name = "date") var date: String,
     @ColumnInfo(name = "amount") var amount: Float,
 
-    @ColumnInfo(name = "donorId", index = true) var donorId: Int,
-    @ColumnInfo(name = "recepientId", index = true) var recepientId: Int
+    @ColumnInfo(name = "donorId") var donorId: Int,
+    @ColumnInfo(name = "recepientId") var recepientId: Int
 
 ): Serializable

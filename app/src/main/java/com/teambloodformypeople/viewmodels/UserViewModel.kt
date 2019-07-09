@@ -54,7 +54,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
         val donorDao = DB.getDatabase(application).donorDao()
         val userDao = DB.getDatabase(application).userDao()
         userRepository = UserRepository(userApiService,userDao,application)
-        donorRepository = DonorRepository(donorApiService,donorDao)
+        donorRepository = DonorRepository(donorApiService,donorDao,application)
         recepientRepository = RecepientRepository(recepientApiService)
         _context=application
 
@@ -65,8 +65,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
         return userRepository.findAllUsers()
     }
 
-     fun getUserById(userId: Int) {
-       // userRepository.findUserByIdAsync(userId)
+     fun getUserById(userId: Int) :LiveData<User>{
+       return userRepository.findUserByIdAsync(userId)
     }
 
 
