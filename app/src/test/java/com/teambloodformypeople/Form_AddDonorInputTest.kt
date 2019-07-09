@@ -12,7 +12,7 @@
 //
 //
 //@RunWith(MockitoJUnitRunner::class)
-class AddDonorInputTest {
+class Form_AddDonorInputTest {
 //    @Mock
 //    private lateinit var donorViewModel: DonorViewModel
 //    @Mock

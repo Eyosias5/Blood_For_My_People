@@ -6,10 +6,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import java.lang.Exception
 
 @RunWith(MockitoJUnitRunner::class)
-class UserRegistrationTest {
+class Form_UserRegistrationTest {
     @Mock
     private lateinit var userViewModel: UserViewModel
     @Mock

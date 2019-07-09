@@ -1,14 +1,11 @@
 package com.teambloodformypeople
 
 import com.teambloodformypeople.util.EmailValidator
-import org.junit.Test
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Test
 
-/**
- * Unit tests for the EmailValidator logic.
- */
-class EmailValidatorTest {
+class Util_EmailInputTest {
     @Test
     fun emailValidator_CorrectEmailSimple_ReturnsTrue() {
         assertTrue(EmailValidator.isValidEmail("name@email.com"))

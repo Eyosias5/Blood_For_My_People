@@ -8,7 +8,7 @@
 //import org.mockito.Mock
 //import java.lang.Exception
 //
-class AddReportInputTest {
+class Form_AddReportInputTest {
 //    @Mock
 //    private lateinit var reportViewModel: ReportViewModel
 //    @Mock

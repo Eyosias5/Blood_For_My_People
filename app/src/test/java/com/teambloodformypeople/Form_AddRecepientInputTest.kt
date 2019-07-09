@@ -11,7 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 
 @RunWith(MockitoJUnitRunner::class)
-class AddRecepientInputTest {
+class Form_AddRecepientInputTest {
     @Mock
     private lateinit var recepientViewModel: RecepientViewModel
     @Mock

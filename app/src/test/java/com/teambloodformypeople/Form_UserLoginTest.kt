@@ -4,9 +4,8 @@ import android.view.View
 import com.teambloodformypeople.viewmodels.UserViewModel
 import org.junit.Test
 import org.mockito.Mock
-import java.lang.Exception
 
-class UserLoginTest {
+class Form_UserLoginTest {
     @Mock
     private lateinit var userViewModel: UserViewModel
     @Mock

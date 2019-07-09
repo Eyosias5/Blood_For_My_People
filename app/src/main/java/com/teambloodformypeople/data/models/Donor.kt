@@ -2,7 +2,6 @@ package com.teambloodformypeople.data.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
@@ -12,11 +11,11 @@ import java.io.Serializable
 //    ]
 )
 data class Donor (
-    @PrimaryKey @ColumnInfo(name = "donorId", index = true) val donorId: Int,
-    @ColumnInfo(name = "phoneNumber") val phoneNumber: String,
-    @ColumnInfo(name = "dateOfBirth") val dateOfBirth: String,
-    @ColumnInfo(name = "fullName") val fullName: String,
-    @ColumnInfo(name = "userId", index = true) val userId: Int
+    @PrimaryKey @ColumnInfo(name = "donorId", index = true) var donorId: Int,
+    @ColumnInfo(name = "phoneNumber") var phoneNumber: String,
+    @ColumnInfo(name = "dateOfBirth") var dateOfBirth: String,
+    @ColumnInfo(name = "fullName") var fullName: String,
+    @ColumnInfo(name = "userId") var userId: Int
 ): Serializable
 
 

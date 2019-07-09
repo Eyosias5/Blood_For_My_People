@@ -11,7 +11,7 @@
 //import org.mockito.junit.MockitoJUnitRunner
 //
 //@RunWith(MockitoJUnitRunner::class)
-class AddDonationHistoryInputTest {
+class Form_AddDonationHistoryInputTest {
 //    @Mock
 //    private lateinit var donationHistoryViewModel : DonationHistoryViewModel
 //    @Mock

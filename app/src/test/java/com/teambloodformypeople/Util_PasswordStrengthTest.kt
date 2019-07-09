@@ -1,14 +1,14 @@
 package com.teambloodformypeople
 
 import com.teambloodformypeople.util.PasswordValidator
-import org.junit.Test
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Test
 
 /**
- * Unit tests for the PasswordStrengthTest logic.
+ * Unit tests for the Util_PasswordStrengthTest logic.
  */
-class PasswordStrengthTest {
+class Util_PasswordStrengthTest {
     @Test
     fun emailValidator_CorrectPasswordSimple_ReturnsTrue() {
         assertTrue(PasswordValidator.isValidPassword("aKvBnj10"))
