@@ -6,10 +6,7 @@ import android.bluetooth.BluetoothAdapter
 import junit.framework.TestCase.assertTrue
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyNoMoreInteractions
-import org.hamcrest.CoreMatchers.`is` as matchIs
+import org.mockito.Mockito.*
 import org.mockito.Mockito.`when` as mockWhen
 
 class LocalUnitTest {
