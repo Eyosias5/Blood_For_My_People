@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.teambloodformypeople.R
 import com.teambloodformypeople.databinding.ProfileFragmentBinding
 import com.teambloodformypeople.util.Constants
@@ -79,9 +81,8 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.signOutButton)?.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.signOutAction, null)
-        )
+
+
     }
 
     companion object {

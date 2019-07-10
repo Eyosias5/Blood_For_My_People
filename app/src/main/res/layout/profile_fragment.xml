@@ -89,6 +89,7 @@
         />
         <Button
                 android:text="Sign Out"
+                android:onClick="@{(view)->viewModel.onSignOut(view)}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/signOutButton" app:layout_constraintStart_toStartOf="parent"

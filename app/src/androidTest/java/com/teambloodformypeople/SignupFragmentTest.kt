@@ -16,32 +16,17 @@ import org.mockito.Mockito.verify
 class SignupFragmentTest {
 
     @Test
-    fun testNavigationToHomeFromSignupScreen(){
-        val mockNavController = mock(NavController::class.java)
-        val scenario = launchFragmentInContainer<SecuritySignupFragment>(Bundle(),R.style.AppTheme)
-        scenario.onFragment {
-            Navigation.setViewNavController(it.view!!,mockNavController)
-        }
-        onView(withId(R.id.Signup_button)).perform(click())
-//
-//        verify(mockNavController).navigate(
-//            SecuritySignupFragmentDirections
-//        )
-    }
-
-    @Test
     fun testNavigationToLoginScreenFromSignupScreen(){
         val mockNavController = mock(NavController::class.java)
         val scenario = launchFragmentInContainer<SecuritySignupFragment>(Bundle(),R.style.AppTheme)
 
-        scenario.onFragment {
-            Navigation.setViewNavController(it.view!!,mockNavController)
+        scenario.onFragment {fragment ->
+            Navigation.setViewNavController(fragment.requireView(),mockNavController)
         }
-
         onView(withId(R.id.textview_have_account)).perform(click())
 
         verify(mockNavController).navigate(
-            SecuritySignupFragmentDirections.alreadyMemberAction()
+            R.id.alreadyMemberAction
         )
     }
 }

@@ -136,11 +136,13 @@ dependencies {
     def androidXTestRulesVersion ="1.2.0-beta01"
     def mockitoVersion = "2.8.9"
     def dexMakerVersion = "2.12.1"
+    def rulesVersion = "1.0.2"
 
     testImplementation "androidx.room:room-testing:$room_version"
     // Dependencies for local unit tests
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "com.android.support.test:rules:$rulesVersion"
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
     testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"

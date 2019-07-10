@@ -26,8 +26,8 @@ class RecyclerViewDonationHistoryFragment : Fragment(){
                               savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        val bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view) as BottomNavigationView
-        bottom_nav.visibility = View.VISIBLE
+//        val bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view) as BottomNavigationView
+//        bottom_nav.visibility = View.VISIBLE
 
 
         binding = DataBindingUtil.inflate(inflater,

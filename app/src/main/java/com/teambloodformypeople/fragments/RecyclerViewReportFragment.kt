@@ -19,8 +19,8 @@ class RecyclerViewReportFragment : Fragment(), AdapterView.OnItemSelectedListene
                               savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-        val bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view)
-        bottom_nav?.visibility = View.VISIBLE
+//        val bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view)
+//        bottom_nav?.visibility = View.VISIBLE
         val view = inflater.inflate(R.layout.report_fragment,container,false)
         return view
     }

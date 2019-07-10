@@ -84,6 +84,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application){
         userRepository.deleteUserAsync(userId)
     }
 
+    fun onSignOut (view: View){
+        Navigation.findNavController(view).navigate(R.id.signOutAction)
+    }
     fun onLogin(view: View) {
         viewModelScope.launch{
             try{
