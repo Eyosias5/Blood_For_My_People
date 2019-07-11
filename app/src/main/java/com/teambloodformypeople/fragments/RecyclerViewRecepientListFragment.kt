@@ -27,10 +27,10 @@ class RecyclerViewRecepientListFragment : Fragment(){
                               savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-//        var bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view) as BottomNavigationView
-//        bottom_nav.visibility = View.VISIBLE
-//        bottom_nav.menu.clear()
-//        bottom_nav.inflateMenu(R.menu.donor_bottom_nav_menu)
+        var bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view) as BottomNavigationView
+        bottom_nav.visibility = View.VISIBLE
+        bottom_nav.menu.clear()
+        bottom_nav.inflateMenu(R.menu.donor_bottom_nav_menu)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.recepient_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(RecepientViewModel::class.java)

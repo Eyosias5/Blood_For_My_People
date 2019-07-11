@@ -25,8 +25,8 @@ class RecyclerViewUserListFragment : Fragment(){
                               savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
-//        var bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view) as BottomNavigationView
-//        bottom_nav.visibility = View.VISIBLE
+        var bottom_nav = this.activity?.findViewById<View>(R.id.bottom_nav_view) as BottomNavigationView
+        bottom_nav.visibility = View.VISIBLE
 
         binding = DataBindingUtil.inflate(inflater, R.layout.user_list_fragment, container, false)
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
